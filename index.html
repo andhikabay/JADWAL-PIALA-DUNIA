@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FIFA World Cup 2026 - Jadwal Lengkap WIB</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0a0a0f; --bg2: #13131a; --bg3: #1c1c26;
+    --border: rgba(255,255,255,0.08); --border2: rgba(255,255,255,0.14);
+    --text: #f0f0f5; --text2: #9090a8; --text3: #55556a;
+    --accent: #c8a84b; --accent2: #e8c86a;
+    --radius: 10px; --radius-lg: 14px;
+  }
+  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; min-height: 100vh; padding-bottom: 3rem; }
+  header { background: var(--bg2); border-bottom: 1px solid var(--border); padding: 1.25rem; position: sticky; top: 0; z-index: 100; }
+  .header-inner { max-width: 960px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; }
+  .logo-area h1 { font-size: 17px; font-weight: 700; color: var(--accent2); letter-spacing: -0.02em; }
+  .logo-area p { font-size: 11px; color: var(--text2); margin-top: 2px; }
+  .badge { background: rgba(200,168,75,0.12); color: var(--accent); border: 1px solid rgba(200,168,75,0.25); border-radius: 99px; padding: 4px 12px; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
+  main { max-width: 960px; margin: 0 auto; padding: 1.5rem 1.25rem 0; }
+  .phase-tabs { display: flex; gap: 6px; margin-bottom: 1.5rem; flex-wrap: wrap; }
+  .phase-tab { padding: 7px 16px; font-size: 13px; font-weight: 500; border: 1px solid var(--border2); border-radius: 99px; background: transparent; color: var(--text2); cursor: pointer; font-family: inherit; transition: all 0.15s; }
+  .phase-tab:hover { background: var(--bg3); color: var(--text); }
+  .phase-tab.active { background: var(--accent); color: #0a0a0f; border-color: transparent; font-weight: 700; }
+  .phase-panel { display: none; }
+  .phase-panel.active { display: block; }
+  .group-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1.25rem; }
+  .group-tab { padding: 5px 12px; font-size: 12px; font-weight: 500; border: 1px solid var(--border2); border-radius: 99px; background: transparent; color: var(--text2); cursor: pointer; font-family: inherit; transition: all 0.15s; }
+  .group-tab:hover { background: var(--bg3); color: var(--text); }
+  .group-tab.active { background: var(--bg3); color: var(--text); border-color: var(--border2); font-weight: 700; }
+  .group-panel { display: none; }
+  .group-panel.active { display: block; }
+  .panel-title { font-size: 18px; font-weight: 700; color: var(--text); letter-spacing: -0.02em; margin-bottom: 0.6rem; }
+  .teams-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1.25rem; }
+  .team-pill { font-size: 12px; padding: 3px 10px; border-radius: 99px; background: var(--bg3); color: var(--text2); border: 1px solid var(--border); }
+  .table-wrap { overflow-x: auto; border-radius: var(--radius-lg); border: 1px solid var(--border); margin-bottom: 1.5rem; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 480px; }
+  thead th { text-align: left; padding: 9px 14px; font-size: 11px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text3); background: var(--bg2); border-bottom: 1px solid var(--border); }
+  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.1s; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: var(--bg2); }
+  td { padding: 11px 14px; vertical-align: middle; }
+  .no { color: var(--text3); font-size: 11px; }
+  .teams-cell { font-weight: 600; color: var(--text); }
+  .vs { color: var(--text3); font-weight: 400; margin: 0 4px; }
+  .date-cell { color: var(--text2); font-size: 12px; white-space: nowrap; }
+  .time-wib { font-weight: 700; font-size: 14px; color: var(--accent2); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .time-et { font-size: 10px; color: var(--text3); display: block; }
+  .venue-cell { color: var(--text3); font-size: 11px; white-space: nowrap; }
+  .plus1 { color: var(--accent); font-size: 10px; margin-left: 3px; }
+  .phase-section-title { font-size: 14px; font-weight: 600; color: var(--text2); margin-bottom: 0.75rem; letter-spacing: 0.04em; text-transform: uppercase; padding-left: 2px; }
+  .note { margin-top: 1rem; padding: 0.875rem 1rem; background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); font-size: 12px; color: var(--text2); line-height: 1.6; }
+  .note strong { color: var(--text); }
+  .ko-note { font-size: 12px; color: var(--text3); font-style: italic; margin-bottom: 1rem; padding-left: 2px; }
+  .final-badge { display: inline-block; background: rgba(200,168,75,0.15); color: var(--accent2); border: 1px solid rgba(200,168,75,0.3); border-radius: 6px; padding: 2px 8px; font-size: 11px; font-weight: 600; margin-left: 8px; vertical-align: middle; }
+  @media (max-width: 600px) {
+    .phase-tab { padding: 6px 11px; font-size: 12px; }
+    td { padding: 9px 10px; }
+    .venue-cell { display: none; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <div class="logo-area">
+      <h1>FIFA World Cup 2026</h1>
+      <p>Jadwal Lengkap &mdash; Waktu Indonesia Barat (WIB)</p>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
+      <span class="badge">11 Jun &ndash; 19 Jul 2026</span>
+      <span style="font-size:11px;color:var(--text3)">by Andhika Bayu Satriaji</span>
+    </div>
+  </div>
+</header>
+<main>
+  <div class="phase-tabs" id="phaseTabs"></div>
+  <div id="phaseContent"></div>
+  <div class="note">
+    <strong>Catatan:</strong> Semua waktu dikonversi ke WIB (Eastern Time + 11 jam). Tanda <strong>(+1)</strong> artinya keesokan harinya WIB.
+    Jadwal berdasarkan FWC26 Match Schedule v17, 10 April 2026 &mdash; <strong>subject to change</strong>.
+    Untuk fase knockout, lawan ditentukan dari hasil babak sebelumnya.
+  </div>
+</main>
+<script>
+function etToWib(et) {
+  const [h, m] = et.split(":").map(Number);
+  let wh = h + 11; let plus = false;
+  if (wh >= 24) { wh -= 24; plus = true; }
+  return { time: `${String(wh).padStart(2,"0")}:${String(m).padStart(2,"0")}`, plus };
+}
+
+function buildTable(matches) {
+  const rows = matches.map(m => {
+    const { time, plus } = etToWib(m.et);
+    return `<tr>
+      <td class="no">${m.no}</td>
+      <td class="teams-cell">${m.home} <span class="vs">vs</span> ${m.away}</td>
+      <td class="date-cell">${m.date}${plus ? `<span class="plus1">(+1)</span>` : ""}</td>
+      <td><span class="time-wib">${time} WIB</span><span class="time-et">ET ${m.et}</span></td>
+      <td class="venue-cell">${m.venue}</td>
+    </tr>`;
+  }).join("");
+  return `<div class="table-wrap"><table>
+    <thead><tr><th style="width:32px">#</th><th>Pertandingan</th><th>Tanggal</th><th>Waktu</th><th>Venue</th></tr></thead>
+    <tbody>${rows}</tbody>
+  </table></div>`;
+}
+
+// ── DATA ──────────────────────────────────────────────────────────────
+const groupData = [
+  { id:"A", teams:["Mexico (MEX)","South Africa (RSA)","Korea Republic (KOR)","Czechia (CZE)"], matches:[
+    {no:1,  home:"MEX",away:"RSA", date:"Jumat, 12 Jun",  et:"15:00",venue:"Mexico City"},
+    {no:2,  home:"KOR",away:"CZE", date:"Sabtu, 13 Jun",  et:"22:00",venue:"Guadalajara"},
+    {no:25, home:"CZE",away:"RSA", date:"Rabu, 18 Jun",   et:"12:00",venue:"Guadalajara"},
+    {no:27, home:"MEX",away:"KOR", date:"Kamis, 19 Jun",  et:"21:00",venue:"Mexico City"},
+    {no:51, home:"RSA",away:"KOR", date:"Selasa, 24 Jun", et:"15:00",venue:"Guadalajara"},
+    {no:53, home:"CZE",away:"MEX", date:"Selasa, 24 Jun", et:"21:00",venue:"Mexico City"},
+  ]},
+  { id:"B", teams:["Canada (CAN)","Bosnia & Herzegovina (BIH)","Qatar (QAT)","Switzerland (SUI)"], matches:[
+    {no:3,  home:"CAN",away:"BIH", date:"Jumat, 12 Jun",  et:"15:00",venue:"Toronto"},
+    {no:5,  home:"QAT",away:"SUI", date:"Sabtu, 13 Jun",  et:"21:00",venue:"San Francisco"},
+    {no:26, home:"SUI",away:"BIH", date:"Rabu, 18 Jun",   et:"15:00",venue:"San Francisco"},
+    {no:24, home:"CAN",away:"QAT", date:"Rabu, 18 Jun",   et:"22:00",venue:"Toronto"},
+    {no:44, home:"SUI",away:"CAN", date:"Sabtu, 21 Jun",  et:"23:00",venue:"San Francisco"},
+    {no:52, home:"BIH",away:"QAT", date:"Selasa, 24 Jun", et:"15:00",venue:"Toronto"},
+  ]},
+  { id:"C", teams:["Brazil (BRA)","Morocco (MAR)","Haiti (HAI)","Scotland (SCO)"], matches:[
+    {no:4,  home:"BRA",away:"MAR", date:"Sabtu, 13 Jun",  et:"15:00",venue:"New York/NJ"},
+    {no:7,  home:"HAI",away:"SCO", date:"Minggu, 14 Jun", et:"18:00",venue:"Boston"},
+    {no:28, home:"BRA",away:"HAI", date:"Jumat, 19 Jun",  et:"21:00",venue:"New York/NJ"},
+    {no:29, home:"SCO",away:"MAR", date:"Sabtu, 20 Jun",  et:"20:30",venue:"Boston"},
+    {no:47, home:"MAR",away:"HAI", date:"Minggu, 22 Jun", et:"13:00",venue:"Boston"},
+    {no:50, home:"SCO",away:"BRA", date:"Minggu, 22 Jun", et:"18:00",venue:"New York/NJ"},
+  ]},
+  { id:"D", teams:["USA","Paraguay (PAR)","Australia (AUS)","Türkiye (TUR)"], matches:[
+    {no:6,  home:"AUS",away:"TUR", date:"Minggu, 14 Jun", et:"00:00",venue:"Seattle"},
+    {no:18, home:"TUR",away:"USA", date:"Rabu, 17 Jun",   et:"18:00",venue:"San Francisco"},
+    {no:26, home:"USA",away:"PAR", date:"Rabu, 18 Jun",   et:"15:00",venue:"Los Angeles"},
+    {no:30, home:"USA",away:"AUS", date:"Sabtu, 20 Jun",  et:"18:00",venue:"Seattle"},
+    {no:58, home:"PAR",away:"AUS", date:"Selasa, 24 Jun", et:"22:00",venue:"Seattle"},
+    {no:59, home:"TUR",away:"USA", date:"Selasa, 24 Jun", et:"22:00",venue:"San Francisco"},
+  ]},
+  { id:"E", teams:["Germany (GER)","Curaçao (CUW)","Côte d'Ivoire (CIV)","Ecuador (ECU)"], matches:[
+    {no:8,  home:"GER",away:"CUW", date:"Minggu, 14 Jun", et:"13:00",venue:"Philadelphia"},
+    {no:11, home:"CIV",away:"ECU", date:"Senin, 15 Jun",  et:"16:00",venue:"Dallas"},
+    {no:34, home:"GER",away:"CIV", date:"Jumat, 20 Jun",  et:"20:00",venue:"Philadelphia"},
+    {no:36, home:"ECU",away:"CUW", date:"Sabtu, 21 Jun",  et:"00:00",venue:"Kansas City"},
+    {no:49, home:"ECU",away:"GER", date:"Selasa, 23 Jun", et:"18:00",venue:"Philadelphia"},
+    {no:56, home:"CUW",away:"CIV", date:"Selasa, 24 Jun", et:"16:00",venue:"Dallas"},
+  ]},
+  { id:"F", teams:["Netherlands (NED)","Japan (JPN)","Sweden (SWE)","Tunisia (TUN)"], matches:[
+    {no:10, home:"NED",away:"JPN", date:"Senin, 15 Jun",  et:"13:00",venue:"Houston"},
+    {no:12, home:"SWE",away:"TUN", date:"Senin, 15 Jun",  et:"22:00",venue:"Monterrey"},
+    {no:31, home:"SWE",away:"TUN", date:"Sabtu, 20 Jun",  et:"23:00",venue:"Monterrey"},
+    {no:32, home:"TUN",away:"JPN", date:"Sabtu, 20 Jun",  et:"15:00",venue:"Monterrey"},
+    {no:55, home:"TUN",away:"NED", date:"Selasa, 24 Jun", et:"16:00",venue:"Monterrey"},
+    {no:62, home:"JPN",away:"SWE", date:"Selasa, 24 Jun", et:"15:00",venue:"Houston"},
+  ]},
+  { id:"G", teams:["Belgium (BEL)","Egypt (EGY)","IR Iran (IRN)","New Zealand (NZL)"], matches:[
+    {no:15, home:"IRN",away:"NZL", date:"Selasa, 16 Jun", et:"21:00",venue:"Seattle"},
+    {no:16, home:"BEL",away:"EGY", date:"Selasa, 16 Jun", et:"15:00",venue:"Vancouver"},
+    {no:39, home:"NZL",away:"EGY", date:"Sabtu, 21 Jun",  et:"15:00",venue:"Seattle"},
+    {no:43, home:"BEL",away:"IRN", date:"Sabtu, 21 Jun",  et:"13:00",venue:"Los Angeles"},
+    {no:60, home:"NZL",away:"BEL", date:"Selasa, 24 Jun", et:"22:00",venue:"Vancouver"},
+    {no:70, home:"EGY",away:"IRN", date:"Selasa, 24 Jun", et:"22:00",venue:"Seattle"},
+  ]},
+  { id:"H", teams:["Spain (ESP)","Cabo Verde (CPV)","Saudi Arabia (KSA)","Uruguay (URU)"], matches:[
+    {no:13, home:"ESP",away:"CPV", date:"Selasa, 16 Jun", et:"18:00",venue:"Atlanta"},
+    {no:14, home:"KSA",away:"URU", date:"Selasa, 16 Jun", et:"12:00",venue:"Miami"},
+    {no:37, home:"ESP",away:"KSA", date:"Sabtu, 21 Jun",  et:"18:00",venue:"Atlanta"},
+    {no:46, home:"URU",away:"CPV", date:"Sabtu, 21 Jun",  et:"19:00",venue:"Miami"},
+    {no:64, home:"CPV",away:"KSA", date:"Selasa, 24 Jun", et:"23:00",venue:"Atlanta"},
+    {no:65, home:"URU",away:"ESP", date:"Selasa, 24 Jun", et:"20:00",venue:"Miami"},
+  ]},
+  { id:"I", teams:["France (FRA)","Senegal (SEN)","Iraq (IRQ)","Norway (NOR)"], matches:[
+    {no:19, home:"FRA",away:"SEN", date:"Rabu, 17 Jun",   et:"18:00",venue:"New York/NJ"},
+    {no:33, home:"NOR",away:"SEN", date:"Sabtu, 20 Jun",  et:"16:00",venue:"New York/NJ"},
+    {no:42, home:"SEN",away:"IRQ", date:"Sabtu, 21 Jun",  et:"17:00",venue:"Toronto"},
+    {no:48, home:"FRA",away:"IRQ", date:"Selasa, 22 Jun", et:"22:00",venue:"New York/NJ"},
+    {no:57, home:"IRQ",away:"NOR", date:"Selasa, 24 Jun", et:"19:00",venue:"Toronto"},
+    {no:66, home:"NOR",away:"FRA", date:"Selasa, 24 Jun", et:"20:00",venue:"New York/NJ"},
+  ]},
+  { id:"J", teams:["Argentina (ARG)","Algeria (ALG)","Austria (AUT)","Jordan (JOR)"], matches:[
+    {no:19, home:"AUT",away:"JOR", date:"Rabu, 17 Jun",   et:"21:00",venue:"San Francisco"},
+    {no:20, home:"ARG",away:"ALG", date:"Kamis, 18 Jun",  et:"00:00",venue:"Dallas"},
+    {no:38, home:"ARG",away:"AUT", date:"Sabtu, 21 Jun",  et:"12:00",venue:"Dallas"},
+    {no:40, home:"JOR",away:"ALG", date:"Sabtu, 21 Jun",  et:"21:00",venue:"Kansas City"},
+    {no:69, home:"JOR",away:"ARG", date:"Selasa, 24 Jun", et:"22:00",venue:"Dallas"},
+    {no:71, home:"ALG",away:"AUT", date:"Selasa, 24 Jun", et:"19:30",venue:"Kansas City"},
+  ]},
+  { id:"K", teams:["Portugal (POR)","Congo DR (COD)","Uzbekistan (UZB)","Colombia (COL)"], matches:[
+    {no:23, home:"COL",away:"COD", date:"Selasa, 17 Jun", et:"13:00",venue:"Houston"},
+    {no:35, home:"POR",away:"COD", date:"Jumat, 20 Jun",  et:"13:00",venue:"Houston"},
+    {no:54, home:"POR",away:"UZB", date:"Selasa, 23 Jun", et:"21:00",venue:"Houston"},
+    {no:68, home:"COL",away:"POR", date:"Selasa, 24 Jun", et:"17:00",venue:"Miami"},
+    {no:72, home:"COD",away:"UZB", date:"Selasa, 24 Jun", et:"19:30",venue:"Kansas City"},
+  ]},
+  { id:"L", teams:["England (ENG)","Croatia (CRO)","Ghana (GHA)","Panama (PAN)"], matches:[
+    {no:21, home:"ENG",away:"CRO", date:"Kamis, 18 Jun",  et:"19:00",venue:"Dallas"},
+    {no:22, home:"GHA",away:"PAN", date:"Kamis, 18 Jun",  et:"15:00",venue:"Toronto"},
+    {no:41, home:"ENG",away:"GHA", date:"Sabtu, 21 Jun",  et:"20:00",venue:"Atlanta"},
+    {no:45, home:"PAN",away:"CRO", date:"Sabtu, 21 Jun",  et:"16:00",venue:"Toronto"},
+    {no:61, home:"PAN",away:"ENG", date:"Selasa, 24 Jun", et:"15:00",venue:"Toronto"},
+    {no:67, home:"CRO",away:"GHA", date:"Selasa, 24 Jun", et:"17:00",venue:"Atlanta"},
+  ]},
+];
+
+// Round of 32
+const r32 = [
+  {no:63, home:"2A", away:"2B",           date:"Minggu, 28 Jun",  et:"23:00",venue:"Los Angeles"},
+  {no:73, home:"1F", away:"2C",           date:"Senin, 29 Jun",   et:"15:00",venue:"Houston"},
+  {no:74, home:"1E", away:"3 ABCDF",      date:"Senin, 29 Jun",   et:"16:30",venue:"Dallas"},
+  {no:75, home:"1C", away:"2F",           date:"Senin, 29 Jun",   et:"21:00",venue:"New York/NJ"},
+  {no:76, home:"2E", away:"2I",           date:"Selasa, 30 Jun",  et:"13:00",venue:"Philadelphia"},
+  {no:77, home:"1I", away:"3 CDFGH",      date:"Selasa, 30 Jun",  et:"17:00",venue:"Atlanta"},
+  {no:78, home:"1J", away:"2H",           date:"Selasa, 30 Jun",  et:"13:00",venue:"Kansas City"},
+  {no:79, home:"1A", away:"3 CEFHI",      date:"Selasa, 30 Jun",  et:"21:00",venue:"Mexico City"},
+  {no:80, home:"1D", away:"3 BEFIJ",      date:"Rabu, 1 Jul",     et:"12:00",venue:"Seattle"},
+  {no:81, home:"1G", away:"3 AEHIJ",      date:"Rabu, 1 Jul",     et:"20:00",venue:"Los Angeles"},
+  {no:82, home:"1B", away:"3 EFGIJ",      date:"Rabu, 1 Jul",     et:"16:00",venue:"Vancouver"},
+  {no:83, home:"2K", away:"2L",           date:"Kamis, 2 Jul",    et:"19:00",venue:"Miami"},
+  {no:84, home:"1H", away:"2J",           date:"Kamis, 2 Jul",    et:"15:00",venue:"San Francisco"},
+  {no:85, home:"1L", away:"3 EHIJK",      date:"Kamis, 2 Jul",    et:"23:00",venue:"Boston"},
+  {no:86, home:"1K", away:"3 DEIJL",      date:"Kamis, 2 Jul",    et:"18:00",venue:"Toronto"},
+  {no:87, home:"2D", away:"2G",           date:"Jumat, 3 Jul",    et:"21:30",venue:"Dallas"},
+  {no:88, home:"2D", away:"2G",           date:"Jumat, 3 Jul",    et:"14:00",venue:"Guadalajara"},
+];
+
+// Round of 16
+const r16 = [
+  {no:89, home:"W86", away:"W88",  date:"Minggu, 5 Jul",  et:"17:00",venue:"Toronto"},
+  {no:90, home:"W73", away:"W75",  date:"Minggu, 5 Jul",  et:"13:00",venue:"Houston"},
+  {no:91, home:"W76", away:"W78",  date:"Minggu, 5 Jul",  et:"16:00",venue:"Kansas City"},
+  {no:92, home:"W79", away:"W80",  date:"Senin, 6 Jul",   et:"20:00",venue:"Mexico City"},
+  {no:93, home:"W83", away:"W84",  date:"Senin, 6 Jul",   et:"15:00",venue:"Miami"},
+  {no:94, home:"W85", away:"W87",  date:"Senin, 6 Jul",   et:"20:00",venue:"Dallas"},
+  {no:95, home:"W74", away:"W77",  date:"Selasa, 7 Jul",  et:"12:00",venue:"Atlanta"},
+  {no:96, home:"W81", away:"W82",  date:"Selasa, 7 Jul",  et:"16:00",venue:"Los Angeles"},
+];
+
+// Quarter-Finals
+const qf = [
+  {no:97,  home:"W89", away:"W90",  date:"Sabtu, 11 Jul",  et:"16:00",venue:"Dallas"},
+  {no:98,  home:"W95", away:"W96",  date:"Sabtu, 11 Jul",  et:"15:00",venue:"San Francisco"},
+  {no:99,  home:"W91", away:"W92",  date:"Minggu, 12 Jul", et:"17:00",venue:"Miami"},
+  {no:100, home:"W93", away:"W94",  date:"Minggu, 12 Jul", et:"21:00",venue:"Boston"},
+];
+
+// Semi-Finals
+const sf = [
+  {no:101, home:"W97", away:"W98",   date:"Kamis, 16 Jul",  et:"15:00",venue:"New York/NJ"},
+  {no:102, home:"W99", away:"W100",  date:"Jumat, 17 Jul",  et:"15:00",venue:"Atlanta"},
+];
+
+// Bronze & Final
+const finals = [
+  {no:103, home:"Losers SF101", away:"Losers SF102", date:"Sabtu, 19 Jul", et:"17:00", venue:"Miami", label:"Bronze Final"},
+  {no:104, home:"W101",         away:"W102",         date:"Minggu, 20 Jul",et:"15:00", venue:"New York/NJ", label:"FINAL"},
+];
+
+// ── RENDER ────────────────────────────────────────────────────────────
+const phases = [
+  { id:"gs",  label:"Group Stage" },
+  { id:"r32", label:"Round of 32" },
+  { id:"r16", label:"Round of 16" },
+  { id:"qf",  label:"Quarter-Finals" },
+  { id:"sf",  label:"Semi-Finals" },
+  { id:"fin", label:"Final" },
+];
+
+const phaseTabs = document.getElementById("phaseTabs");
+const phaseContent = document.getElementById("phaseContent");
+
+phases.forEach((ph, i) => {
+  const btn = document.createElement("button");
+  btn.className = "phase-tab" + (i === 0 ? " active" : "");
+  btn.textContent = ph.label;
+  btn.onclick = () => {
+    document.querySelectorAll(".phase-tab").forEach(t => t.classList.remove("active"));
+    document.querySelectorAll(".phase-panel").forEach(p => p.classList.remove("active"));
+    btn.classList.add("active");
+    document.getElementById("pp-" + ph.id).classList.add("active");
+  };
+  phaseTabs.appendChild(btn);
+
+  const panel = document.createElement("div");
+  panel.className = "phase-panel" + (i === 0 ? " active" : "");
+  panel.id = "pp-" + ph.id;
+
+  if (ph.id === "gs") {
+    // Group tabs
+    const gtabs = document.createElement("div");
+    gtabs.className = "group-tabs";
+    panel.appendChild(gtabs);
+    const gpanels = document.createElement("div");
+    panel.appendChild(gpanels);
+
+    groupData.forEach((g, gi) => {
+      const gtab = document.createElement("button");
+      gtab.className = "group-tab" + (gi === 0 ? " active" : "");
+      gtab.textContent = "Grup " + g.id;
+      gtab.onclick = () => {
+        gtabs.querySelectorAll(".group-tab").forEach(t => t.classList.remove("active"));
+        gpanels.querySelectorAll(".group-panel").forEach(p => p.classList.remove("active"));
+        gtab.classList.add("active");
+        document.getElementById("gp-" + g.id).classList.add("active");
+      };
+      gtabs.appendChild(gtab);
+
+      const gp = document.createElement("div");
+      gp.className = "group-panel" + (gi === 0 ? " active" : "");
+      gp.id = "gp-" + g.id;
+      const pills = g.teams.map(t => `<span class="team-pill">${t}</span>`).join("");
+      gp.innerHTML = `<div class="panel-title">Grup ${g.id}</div><div class="teams-row">${pills}</div>` + buildTable(g.matches);
+      gpanels.appendChild(gp);
+    });
+  } else if (ph.id === "r32") {
+    panel.innerHTML = `<div class="ko-note">Lawan ditentukan dari hasil Group Stage. W = Winner, angka = posisi di grup.</div>` + buildTable(r32);
+  } else if (ph.id === "r16") {
+    panel.innerHTML = `<div class="ko-note">W = pemenang dari Round of 32 sesuai nomor pertandingan.</div>` + buildTable(r16);
+  } else if (ph.id === "qf") {
+    panel.innerHTML = `<div class="ko-note">W = pemenang dari Round of 16 sesuai nomor pertandingan.</div>` + buildTable(qf);
+  } else if (ph.id === "sf") {
+    panel.innerHTML = `<div class="ko-note">W = pemenang dari Quarter-Finals sesuai nomor pertandingan.</div>` + buildTable(sf);
+  } else if (ph.id === "fin") {
+    const rows = finals.map(m => {
+      const { time, plus } = etToWib(m.et);
+      return `<tr>
+        <td class="no">${m.no}</td>
+        <td class="teams-cell">${m.home} <span class="vs">vs</span> ${m.away} <span class="final-badge">${m.label}</span></td>
+        <td class="date-cell">${m.date}${plus ? `<span class="plus1">(+1)</span>` : ""}</td>
+        <td><span class="time-wib">${time} WIB</span><span class="time-et">ET ${m.et}</span></td>
+        <td class="venue-cell">${m.venue}</td>
+      </tr>`;
+    }).join("");
+    panel.innerHTML = `<div class="ko-note">Bronze Final: tim yang kalah di Semi-Finals. Final: pemenang Semi-Finals.</div>
+    <div class="table-wrap"><table>
+      <thead><tr><th style="width:32px">#</th><th>Pertandingan</th><th>Tanggal</th><th>Waktu</th><th>Venue</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table></div>`;
+  }
+
+  phaseContent.appendChild(panel);
+});
+</script>
+</body>
+</html>
