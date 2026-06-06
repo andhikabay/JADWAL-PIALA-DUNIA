@@ -1,94 +1,156 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FIFA World Cup 2026 - Jadwal & Klasemen WIB</title>
+<title>FIFA World Cup 2026 — Jadwal & Statistik WIB</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#0a0a0f;--bg2:#13131a;--bg3:#1c1c26;
-  --border:rgba(255,255,255,0.08);--border2:rgba(255,255,255,0.14);
-  --text:#f0f0f5;--text2:#9090a8;--text3:#55556a;
+  --bg:#08080e;--bg2:#111118;--bg3:#1a1a24;--bg4:#22222f;
+  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);
+  --text:#eeeef5;--text2:#8888a4;--text3:#4a4a62;
   --accent:#c8a84b;--accent2:#e8c86a;
-  --green:#4ade80;--red:#f87171;--yellow:#fbbf24;
-  --radius:10px;--radius-lg:14px;
+  --green:#4ade80;--red:#f87171;--yellow:#fbbf24;--blue:#60a5fa;
+  --r:10px;--rl:14px;
 }
-body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;padding-bottom:3rem}
-header{background:var(--bg2);border-bottom:1px solid var(--border);padding:1.25rem;position:sticky;top:0;z-index:100}
-.header-inner{max-width:960px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
-.logo-area h1{font-size:17px;font-weight:700;color:var(--accent2);letter-spacing:-.02em}
-.logo-area p{font-size:11px;color:var(--text2);margin-top:2px}
-.badge{background:rgba(200,168,75,.12);color:var(--accent);border:1px solid rgba(200,168,75,.25);border-radius:99px;padding:4px 12px;font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
-main{max-width:960px;margin:0 auto;padding:1.5rem 1.25rem 0}
-
-/* Top-level tabs (Jadwal / Klasemen) */
-.main-tabs{display:flex;gap:8px;margin-bottom:1.5rem;border-bottom:1px solid var(--border);padding-bottom:0}
-.main-tab{padding:8px 18px;font-size:14px;font-weight:600;border:none;border-bottom:2px solid transparent;background:transparent;color:var(--text2);cursor:pointer;font-family:inherit;transition:all .15s;margin-bottom:-1px}
+[data-theme="light"]{
+  --bg:#f4f4f8;--bg2:#ffffff;--bg3:#ebebf2;--bg4:#e0e0ea;
+  --border:rgba(0,0,0,0.08);--border2:rgba(0,0,0,0.14);
+  --text:#111118;--text2:#55556a;--text3:#9999b0;
+  --accent:#9a6f1a;--accent2:#7a5410;
+  --green:#16a34a;--red:#dc2626;--yellow:#b45309;--blue:#2563eb;
+}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;padding-bottom:4rem;transition:background .2s,color .2s}
+header{background:var(--bg2);border-bottom:1px solid var(--border);padding:1rem 1.25rem;position:sticky;top:0;z-index:100}
+.header-inner{max-width:980px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
+.logo-area h1{font-size:16px;font-weight:800;color:var(--accent2);letter-spacing:-.02em}
+.logo-area .subtitle{font-size:11px;color:var(--text2);margin-top:2px}
+.header-right{display:flex;flex-direction:column;align-items:flex-end;gap:5px}
+.badge{background:rgba(200,168,75,.13);color:var(--accent);border:1px solid rgba(200,168,75,.28);border-radius:99px;padding:3px 10px;font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase}
+.byline{font-size:13px;font-weight:700;color:var(--text);letter-spacing:-.01em}
+.byline span{color:var(--accent)}
+.theme-btn{background:var(--bg3);border:1px solid var(--border2);border-radius:99px;padding:4px 12px;font-size:11px;color:var(--text2);cursor:pointer;font-family:inherit;transition:all .15s}
+.theme-btn:hover{color:var(--text)}
+main{max-width:980px;margin:0 auto;padding:1.25rem 1rem 0}
+.main-tabs{display:flex;gap:2px;margin-bottom:1.5rem;background:var(--bg2);border:1px solid var(--border);border-radius:var(--rl);padding:4px;flex-wrap:wrap}
+.main-tab{flex:1;min-width:70px;padding:8px 8px;font-size:12px;font-weight:600;border:none;border-radius:10px;background:transparent;color:var(--text2);cursor:pointer;font-family:inherit;transition:all .2s;text-align:center}
 .main-tab:hover{color:var(--text)}
-.main-tab.active{color:var(--accent2);border-bottom-color:var(--accent2)}
+.main-tab.active{background:var(--bg4);color:var(--accent2);box-shadow:0 1px 4px rgba(0,0,0,.3)}
 .main-panel{display:none}
 .main-panel.active{display:block}
-
-/* Phase tabs */
-.phase-tabs{display:flex;gap:6px;margin-bottom:1.25rem;flex-wrap:wrap}
-.phase-tab{padding:7px 14px;font-size:12px;font-weight:500;border:1px solid var(--border2);border-radius:99px;background:transparent;color:var(--text2);cursor:pointer;font-family:inherit;transition:all .15s}
+.phase-tabs{display:flex;gap:5px;margin-bottom:1.25rem;flex-wrap:wrap}
+.phase-tab{padding:6px 13px;font-size:12px;font-weight:500;border:1px solid var(--border2);border-radius:99px;background:transparent;color:var(--text2);cursor:pointer;font-family:inherit;transition:all .15s}
 .phase-tab:hover{background:var(--bg3);color:var(--text)}
-.phase-tab.active{background:var(--accent);color:#0a0a0f;border-color:transparent;font-weight:700}
-.phase-panel{display:none}
-.phase-panel.active{display:block}
-
-/* Group tabs */
-.group-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1.25rem}
-.group-tab{padding:5px 11px;font-size:12px;font-weight:500;border:1px solid var(--border2);border-radius:99px;background:transparent;color:var(--text2);cursor:pointer;font-family:inherit;transition:all .15s}
+.phase-tab.active{background:var(--accent);color:#fff;border-color:transparent;font-weight:700}
+.group-tabs{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:1.25rem}
+.group-tab{padding:5px 11px;font-size:11px;font-weight:500;border:1px solid var(--border2);border-radius:99px;background:transparent;color:var(--text2);cursor:pointer;font-family:inherit;transition:all .15s}
 .group-tab:hover{background:var(--bg3);color:var(--text)}
-.group-tab.active{background:var(--bg3);color:var(--text);border-color:var(--border2);font-weight:700}
-.group-panel{display:none}
-.group-panel.active{display:block}
+.group-tab.active{background:var(--bg3);color:var(--text);font-weight:700}
+.phase-panel,.group-panel,.main-panel{display:none}
+.phase-panel.active,.group-panel.active,.main-panel.active{display:block}
+.panel-title{font-size:17px;font-weight:700;color:var(--text);letter-spacing:-.02em;margin-bottom:.5rem}
+.teams-row{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:1.1rem}
+.team-pill{font-size:11px;padding:3px 9px;border-radius:99px;background:var(--bg3);color:var(--text2);border:1px solid var(--border)}
 
-.panel-title{font-size:18px;font-weight:700;color:var(--text);letter-spacing:-.02em;margin-bottom:.6rem}
-.teams-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1.25rem}
-.team-pill{font-size:12px;padding:3px 10px;border-radius:99px;background:var(--bg3);color:var(--text2);border:1px solid var(--border)}
-
-/* Match list (mobile-first card style) */
-.match-list{display:flex;flex-direction:column;gap:1px;border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--border);margin-bottom:1.5rem}
-.match-item{background:var(--bg2);padding:12px 14px;transition:background .1s;display:grid;grid-template-columns:28px 1fr auto;gap:8px;align-items:center}
-.match-item:hover{background:var(--bg3)}
+/* MATCH ITEM */
+.match-list{display:flex;flex-direction:column;border-radius:var(--rl);overflow:hidden;border:1px solid var(--border);margin-bottom:1.25rem}
+.match-item{background:var(--bg2);padding:11px 14px;transition:background .1s;display:grid;grid-template-columns:26px 1fr auto;gap:8px;align-items:center;position:relative}
 .match-item+.match-item{border-top:1px solid var(--border)}
-.m-no{font-size:11px;color:var(--text3);font-variant-numeric:tabular-nums}
-.m-main{}
-.m-teams{font-weight:600;font-size:14px;color:var(--text)}
-.m-sub{font-size:11px;color:var(--text3);margin-top:2px;display:flex;gap:8px;flex-wrap:wrap}
-.m-sub .venue{color:var(--text3)}
-.m-time{text-align:right}
-.m-wib{font-weight:700;font-size:14px;color:var(--accent2);white-space:nowrap}
-.m-et{font-size:10px;color:var(--text3);display:block;text-align:right}
-.m-date{font-size:11px;color:var(--text2);white-space:nowrap}
+.match-item:hover{background:var(--bg3)}
+.match-item.watched::after{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--green)}
+.match-item.fav-match{background:rgba(200,168,75,.06)}
+.match-item.fav-match:hover{background:rgba(200,168,75,.1)}
+.m-no{font-size:10px;color:var(--text3);font-variant-numeric:tabular-nums}
+.m-teams{font-weight:600;font-size:13px;color:var(--text);display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.m-score{background:var(--bg3);border:1px solid var(--border2);border-radius:5px;padding:1px 7px;font-size:12px;font-weight:700;color:var(--accent2);font-variant-numeric:tabular-nums;white-space:nowrap}
+.m-sub{font-size:11px;color:var(--text3);margin-top:3px;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.m-dot{width:3px;height:3px;border-radius:50%;background:var(--text3);flex-shrink:0}
+.m-wib{font-weight:700;font-size:14px;color:var(--accent2);white-space:nowrap;font-variant-numeric:tabular-nums}
+.m-et{font-size:10px;color:var(--text3);display:block;text-align:right;margin-top:1px}
+.m-date{font-size:11px;color:var(--text2)}
 .plus1{color:var(--accent);font-size:10px;margin-left:2px}
-.final-badge{display:inline-block;background:rgba(200,168,75,.15);color:var(--accent2);border:1px solid rgba(200,168,75,.3);border-radius:6px;padding:1px 7px;font-size:10px;font-weight:600;margin-left:6px;vertical-align:middle}
+.final-badge{display:inline-block;background:rgba(200,168,75,.15);color:var(--accent2);border:1px solid rgba(200,168,75,.3);border-radius:5px;padding:1px 6px;font-size:10px;font-weight:600;margin-left:5px;vertical-align:middle}
+.watch-btn{background:none;border:none;cursor:pointer;font-size:14px;padding:2px 4px;border-radius:4px;opacity:.5;transition:opacity .15s;flex-shrink:0}
+.watch-btn:hover{opacity:1}
+.match-item.watched .watch-btn{opacity:1}
 
-/* Standings table */
-.standing-group-tab.active{background:var(--bg3);color:var(--text);border-color:var(--border2);font-weight:700}
-.standing-wrap{overflow-x:auto;border-radius:var(--radius-lg);border:1px solid var(--border);margin-bottom:1.5rem}
-.standing-table{width:100%;border-collapse:collapse;font-size:13px;min-width:380px}
-.standing-table thead th{text-align:left;padding:9px 12px;font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);background:var(--bg2);border-bottom:1px solid var(--border)}
-.standing-table thead th:not(:first-child){text-align:center}
-.standing-table tbody tr{border-bottom:1px solid var(--border);transition:background .1s}
-.standing-table tbody tr:last-child{border-bottom:none}
-.standing-table tbody tr:hover{background:var(--bg2)}
-.standing-table td{padding:11px 12px;vertical-align:middle}
-.standing-table td:not(:first-child){text-align:center;font-variant-numeric:tabular-nums}
-.st-pos{font-size:11px;color:var(--text3);width:24px}
-.st-team{font-weight:600;color:var(--text);display:flex;align-items:center;gap:8px}
-.st-pts{font-weight:700;font-size:15px;color:var(--accent2)}
-.st-gd{color:var(--text2)}
-.st-gd.pos{color:var(--green)}
-.st-gd.neg{color:var(--red)}
-.qualify-line{border-top:2px solid rgba(74,222,128,.3) !important}
-.ko-note{font-size:12px;color:var(--text3);font-style:italic;margin-bottom:1rem;padding-left:2px}
-.note{margin-top:1rem;padding:.875rem 1rem;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);font-size:12px;color:var(--text2);line-height:1.6}
-.note strong{color:var(--text)}
-.standing-note{font-size:11px;color:var(--text3);margin-bottom:1rem;padding-left:2px}
+/* FILTER BAR */
+.filter-bar{display:flex;gap:8px;margin-bottom:1.25rem;flex-wrap:wrap;align-items:center}
+.search-input{flex:1;min-width:160px;padding:8px 12px;background:var(--bg2);border:1px solid var(--border2);border-radius:99px;color:var(--text);font-size:13px;font-family:inherit;outline:none;transition:border-color .15s}
+.search-input:focus{border-color:var(--accent)}
+.search-input::placeholder{color:var(--text3)}
+.filter-select{padding:7px 12px;background:var(--bg2);border:1px solid var(--border2);border-radius:99px;color:var(--text2);font-size:12px;font-family:inherit;outline:none;cursor:pointer}
+.fav-btn{padding:7px 14px;font-size:12px;border:1px solid var(--border2);border-radius:99px;background:transparent;color:var(--text2);cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap}
+.fav-btn.active{background:rgba(200,168,75,.15);color:var(--accent);border-color:rgba(200,168,75,.3)}
+.no-results{padding:2rem;text-align:center;color:var(--text3);font-size:13px}
+
+/* STANDING */
+.st-wrap{overflow-x:auto;border-radius:var(--rl);border:1px solid var(--border);margin-bottom:1rem}
+.st-table{width:100%;border-collapse:collapse;font-size:12px;min-width:360px}
+.st-table thead th{text-align:left;padding:8px 10px;font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);background:var(--bg2);border-bottom:1px solid var(--border)}
+.st-table thead th:not(:nth-child(2)){text-align:center}
+.st-table tbody tr{border-bottom:1px solid var(--border);transition:background .1s}
+.st-table tbody tr:last-child{border-bottom:none}
+.st-table tbody tr:hover{background:var(--bg2)}
+.st-table td{padding:10px 10px;vertical-align:middle}
+.st-table td:not(:nth-child(2)){text-align:center;font-variant-numeric:tabular-nums}
+.st-pos{font-size:10px;color:var(--text3);width:22px}
+.st-team-name{font-weight:600;font-size:13px;color:var(--text)}
+.st-pts{font-weight:700;font-size:14px;color:var(--accent2)}
+.gd-pos{color:var(--green)}.gd-neg{color:var(--red)}
+.q-r32{border-left:3px solid var(--green)!important}
+.q-po{border-left:3px solid var(--yellow)!important}
+.q-out{border-left:3px solid transparent}
+.qualify-legend{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:.75rem;font-size:11px;color:var(--text2)}
+.ql-dot{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+.standing-note{font-size:11px;color:var(--text3);margin-bottom:1rem}
+.standing-note code{background:var(--bg3);padding:1px 5px;border-radius:4px;font-size:11px}
+
+/* BRACKET */
+.bracket-wrap{overflow-x:auto;padding-bottom:1rem}
+.bracket{display:flex;gap:0;min-width:700px}
+.bracket-round{display:flex;flex-direction:column;flex:1;min-width:130px}
+.bracket-round-title{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);padding:0 8px 10px;text-align:center}
+.bracket-matches{display:flex;flex-direction:column;justify-content:space-around;flex:1;gap:6px;padding:0 4px}
+.bracket-match{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:6px 8px;font-size:11px;position:relative}
+.bracket-match.final-match{border-color:rgba(200,168,75,.4);background:rgba(200,168,75,.05)}
+.bm-team{display:flex;justify-content:space-between;align-items:center;padding:2px 0;color:var(--text2)}
+.bm-team.winner{color:var(--text);font-weight:700}
+.bm-score{font-variant-numeric:tabular-nums;font-weight:700;color:var(--accent2)}
+.bm-label{font-size:9px;color:var(--text3);margin-bottom:4px;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+.bracket-note{font-size:11px;color:var(--text3);font-style:italic;margin-bottom:1rem}
+
+/* SCORER */
+.scorer-list{display:flex;flex-direction:column;border-radius:var(--rl);overflow:hidden;border:1px solid var(--border);margin-bottom:1.25rem}
+.scorer-item{background:var(--bg2);padding:11px 14px;display:grid;grid-template-columns:28px 1fr auto;gap:10px;align-items:center;transition:background .1s}
+.scorer-item+.scorer-item{border-top:1px solid var(--border)}
+.scorer-item:hover{background:var(--bg3)}
+.scorer-rank{font-size:11px;color:var(--text3);font-weight:700;text-align:center}
+.scorer-rank.gold{color:#fbbf24}.scorer-rank.silver{color:#94a3b8}.scorer-rank.bronze{color:#c87533}
+.scorer-name{font-weight:600;font-size:13px;color:var(--text)}
+.scorer-team{font-size:11px;color:var(--text3);margin-top:2px}
+.scorer-val{font-weight:800;font-size:18px;color:var(--accent2);font-variant-numeric:tabular-nums;text-align:right}
+.scorer-label{font-size:10px;color:var(--text3);text-align:right;display:block}
+.empty-state{padding:2rem;text-align:center;color:var(--text3);font-size:13px;background:var(--bg2);border-radius:var(--rl);border:1px solid var(--border);margin-bottom:1.25rem}
+
+/* COUNTDOWN */
+.countdown-bar{background:var(--bg2);border:1px solid var(--border2);border-radius:var(--rl);padding:1rem 1.25rem;margin-bottom:1.25rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem}
+.cd-label{font-size:10px;color:var(--text2);font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.cd-next{font-size:12px;color:var(--text2);margin-top:3px}
+.cd-next strong{color:var(--text)}
+.cd-units{display:flex;gap:12px}
+.cd-unit{text-align:center}
+.cd-num{font-size:22px;font-weight:800;color:var(--accent2);font-variant-numeric:tabular-nums;line-height:1;display:block}
+.cd-sub{font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em}
+.note-box{margin-top:1rem;padding:.75rem 1rem;background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);font-size:11px;color:var(--text2);line-height:1.7}
+.note-box strong{color:var(--text)}
+.ko-note{font-size:11px;color:var(--text3);font-style:italic;margin-bottom:.9rem}
+@media(max-width:600px){
+  .main-tab{font-size:10px;padding:7px 4px}
+  .cd-num{font-size:18px}
+  .bracket{min-width:500px}
+}
 </style>
 </head>
 <body>
@@ -96,11 +158,14 @@ main{max-width:960px;margin:0 auto;padding:1.5rem 1.25rem 0}
   <div class="header-inner">
     <div class="logo-area">
       <h1>FIFA World Cup 2026</h1>
-      <p>Jadwal &amp; Klasemen &mdash; Waktu Indonesia Barat (WIB)</p>
+      <div class="subtitle">Jadwal Lengkap &amp; Statistik — Waktu Indonesia Barat</div>
     </div>
-    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
-      <span class="badge">11 Jun &ndash; 19 Jul 2026</span>
-      <span style="font-size:11px;color:var(--text3)">by Andhika Bayu Satriaji</span>
+    <div class="header-right">
+      <div style="display:flex;align-items:center;gap:8px">
+        <button class="theme-btn" onclick="toggleTheme()" id="themeBtn">Mode Terang</button>
+        <span class="badge">11 Jun – 19 Jul 2026</span>
+      </div>
+      <div class="byline">by <span>Andhika Bayu Satriaji</span></div>
     </div>
   </div>
 </header>
@@ -108,62 +173,311 @@ main{max-width:960px;margin:0 auto;padding:1.5rem 1.25rem 0}
   <div class="main-tabs">
     <button class="main-tab active" onclick="switchMain('jadwal',this)">Jadwal</button>
     <button class="main-tab" onclick="switchMain('klasemen',this)">Klasemen</button>
+    <button class="main-tab" onclick="switchMain('ketiga',this)">Peringkat 3</button>
+    <button class="main-tab" onclick="switchMain('bracket',this)">Bracket</button>
+    <button class="main-tab" onclick="switchMain('topskor',this)">Top Skor</button>
+    <button class="main-tab" onclick="switchMain('topassist',this)">Top Assist</button>
   </div>
 
+  <!-- JADWAL -->
   <div class="main-panel active" id="mp-jadwal">
+    <div id="countdown" class="countdown-bar"></div>
+    <!-- Filter bar -->
+    <div class="filter-bar">
+      <input class="search-input" id="teamSearch" placeholder="Cari tim..." oninput="applyFilter()">
+      <button class="fav-btn" id="favFilterBtn" onclick="toggleFavFilter()">Favorit saja</button>
+      <button class="fav-btn" id="watchedFilterBtn" onclick="toggleWatchedFilter()">Belum ditonton</button>
+    </div>
     <div class="phase-tabs" id="phaseTabs"></div>
     <div id="phaseContent"></div>
-    <div class="note">
+    <div class="note-box">
       <strong>Catatan:</strong> Semua waktu dikonversi ke WIB (ET + 11 jam). Tanda <strong>(+1)</strong> = keesokan harinya WIB.
-      Jadwal FWC26 v17, 10 April 2026 &mdash; <strong>subject to change</strong>.
+      Klik tanda centang di kanan untuk tandai pertandingan sudah ditonton. Jadwal FWC26 v17, 10 April 2026 — subject to change.
     </div>
   </div>
 
+  <!-- KLASEMEN -->
   <div class="main-panel" id="mp-klasemen">
-    <p class="standing-note">Klasemen diperbarui manual. Klik tim untuk edit &mdash; atau biarkan kosong dan isi sendiri setelah pertandingan.</p>
+    <div class="qualify-legend">
+      <div style="display:flex;align-items:center;gap:5px"><div class="ql-dot" style="background:var(--green)"></div>Lolos Round of 32</div>
+      <div style="display:flex;align-items:center;gap:5px"><div class="ql-dot" style="background:var(--yellow)"></div>Berpotensi lolos (best 3rd)</div>
+      <div style="display:flex;align-items:center;gap:5px"><div class="ql-dot" style="background:var(--text3)"></div>Gugur</div>
+    </div>
+    <p class="standing-note">Edit variabel <code>klasemenData</code> di bagian script untuk update data.</p>
     <div class="group-tabs" id="standingGroupTabs"></div>
     <div id="standingPanels"></div>
+  </div>
+
+  <!-- PERINGKAT 3 -->
+  <div class="main-panel" id="mp-ketiga">
+    <p style="font-size:12px;color:var(--text2);margin-bottom:1rem">8 tim peringkat 3 terbaik dari 12 grup lolos ke Round of 32. Data otomatis dari klasemen grup.</p>
+    <div id="thirdPlaceContainer"></div>
+  </div>
+
+  <!-- BRACKET -->
+  <div class="main-panel" id="mp-bracket">
+    <p class="bracket-note">Bracket diisi dari variabel <code style="background:var(--bg3);padding:1px 5px;border-radius:4px;font-size:11px">bracketData</code> di script.</p>
+    <div id="bracketContainer"></div>
+  </div>
+
+  <!-- TOP SKOR -->
+  <div class="main-panel" id="mp-topskor">
+    <p style="font-size:12px;color:var(--text2);margin-bottom:1rem">Edit variabel <code style="background:var(--bg3);padding:1px 5px;border-radius:4px;font-size:11px">topSkorData</code> di script.</p>
+    <div id="topSkorContainer"></div>
+  </div>
+
+  <!-- TOP ASSIST -->
+  <div class="main-panel" id="mp-topassist">
+    <p style="font-size:12px;color:var(--text2);margin-bottom:1rem">Edit variabel <code style="background:var(--bg3);padding:1px 5px;border-radius:4px;font-size:11px">topAssistData</code> di script.</p>
+    <div id="topAssistContainer"></div>
   </div>
 </main>
 
 <script>
-function switchMain(id, btn) {
+// ══════════════════════════════════════════════════════
+//  EDIT DATA DI BAWAH INI
+// ══════════════════════════════════════════════════════
+
+// TIM FAVORIT — isi kode tim yang mau di-highlight, contoh: ['BRA','ARG']
+const FAVORITE_TEAMS = [];
+
+// KLASEMEN GRUP — isi setelah pertandingan
+const klasemenData = {
+  A:[
+    {team:'Mexico (MEX)',        mp:0,w:0,d:0,l:0,gf:0,ga:0},
+    {team:'South Africa (RSA)', mp:0,w:0,d:0,l:0,gf:0,ga:0},
+    {team:'Korea Republic (KOR)',mp:0,w:0,d:0,l:0,gf:0,ga:0},
+    {team:'Czechia (CZE)',       mp:0,w:0,d:0,l:0,gf:0,ga:0},
+  ],
+  B:[
+    {team:'Canada (CAN)',        mp:0,w:0,d:0,l:0,gf:0,ga:0},
+    {team:'Bosnia & Herz. (BIH)',mp:0,w:0,d:0,l:0,gf:0,ga:0},
+    {team:'Qatar (QAT)',         mp:0,w:0,d:0,l:0,gf:0,ga:0},
+    {team:'Switzerland (SUI)',   mp:0,w:0,d:0,l:0,gf:0,ga:0},
+  ],
+  C:[
+    {team:'Brazil (BRA)',        mp:0,w:0,d:0,l:0,gf:0,ga:0},
+    {team:'Morocco (MAR)',       mp:0,w:0,d:0,l:0,gf:0,ga:0},
+    {team:'Haiti (HAI)',         mp:0,w:0,d:0,l:0,gf:0,ga:0},
+    {team:'Scotland (SCO)',      mp:0,w:0,d:0,l:0,gf:0,ga:0},
+  ],
+  D:[
+    {team:'USA',                 mp:0,w:0,d:0,l:0,gf:0,ga:0},
+    {team:'Paraguay (PAR)',      mp:0,w:0,d:0,l:0,gf:0,ga:0},
+    {team:'Australia (AUS)',     mp:0,w:0,d:0,l:0,gf:0,ga:0},
+    {team:'Turkiye (TUR)',       mp:0,w:0,d:0,l:0,gf:0,ga:0},
+  ],
+  E:[
+    {team:'Germany (GER)',       mp:0,w:0,d:0,l:0,gf:0,ga:0},
+    {team:'Curacao (CUW)',       mp:0,w:0,d:0,l:0,gf:0,ga:0},
+    {team:"Cote d'Ivoire (CIV)", mp:0,w:0,d:0,l:0,gf:0,ga:0},
+    {team:'Ecuador (ECU)',       mp:0,w:0,d:0,l:0,gf:0,ga:0},
+  ],
+  F:[
+    {team:'Netherlands (NED)',   mp:0,w:0,d:0,l:0,gf:0,ga:0},
+    {team:'Japan (JPN)',         mp:0,w:0,d:0,l:0,gf:0,ga:0},
+    {team:'Sweden (SWE)',        mp:0,w:0,d:0,l:0,gf:0,ga:0},
+    {team:'Tunisia (TUN)',       mp:0,w:0,d:0,l:0,gf:0,ga:0},
+  ],
+  G:[
+    {team:'Belgium (BEL)',       mp:0,w:0,d:0,l:0,gf:0,ga:0},
+    {team:'Egypt (EGY)',         mp:0,w:0,d:0,l:0,gf:0,ga:0},
+    {team:'IR Iran (IRN)',       mp:0,w:0,d:0,l:0,gf:0,ga:0},
+    {team:'New Zealand (NZL)',   mp:0,w:0,d:0,l:0,gf:0,ga:0},
+  ],
+  H:[
+    {team:'Spain (ESP)',         mp:0,w:0,d:0,l:0,gf:0,ga:0},
+    {team:'Cabo Verde (CPV)',    mp:0,w:0,d:0,l:0,gf:0,ga:0},
+    {team:'Saudi Arabia (KSA)', mp:0,w:0,d:0,l:0,gf:0,ga:0},
+    {team:'Uruguay (URU)',       mp:0,w:0,d:0,l:0,gf:0,ga:0},
+  ],
+  I:[
+    {team:'France (FRA)',        mp:0,w:0,d:0,l:0,gf:0,ga:0},
+    {team:'Senegal (SEN)',       mp:0,w:0,d:0,l:0,gf:0,ga:0},
+    {team:'Iraq (IRQ)',          mp:0,w:0,d:0,l:0,gf:0,ga:0},
+    {team:'Norway (NOR)',        mp:0,w:0,d:0,l:0,gf:0,ga:0},
+  ],
+  J:[
+    {team:'Argentina (ARG)',     mp:0,w:0,d:0,l:0,gf:0,ga:0},
+    {team:'Algeria (ALG)',       mp:0,w:0,d:0,l:0,gf:0,ga:0},
+    {team:'Austria (AUT)',       mp:0,w:0,d:0,l:0,gf:0,ga:0},
+    {team:'Jordan (JOR)',        mp:0,w:0,d:0,l:0,gf:0,ga:0},
+  ],
+  K:[
+    {team:'Portugal (POR)',      mp:0,w:0,d:0,l:0,gf:0,ga:0},
+    {team:'Congo DR (COD)',      mp:0,w:0,d:0,l:0,gf:0,ga:0},
+    {team:'Uzbekistan (UZB)',    mp:0,w:0,d:0,l:0,gf:0,ga:0},
+    {team:'Colombia (COL)',      mp:0,w:0,d:0,l:0,gf:0,ga:0},
+  ],
+  L:[
+    {team:'England (ENG)',       mp:0,w:0,d:0,l:0,gf:0,ga:0},
+    {team:'Croatia (CRO)',       mp:0,w:0,d:0,l:0,gf:0,ga:0},
+    {team:'Ghana (GHA)',         mp:0,w:0,d:0,l:0,gf:0,ga:0},
+    {team:'Panama (PAN)',        mp:0,w:0,d:0,l:0,gf:0,ga:0},
+  ],
+};
+
+// HASIL PERTANDINGAN — isi nomor match dan skor, contoh: { 1: '2-1', 25: '0-0' }
+const hasilMatch = {
+  // 1: '2-1',
+};
+
+// BRACKET KNOCKOUT — isi setelah R32 dst, contoh: { home:'Brazil', away:'Morocco', score:'2-0', winner:'Brazil' }
+const bracketData = {
+  r32: Array(16).fill(null),   // isi 16 slot
+  r16: Array(8).fill(null),
+  qf:  Array(4).fill(null),
+  sf:  Array(2).fill(null),
+  final: null,
+  bronze: null,
+};
+
+// TOP SKOR — contoh: { name:'Kylian Mbappe', team:'France (FRA)', val:4 }
+const topSkorData = [
+];
+
+// TOP ASSIST — contoh: { name:'Bruno Fernandes', team:'Portugal (POR)', val:3 }
+const topAssistData = [
+];
+
+// ══════════════════════════════════════════════════════
+//  JANGAN EDIT DI BAWAH KECUALI MAU UBAH TAMPILAN
+// ══════════════════════════════════════════════════════
+
+const DAYS_ID=['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+const MONTHS_ID=['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
+
+function etToWib(et){
+  const[h,m]=et.split(':').map(Number);let wh=h+11,plus=false;
+  if(wh>=24){wh-=24;plus=true;}
+  return{time:`${String(wh).padStart(2,'0')}:${String(m).padStart(2,'0')}`,plus};
+}
+function formatDate(dateStr,et){
+  const months={Jan:0,Feb:1,Mar:2,Apr:3,Mei:4,Jun:5,Jul:6,Agu:7,Sep:8,Okt:9,Nov:10,Des:11,June:5,July:6};
+  const parts=dateStr.replace(/,/g,'').trim().split(/\s+/);
+  let day,mon;
+  if(parts.length===3){day=parseInt(parts[1]);mon=months[parts[2]];}
+  else{day=parseInt(parts[0]);mon=months[parts[1]];}
+  let d=new Date(2026,mon,day);
+  if(parseInt(et.split(':')[0])+11>=24) d=new Date(d.getTime()+86400000);
+  return`${DAYS_ID[d.getDay()]}, ${d.getDate()} ${MONTHS_ID[d.getMonth()]}`;
+}
+function gdStr(n){return n>0?'+'+n:''+n;}
+function gdClass(n){return n>0?'gd-pos':n<0?'gd-neg':'';}
+function rankClass(i){return['gold','silver','bronze'][i]||'';}
+
+function switchMain(id,btn){
   document.querySelectorAll('.main-tab').forEach(t=>t.classList.remove('active'));
   document.querySelectorAll('.main-panel').forEach(p=>p.classList.remove('active'));
   btn.classList.add('active');
   document.getElementById('mp-'+id).classList.add('active');
 }
 
-function etToWib(et){
-  const[h,m]=et.split(':').map(Number);
-  let wh=h+11,plus=false;
-  if(wh>=24){wh-=24;plus=true;}
-  return{time:`${String(wh).padStart(2,'0')}:${String(m).padStart(2,'0')}`,plus};
+// ── THEME ─────────────────────────────────────────────
+function toggleTheme(){
+  const html=document.documentElement;
+  const isDark=html.getAttribute('data-theme')==='dark';
+  html.setAttribute('data-theme',isDark?'light':'dark');
+  document.getElementById('themeBtn').textContent=isDark?'Mode Gelap':'Mode Terang';
+  localStorage.setItem('fwc_theme',isDark?'light':'dark');
+}
+(function(){
+  const t=localStorage.getItem('fwc_theme');
+  if(t){
+    document.documentElement.setAttribute('data-theme',t);
+    document.addEventListener('DOMContentLoaded',()=>{
+      const btn=document.getElementById('themeBtn');
+      if(btn) btn.textContent=t==='light'?'Mode Gelap':'Mode Terang';
+    });
+  }
+})();
+
+// ── WATCHED ───────────────────────────────────────────
+function getWatched(){try{return JSON.parse(localStorage.getItem('fwc_watched')||'[]');}catch(e){return[];}}
+function toggleWatched(no){
+  let w=getWatched();
+  if(w.includes(no)) w=w.filter(x=>x!==no); else w.push(no);
+  localStorage.setItem('fwc_watched',JSON.stringify(w));
+  document.querySelectorAll(`.mi-${no}`).forEach(el=>{
+    el.classList.toggle('watched',w.includes(no));
+    const btn=el.querySelector('.watch-btn');
+    if(btn) btn.title=w.includes(no)?'Tandai belum ditonton':'Tandai sudah ditonton';
+  });
+  if(showOnlyUnwatched) applyFilter();
 }
 
+// ── FILTER ────────────────────────────────────────────
+let showOnlyFav=false, showOnlyUnwatched=false;
+function toggleFavFilter(){
+  showOnlyFav=!showOnlyFav;
+  document.getElementById('favFilterBtn').classList.toggle('active',showOnlyFav);
+  applyFilter();
+}
+function toggleWatchedFilter(){
+  showOnlyUnwatched=!showOnlyUnwatched;
+  document.getElementById('watchedFilterBtn').classList.toggle('active',showOnlyUnwatched);
+  applyFilter();
+}
+function applyFilter(){
+  const q=document.getElementById('teamSearch').value.toLowerCase().trim();
+  const watched=getWatched();
+  document.querySelectorAll('.match-item[data-teams]').forEach(el=>{
+    const teams=el.getAttribute('data-teams').toLowerCase();
+    const no=parseInt(el.getAttribute('data-no'));
+    const isFav=el.classList.contains('fav-match');
+    const isWatched=watched.includes(no);
+    let show=true;
+    if(q && !teams.includes(q)) show=false;
+    if(showOnlyFav && !isFav) show=false;
+    if(showOnlyUnwatched && isWatched) show=false;
+    el.style.display=show?'':'none';
+  });
+  // show no-results if all hidden in each list
+  document.querySelectorAll('.match-list').forEach(list=>{
+    const visible=[...list.querySelectorAll('.match-item')].filter(i=>i.style.display!=='none');
+    let nr=list.querySelector('.no-results');
+    if(!visible.length){
+      if(!nr){nr=document.createElement('div');nr.className='no-results';nr.textContent='Tidak ada pertandingan yang cocok.';list.appendChild(nr);}
+      nr.style.display='';
+    } else {
+      if(nr) nr.style.display='none';
+    }
+  });
+}
+
+// ── MATCH LIST ────────────────────────────────────────
 function buildMatchList(matches){
-  const items=matches.map(m=>{
+  const watched=getWatched();
+  return`<div class="match-list">${matches.map(m=>{
     const{time,plus}=etToWib(m.et);
-    const label=m.label?`<span class="final-badge">${m.label}</span>`:'';
-    return `<div class="match-item">
+    const dateLabel=formatDate(m.date,m.et);
+    const lbl=m.label?`<span class="final-badge">${m.label}</span>`:'';
+    const score=hasilMatch[m.no]?`<span class="m-score">${hasilMatch[m.no]}</span>`:'';
+    const isFav=FAVORITE_TEAMS.some(f=>m.home.includes(f)||m.away.includes(f));
+    const isWatched=watched.includes(m.no);
+    const teamsStr=`${m.home} ${m.away}`;
+    return`<div class="match-item mi-${m.no}${isFav?' fav-match':''}${isWatched?' watched':''}" data-no="${m.no}" data-teams="${teamsStr}">
       <span class="m-no">${m.no}</span>
-      <div class="m-main">
-        <div class="m-teams">${m.home} <span style="color:var(--text3);font-weight:400">vs</span> ${m.away}${label}</div>
+      <div>
+        <div class="m-teams">${m.home} <span style="color:var(--text3);font-weight:400">vs</span> ${m.away}${score}${lbl}</div>
         <div class="m-sub">
-          <span class="m-date">${m.date}${plus?`<span class="plus1">(+1)</span>`:''}</span>
-          <span class="venue">${m.venue}</span>
+          <span class="m-date">${dateLabel}${plus?`<span class="plus1">(+1)</span>`:''}</span>
+          <span class="m-dot"></span>
+          <span>${m.venue}</span>
         </div>
       </div>
-      <div class="m-time">
-        <span class="m-wib">${time} WIB</span>
-        <span class="m-et">ET ${m.et}</span>
+      <div style="display:flex;align-items:center;gap:8px">
+        <div style="text-align:right">
+          <span class="m-wib">${time} WIB</span>
+          <span class="m-et">ET ${m.et}</span>
+        </div>
+        <button class="watch-btn" onclick="toggleWatched(${m.no})" title="${isWatched?'Tandai belum ditonton':'Tandai sudah ditonton'}">&#10003;</button>
       </div>
     </div>`;
-  }).join('');
-  return `<div class="match-list">${items}</div>`;
+  }).join('')}</div>`;
 }
 
-// ── GROUP DATA ────────────────────────────────────────────────────────
+// ── GROUP DATA ────────────────────────────────────────
 const groupData=[
   {id:'A',teams:['Mexico (MEX)','South Africa (RSA)','Korea Republic (KOR)','Czechia (CZE)'],matches:[
     {no:1, home:'MEX',away:'RSA',date:'Jumat, 12 Jun', et:'15:00',venue:'Mexico City'},
@@ -262,26 +576,25 @@ const groupData=[
   ]},
 ];
 
-const r32=[
-  {no:63,home:'2A',away:'2B',          date:'Minggu, 28 Jun', et:'23:00',venue:'Los Angeles'},
-  {no:73,home:'1F',away:'2C',          date:'Senin, 29 Jun',  et:'15:00',venue:'Houston'},
-  {no:74,home:'1E',away:'3 ABCDF',     date:'Senin, 29 Jun',  et:'16:30',venue:'Dallas'},
-  {no:75,home:'1C',away:'2F',          date:'Senin, 29 Jun',  et:'21:00',venue:'New York/NJ'},
-  {no:76,home:'2E',away:'2I',          date:'Selasa, 30 Jun', et:'13:00',venue:'Philadelphia'},
-  {no:77,home:'1I',away:'3 CDFGH',     date:'Selasa, 30 Jun', et:'17:00',venue:'Atlanta'},
-  {no:78,home:'1J',away:'2H',          date:'Selasa, 30 Jun', et:'13:00',venue:'Kansas City'},
-  {no:79,home:'1A',away:'3 CEFHI',     date:'Selasa, 30 Jun', et:'21:00',venue:'Mexico City'},
-  {no:80,home:'1D',away:'3 BEFIJ',     date:'Rabu, 1 Jul',    et:'12:00',venue:'Seattle'},
-  {no:81,home:'1G',away:'3 AEHIJ',     date:'Rabu, 1 Jul',    et:'20:00',venue:'Los Angeles'},
-  {no:82,home:'1B',away:'3 EFGIJ',     date:'Rabu, 1 Jul',    et:'16:00',venue:'Vancouver'},
-  {no:83,home:'2K',away:'2L',          date:'Kamis, 2 Jul',   et:'19:00',venue:'Miami'},
-  {no:84,home:'1H',away:'2J',          date:'Kamis, 2 Jul',   et:'15:00',venue:'San Francisco'},
-  {no:85,home:'1L',away:'3 EHIJK',     date:'Kamis, 2 Jul',   et:'23:00',venue:'Boston'},
-  {no:86,home:'1K',away:'3 DEIJL',     date:'Kamis, 2 Jul',   et:'18:00',venue:'Toronto'},
-  {no:87,home:'2D',away:'2G',          date:'Jumat, 3 Jul',   et:'21:30',venue:'Dallas'},
-  {no:88,home:'2D',away:'2G',          date:'Jumat, 3 Jul',   et:'14:00',venue:'Guadalajara'},
+const r32m=[
+  {no:63,home:'2A',away:'2B',      date:'Minggu, 28 Jun',et:'23:00',venue:'Los Angeles'},
+  {no:73,home:'1F',away:'2C',      date:'Senin, 29 Jun', et:'15:00',venue:'Houston'},
+  {no:74,home:'1E',away:'3 ABCDF', date:'Senin, 29 Jun', et:'16:30',venue:'Dallas'},
+  {no:75,home:'1C',away:'2F',      date:'Senin, 29 Jun', et:'21:00',venue:'New York/NJ'},
+  {no:76,home:'2E',away:'2I',      date:'Selasa, 30 Jun',et:'13:00',venue:'Philadelphia'},
+  {no:77,home:'1I',away:'3 CDFGH', date:'Selasa, 30 Jun',et:'17:00',venue:'Atlanta'},
+  {no:78,home:'1J',away:'2H',      date:'Selasa, 30 Jun',et:'13:00',venue:'Kansas City'},
+  {no:79,home:'1A',away:'3 CEFHI', date:'Selasa, 30 Jun',et:'21:00',venue:'Mexico City'},
+  {no:80,home:'1D',away:'3 BEFIJ', date:'Rabu, 1 Jul',   et:'12:00',venue:'Seattle'},
+  {no:81,home:'1G',away:'3 AEHIJ', date:'Rabu, 1 Jul',   et:'20:00',venue:'Los Angeles'},
+  {no:82,home:'1B',away:'3 EFGIJ', date:'Rabu, 1 Jul',   et:'16:00',venue:'Vancouver'},
+  {no:83,home:'2K',away:'2L',      date:'Kamis, 2 Jul',  et:'19:00',venue:'Miami'},
+  {no:84,home:'1H',away:'2J',      date:'Kamis, 2 Jul',  et:'15:00',venue:'San Francisco'},
+  {no:85,home:'1L',away:'3 EHIJK', date:'Kamis, 2 Jul',  et:'23:00',venue:'Boston'},
+  {no:86,home:'1K',away:'3 DEIJL', date:'Kamis, 2 Jul',  et:'18:00',venue:'Toronto'},
+  {no:87,home:'2D',away:'2G',      date:'Jumat, 3 Jul',  et:'21:30',venue:'Dallas'},
 ];
-const r16=[
+const r16m=[
   {no:89, home:'W86',away:'W88',date:'Minggu, 5 Jul', et:'17:00',venue:'Toronto'},
   {no:90, home:'W73',away:'W75',date:'Minggu, 5 Jul', et:'13:00',venue:'Houston'},
   {no:91, home:'W76',away:'W78',date:'Minggu, 5 Jul', et:'16:00',venue:'Kansas City'},
@@ -291,64 +604,80 @@ const r16=[
   {no:95, home:'W74',away:'W77',date:'Selasa, 7 Jul', et:'12:00',venue:'Atlanta'},
   {no:96, home:'W81',away:'W82',date:'Selasa, 7 Jul', et:'16:00',venue:'Los Angeles'},
 ];
-const qf=[
+const qfm=[
   {no:97, home:'W89',away:'W90',date:'Sabtu, 11 Jul',  et:'16:00',venue:'Dallas'},
   {no:98, home:'W95',away:'W96',date:'Sabtu, 11 Jul',  et:'15:00',venue:'San Francisco'},
   {no:99, home:'W91',away:'W92',date:'Minggu, 12 Jul', et:'17:00',venue:'Miami'},
   {no:100,home:'W93',away:'W94',date:'Minggu, 12 Jul', et:'21:00',venue:'Boston'},
 ];
-const sf=[
-  {no:101,home:'W97',away:'W98', date:'Kamis, 16 Jul',et:'15:00',venue:'New York/NJ'},
-  {no:102,home:'W99',away:'W100',date:'Jumat, 17 Jul',et:'15:00',venue:'Atlanta'},
+const sfm=[
+  {no:101,home:'W97', away:'W98', date:'Kamis, 16 Jul',et:'15:00',venue:'New York/NJ'},
+  {no:102,home:'W99', away:'W100',date:'Jumat, 17 Jul',et:'15:00',venue:'Atlanta'},
 ];
-const finals=[
+const finalsm=[
   {no:103,home:'Losers SF 101',away:'Losers SF 102',date:'Sabtu, 19 Jul',  et:'17:00',venue:'Miami',         label:'Bronze Final'},
   {no:104,home:'W101',          away:'W102',         date:'Minggu, 20 Jul', et:'15:00',venue:'New York/NJ',   label:'FINAL'},
 ];
 
-// ── RENDER JADWAL ─────────────────────────────────────────────────────
+// ── COUNTDOWN ────────────────────────────────────────
+function updateCountdown(){
+  const kickoff=new Date('2026-06-12T19:00:00Z');
+  const now=new Date();const diff=kickoff-now;
+  const el=document.getElementById('countdown');
+  if(diff<=0){el.style.display='none';return;}
+  const d=Math.floor(diff/86400000);
+  const h=Math.floor((diff%86400000)/3600000);
+  const m=Math.floor((diff%3600000)/60000);
+  const s=Math.floor((diff%60000)/1000);
+  el.innerHTML=`<div><div class="cd-label">Kick-off pertama</div><div class="cd-next" style="margin-top:3px">MEX vs RSA &mdash; <strong>Sabtu, 13 Jun 2026 • 02:00 WIB</strong></div></div>
+  <div class="cd-units">
+    <div class="cd-unit"><span class="cd-num">${String(d).padStart(2,'0')}</span><span class="cd-sub">Hari</span></div>
+    <div class="cd-unit"><span class="cd-num">${String(h).padStart(2,'0')}</span><span class="cd-sub">Jam</span></div>
+    <div class="cd-unit"><span class="cd-num">${String(m).padStart(2,'0')}</span><span class="cd-sub">Menit</span></div>
+    <div class="cd-unit"><span class="cd-num">${String(s).padStart(2,'0')}</span><span class="cd-sub">Detik</span></div>
+  </div>`;
+}
+updateCountdown();setInterval(updateCountdown,1000);
+
+// ── JADWAL RENDER ─────────────────────────────────────
 const phases=[
   {id:'gs', label:'Group Stage'},
   {id:'r32',label:'Round of 32'},
   {id:'r16',label:'Round of 16'},
-  {id:'qf', label:'Quarter-Finals'},
-  {id:'sf', label:'Semi-Finals'},
+  {id:'qf', label:'QF'},
+  {id:'sf', label:'SF'},
   {id:'fin',label:'Final'},
 ];
 const phaseTabs=document.getElementById('phaseTabs');
 const phaseContent=document.getElementById('phaseContent');
-
 phases.forEach((ph,i)=>{
   const btn=document.createElement('button');
   btn.className='phase-tab'+(i===0?' active':'');
   btn.textContent=ph.label;
   btn.onclick=()=>{
-    document.querySelectorAll('.phase-tab').forEach(t=>t.classList.remove('active'));
-    document.querySelectorAll('.phase-panel').forEach(p=>p.classList.remove('active'));
+    phaseTabs.querySelectorAll('.phase-tab').forEach(t=>t.classList.remove('active'));
+    phaseContent.querySelectorAll('.phase-panel').forEach(p=>p.classList.remove('active'));
     btn.classList.add('active');
     document.getElementById('pp-'+ph.id).classList.add('active');
+    applyFilter();
   };
   phaseTabs.appendChild(btn);
-
   const panel=document.createElement('div');
   panel.className='phase-panel'+(i===0?' active':'');
   panel.id='pp-'+ph.id;
-
   if(ph.id==='gs'){
-    const gtabs=document.createElement('div');
-    gtabs.className='group-tabs';
-    panel.appendChild(gtabs);
-    const gpanels=document.createElement('div');
-    panel.appendChild(gpanels);
+    const gtabs=document.createElement('div');gtabs.className='group-tabs';panel.appendChild(gtabs);
+    const gps=document.createElement('div');panel.appendChild(gps);
     groupData.forEach((g,gi)=>{
       const gt=document.createElement('button');
       gt.className='group-tab'+(gi===0?' active':'');
       gt.textContent='Grup '+g.id;
       gt.onclick=()=>{
         gtabs.querySelectorAll('.group-tab').forEach(t=>t.classList.remove('active'));
-        gpanels.querySelectorAll('.group-panel').forEach(p=>p.classList.remove('active'));
+        gps.querySelectorAll('.group-panel').forEach(p=>p.classList.remove('active'));
         gt.classList.add('active');
         document.getElementById('gp-'+g.id).classList.add('active');
+        applyFilter();
       };
       gtabs.appendChild(gt);
       const gp=document.createElement('div');
@@ -356,179 +685,139 @@ phases.forEach((ph,i)=>{
       gp.id='gp-'+g.id;
       const pills=g.teams.map(t=>`<span class="team-pill">${t}</span>`).join('');
       gp.innerHTML=`<div class="panel-title">Grup ${g.id}</div><div class="teams-row">${pills}</div>`+buildMatchList(g.matches);
-      gpanels.appendChild(gp);
+      gps.appendChild(gp);
     });
-  } else if(ph.id==='r32'){
-    panel.innerHTML=`<p class="ko-note">Lawan ditentukan dari hasil Group Stage. 1/2 = posisi di grup, 3 = best third-place.</p>`+buildMatchList(r32);
-  } else if(ph.id==='r16'){
-    panel.innerHTML=`<p class="ko-note">W = pemenang pertandingan Round of 32.</p>`+buildMatchList(r16);
-  } else if(ph.id==='qf'){
-    panel.innerHTML=`<p class="ko-note">W = pemenang pertandingan Round of 16.</p>`+buildMatchList(qf);
-  } else if(ph.id==='sf'){
-    panel.innerHTML=`<p class="ko-note">W = pemenang pertandingan Quarter-Finals.</p>`+buildMatchList(sf);
-  } else if(ph.id==='fin'){
-    panel.innerHTML=`<p class="ko-note">Bronze Final: kalah SF. Final: menang SF.</p>`+buildMatchList(finals);
+  } else {
+    const map={r32:r32m,r16:r16m,qf:qfm,sf:sfm};
+    const note={r32:'1/2=posisi di grup, 3=best third-place.',r16:'W=pemenang R32.',qf:'W=pemenang R16.',sf:'W=pemenang QF.'};
+    if(ph.id==='fin') panel.innerHTML=`<p class="ko-note">Bronze Final: kalah SF. Final: menang SF.</p>`+buildMatchList(finalsm);
+    else panel.innerHTML=`<p class="ko-note">${note[ph.id]}</p>`+buildMatchList(map[ph.id]);
   }
   phaseContent.appendChild(panel);
 });
 
-// ── RENDER KLASEMEN ───────────────────────────────────────────────────
-// Storage key prefix
-const SK='fwc26_st_';
-function loadStanding(gid){
-  try{
-    const raw=localStorage.getItem(SK+gid);
-    if(raw) return JSON.parse(raw);
-  }catch(e){}
-  return null;
-}
-function saveStanding(gid,data){
-  try{ localStorage.setItem(SK+gid,JSON.stringify(data)); }catch(e){}
-}
-
-function defaultStanding(g){
-  return g.teams.map(t=>({team:t,mp:0,w:0,d:0,l:0,gf:0,ga:0}));
-}
-
-function gdClass(n){ if(n>0)return 'pos'; if(n<0)return 'neg'; return ''; }
-function gdStr(n){ if(n>0)return '+'+n; return ''+n; }
-
+// ── KLASEMEN ──────────────────────────────────────────
 function renderStanding(gid,container){
-  const g=groupData.find(x=>x.id===gid);
-  let data=loadStanding(gid)||defaultStanding(g);
-  // sort: pts desc, gd desc, gf desc
+  const data=klasemenData[gid]||[];
   const sorted=[...data].map(r=>({...r,pts:r.w*3+r.d,gd:r.gf-r.ga}))
     .sort((a,b)=>b.pts-a.pts||b.gd-a.gd||b.gf-a.gf);
-
-  container.innerHTML=`
-  <div class="standing-wrap">
-  <table class="standing-table">
-    <thead><tr>
-      <th style="width:24px"></th>
-      <th>Tim</th>
-      <th title="Main">M</th>
-      <th title="Menang">M</th>
-      <th title="Seri">S</th>
-      <th title="Kalah">K</th>
-      <th title="Gol Masuk">GM</th>
-      <th title="Gol Kebobolan">GK</th>
-      <th title="Selisih Gol">SG</th>
-      <th title="Poin" style="color:var(--accent2)">Pts</th>
-    </tr></thead>
-    <tbody>
-    ${sorted.map((r,i)=>`<tr class="${i===1?'qualify-line':''}">
-      <td class="st-pos">${i+1}</td>
-      <td><div class="st-team">${r.team}</div></td>
-      <td>${r.mp}</td>
-      <td>${r.w}</td>
-      <td>${r.d}</td>
-      <td>${r.l}</td>
-      <td>${r.gf}</td>
-      <td>${r.ga}</td>
-      <td class="st-gd ${gdClass(r.gd)}">${gdStr(r.gd)}</td>
-      <td class="st-pts">${r.pts}</td>
-    </tr>`).join('')}
-    </tbody>
-  </table>
-  </div>
-  <div style="margin-bottom:1rem">
-    <button onclick="openEdit('${gid}')" style="padding:6px 14px;font-size:12px;border:1px solid var(--border2);border-radius:99px;background:transparent;color:var(--text2);cursor:pointer;font-family:inherit">Edit klasemen</button>
-    <button onclick="resetStanding('${gid}')" style="padding:6px 14px;font-size:12px;border:1px solid var(--border2);border-radius:99px;background:transparent;color:var(--text3);cursor:pointer;font-family:inherit;margin-left:6px">Reset</button>
-  </div>
-  <div id="edit-${gid}" style="display:none;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1rem;margin-bottom:1rem">
-    <p style="font-size:12px;color:var(--text2);margin-bottom:12px">Isi data per tim, lalu klik Simpan.</p>
-    ${data.map((r,idx)=>`
-    <div style="margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid var(--border)">
-      <div style="font-size:12px;font-weight:600;color:var(--text);margin-bottom:6px">${r.team}</div>
-      <div style="display:flex;flex-wrap:wrap;gap:8px">
-        ${['mp','w','d','l','gf','ga'].map(f=>`<label style="display:flex;flex-direction:column;gap:3px;font-size:11px;color:var(--text3)">
-          ${f.toUpperCase()}
-          <input type="number" min="0" value="${r[f]}" data-team="${idx}" data-field="${f}"
-            style="width:52px;padding:4px 6px;background:var(--bg3);border:1px solid var(--border2);border-radius:6px;color:var(--text);font-size:13px;font-family:inherit">
-        </label>`).join('')}
-      </div>
-    </div>`).join('')}
-    <button onclick="saveEdit('${gid}')" style="padding:7px 16px;font-size:12px;font-weight:600;border:none;border-radius:99px;background:var(--accent);color:#0a0a0f;cursor:pointer;font-family:inherit">Simpan</button>
-    <button onclick="closeEdit('${gid}')" style="padding:7px 16px;font-size:12px;border:1px solid var(--border2);border-radius:99px;background:transparent;color:var(--text2);cursor:pointer;font-family:inherit;margin-left:6px">Batal</button>
-  </div>`;
+  const rows=sorted.map((r,i)=>`<tr class="${i<2?'q-r32':i===2?'q-po':'q-out'}">
+    <td class="st-pos">${i+1}</td>
+    <td><div class="st-team-name">${r.team}</div></td>
+    <td>${r.mp}</td><td>${r.w}</td><td>${r.d}</td><td>${r.l}</td>
+    <td>${r.gf}</td><td>${r.ga}</td>
+    <td class="${gdClass(r.gd)}">${gdStr(r.gd)}</td>
+    <td class="st-pts">${r.pts}</td>
+  </tr>`).join('');
+  container.innerHTML=`<div class="st-wrap"><table class="st-table">
+    <thead><tr><th></th><th>Tim</th><th>M</th><th>W</th><th>D</th><th>L</th><th>GF</th><th>GA</th><th>SG</th><th style="color:var(--accent2)">Pts</th></tr></thead>
+    <tbody>${rows}</tbody>
+  </table></div>`;
 }
-
-function openEdit(gid){
-  document.getElementById('edit-'+gid).style.display='block';
-}
-function closeEdit(gid){
-  document.getElementById('edit-'+gid).style.display='none';
-}
-function saveEdit(gid){
-  const g=groupData.find(x=>x.id===gid);
-  let data=loadStanding(gid)||defaultStanding(g);
-  document.querySelectorAll(`[data-team]`).forEach(inp=>{
-    const idx=parseInt(inp.dataset.team);
-    const field=inp.dataset.field;
-    if(inp.closest('#edit-'+gid)){
-      data[idx][field]=parseInt(inp.value)||0;
-    }
-  });
-  saveStanding(gid,data);
-  const cont=document.getElementById('sc-'+gid);
-  renderStanding(gid,cont);
-  closeEdit(gid);
-}
-function resetStanding(gid){
-  if(!confirm('Reset klasemen Grup '+gid+'?')) return;
-  localStorage.removeItem(SK+gid);
-  const g=groupData.find(x=>x.id===gid);
-  const cont=document.getElementById('sc-'+gid);
-  renderStanding(gid,cont);
-}
-
-// Build standing tabs & panels
 const sgt=document.getElementById('standingGroupTabs');
 const sps=document.getElementById('standingPanels');
 groupData.forEach((g,i)=>{
   const btn=document.createElement('button');
-  btn.className='group-tab standing-group-tab'+(i===0?' active':'');
+  btn.className='group-tab'+(i===0?' active':'');
   btn.textContent='Grup '+g.id;
   btn.onclick=()=>{
     sgt.querySelectorAll('.group-tab').forEach(t=>t.classList.remove('active'));
-    sps.querySelectorAll('.standing-gpanel').forEach(p=>p.classList.remove('active'));
+    sps.querySelectorAll('.group-panel').forEach(p=>p.classList.remove('active'));
     btn.classList.add('active');
     document.getElementById('sp-'+g.id).classList.add('active');
   };
   sgt.appendChild(btn);
-
   const sp=document.createElement('div');
-  sp.className='standing-gpanel group-panel'+(i===0?' active':'');
+  sp.className='group-panel'+(i===0?' active':'');
   sp.id='sp-'+g.id;
   const cont=document.createElement('div');
-  cont.id='sc-'+g.id;
-  sp.appendChild(cont);
-  sps.appendChild(sp);
-
-  if(i===0) renderStanding(g.id,cont);
+  sp.appendChild(cont);sps.appendChild(sp);
+  renderStanding(g.id,cont);
 });
 
-// Lazy render standing panels when tab clicked
-sgt.querySelectorAll('.group-tab').forEach((btn,i)=>{
-  if(i===0) return;
-  const orig=btn.onclick;
-  btn.onclick=function(){
-    orig.call(this);
-    const gid=groupData[i].id;
-    const cont=document.getElementById('sc-'+gid);
-    if(!cont.innerHTML) renderStanding(gid,cont);
-  };
-});
-// Also re-render when switching to klasemen tab
-document.querySelector('.main-tab:nth-child(2)').addEventListener('click',()=>{
-  const activeGid=sgt.querySelector('.group-tab.active');
-  if(activeGid){
-    const idx=Array.from(sgt.querySelectorAll('.group-tab')).indexOf(activeGid);
-    const gid=groupData[idx].id;
-    const cont=document.getElementById('sc-'+gid);
-    renderStanding(gid,cont);
+// ── PERINGKAT 3 ───────────────────────────────────────
+function renderThirdPlace(){
+  const thirds=groupData.map(g=>{
+    const data=klasemenData[g.id]||[];
+    const sorted=[...data].map(r=>({...r,pts:r.w*3+r.d,gd:r.gf-r.ga}))
+      .sort((a,b)=>b.pts-a.pts||b.gd-a.gd||b.gf-a.gf);
+    const t=sorted[2]||{team:'-',pts:0,gd:0,gf:0,w:0,d:0,l:0,mp:0};
+    return{group:g.id,...t,gd:t.gd||0};
+  }).sort((a,b)=>b.pts-a.pts||(b.gd-a.gd)||(b.gf||0)-(a.gf||0));
+  const rows=thirds.map((r,i)=>`<tr class="${i<8?'q-r32':'q-out'}">
+    <td class="st-pos">${i+1}</td>
+    <td><div class="st-team-name">${r.team} <span style="font-size:10px;color:var(--text3)">(Grp ${r.group})</span></div></td>
+    <td>${r.mp||0}</td><td>${r.w||0}</td><td>${r.d||0}</td><td>${r.l||0}</td>
+    <td>${r.gf||0}</td><td>${r.ga||0}</td>
+    <td class="${gdClass(r.gd)}">${gdStr(r.gd)}</td>
+    <td class="st-pts">${r.pts||0}</td>
+  </tr>`).join('');
+  document.getElementById('thirdPlaceContainer').innerHTML=`
+    <div class="qualify-legend" style="margin-bottom:.75rem">
+      <div style="display:flex;align-items:center;gap:5px"><div class="ql-dot" style="background:var(--green)"></div>Lolos Round of 32 (8 terbaik)</div>
+    </div>
+    <div class="st-wrap"><table class="st-table">
+      <thead><tr><th></th><th>Tim</th><th>M</th><th>W</th><th>D</th><th>L</th><th>GF</th><th>GA</th><th>SG</th><th style="color:var(--accent2)">Pts</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table></div>`;
+}
+renderThirdPlace();
+
+// ── BRACKET ───────────────────────────────────────────
+function renderBracket(){
+  const c=document.getElementById('bracketContainer');
+  function bMatch(data,label){
+    if(!data) return`<div class="bracket-match"><div class="bm-label">${label}</div><div class="bm-team">TBD</div><div class="bm-team">TBD</div></div>`;
+    const hw=data.winner===data.home;
+    const aw=data.winner===data.away;
+    return`<div class="bracket-match${label==='FINAL'?' final-match':''}">
+      <div class="bm-label">${label}</div>
+      <div class="bm-team ${hw?'winner':''}"><span>${data.home||'TBD'}</span><span class="bm-score">${data.score?data.score.split('-')[0]:'-'}</span></div>
+      <div class="bm-team ${aw?'winner':''}"><span>${data.away||'TBD'}</span><span class="bm-score">${data.score?data.score.split('-')[1]:'-'}</span></div>
+    </div>`;
   }
-});
+  const rounds=[
+    {label:'Round of 32',data:bracketData.r32,count:16},
+    {label:'Round of 16',data:bracketData.r16,count:8},
+    {label:'QF',data:bracketData.qf,count:4},
+    {label:'SF',data:bracketData.sf,count:2},
+  ];
+  let html=`<div class="bracket-wrap"><div class="bracket">`;
+  rounds.forEach(r=>{
+    html+=`<div class="bracket-round"><div class="bracket-round-title">${r.label}</div><div class="bracket-matches">`;
+    for(let i=0;i<r.count;i++) html+=bMatch(r.data[i],`M${i+1}`);
+    html+=`</div></div>`;
+  });
+  // Final column
+  html+=`<div class="bracket-round"><div class="bracket-round-title">Final</div><div class="bracket-matches">`;
+  html+=bMatch(bracketData.bronze,'Bronze');
+  html+=bMatch(bracketData.final,'FINAL');
+  html+=`</div></div>`;
+  html+=`</div></div>`;
+  c.innerHTML=html;
+}
+renderBracket();
+
+// ── TOP SKOR / ASSIST ─────────────────────────────────
+function renderTopStats(type){
+  const contId=type==='skor'?'topSkorContainer':'topAssistContainer';
+  const cont=document.getElementById(contId);
+  const label=type==='skor'?'Gol':'Assist';
+  const data=type==='skor'?topSkorData:topAssistData;
+  const sorted=[...data].sort((a,b)=>b.val-a.val);
+  if(!sorted.length){
+    cont.innerHTML=`<div class="empty-state">Belum ada data. Isi variabel <code style="background:var(--bg3);padding:1px 5px;border-radius:4px">${type==='skor'?'topSkorData':'topAssistData'}</code> di script.</div>`;
+    return;
+  }
+  cont.innerHTML=`<div class="scorer-list">${sorted.map((p,i)=>`
+    <div class="scorer-item">
+      <div class="scorer-rank ${rankClass(i)}">${i+1}</div>
+      <div><div class="scorer-name">${p.name}</div><div class="scorer-team">${p.team}</div></div>
+      <div><div class="scorer-val">${p.val}</div><span class="scorer-label">${label}</span></div>
+    </div>`).join('')}</div>`;
+}
+renderTopStats('skor');
+renderTopStats('assist');
 </script>
 </body>
 </html>
