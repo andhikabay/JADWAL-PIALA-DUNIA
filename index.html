@@ -74,9 +74,35 @@ main{max-width:980px;margin:0 auto;padding:1.25rem 1rem 0}
 .watch-btn{background:none;border:none;cursor:pointer;font-size:14px;padding:2px 4px;border-radius:4px;opacity:.5;transition:opacity .15s;flex-shrink:0}
 .watch-btn:hover{opacity:1}
 .match-item.watched .watch-btn{opacity:1}
+/* 3-dot menu */
+.match-menu-btn{background:none;border:none;cursor:pointer;padding:3px 5px;border-radius:4px;color:var(--text3);font-size:16px;line-height:1;flex-shrink:0;transition:all .15s}
+.match-menu-btn:hover{background:var(--bg3);color:var(--text2)}
+.match-ctx-menu{display:none;position:absolute;right:10px;top:36px;background:var(--bg2);border:1px solid var(--border2);border-radius:var(--r);padding:4px;z-index:50;min-width:160px;box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.match-ctx-menu.open{display:block}
+.ctx-item{display:flex;align-items:center;gap:8px;padding:7px 10px;font-size:12px;color:var(--text2);cursor:pointer;border-radius:6px;transition:background .1s;white-space:nowrap;background:none;border:none;width:100%;text-align:left;font-family:inherit}
+.ctx-item:hover{background:var(--bg3);color:var(--text)}
+.ctx-item.active-item{color:var(--accent2)}
+.match-item.user-fav{background:rgba(200,168,75,.07)}
+.match-item.user-fav:hover{background:rgba(200,168,75,.12)}
+.match-item.user-fav .match-menu-btn{color:var(--accent)}
 
 /* FILTER BAR */
-.filter-bar{display:flex;gap:8px;margin-bottom:1.25rem;flex-wrap:wrap;align-items:center}
+.filter-bar{display:flex;gap:8px;margin-bottom:.75rem;flex-wrap:wrap;align-items:center}
+/* DATE PICKER */
+.date-filter-bar{display:flex;align-items:center;gap:10px;margin-bottom:1.25rem;flex-wrap:wrap}
+.date-filter-label{font-size:11px;font-weight:600;color:var(--text2);white-space:nowrap}
+.date-select{padding:7px 12px;background:var(--bg2);border:1px solid var(--border2);border-radius:var(--r);color:var(--text);font-size:12px;font-family:inherit;outline:none;cursor:pointer;transition:border-color .15s;min-width:180px}
+.date-select:focus{border-color:var(--accent)}
+.date-select option{background:var(--bg2);color:var(--text)}
+.today-btn{padding:7px 14px;font-size:12px;font-weight:600;border:1px solid rgba(200,168,75,.4);border-radius:var(--r);background:rgba(200,168,75,.1);color:var(--accent2);cursor:pointer;font-family:inherit;white-space:nowrap;transition:all .15s}
+.today-btn:hover{background:rgba(200,168,75,.2)}
+.today-btn.no-match{border-color:var(--border);background:transparent;color:var(--text3)}
+.clear-date-btn{padding:6px 12px;font-size:11px;border:1px solid var(--border2);border-radius:var(--r);background:transparent;color:var(--text3);cursor:pointer;font-family:inherit;transition:all .15s;display:none}
+.clear-date-btn.visible{display:block}
+.clear-date-btn:hover{color:var(--text);border-color:var(--border2)}
+/* TODAY BANNER */
+.today-banner{display:none;background:rgba(200,168,75,.08);border:1px solid rgba(200,168,75,.2);border-radius:var(--r);padding:.6rem 1rem;margin-bottom:1rem;font-size:12px;color:var(--accent2);font-weight:600}
+.today-banner.visible{display:block}
 .search-input{flex:1;min-width:160px;padding:8px 12px;background:var(--bg2);border:1px solid var(--border2);border-radius:99px;color:var(--text);font-size:13px;font-family:inherit;outline:none;transition:border-color .15s}
 .search-input:focus{border-color:var(--accent)}
 .search-input::placeholder{color:var(--text3)}
@@ -108,18 +134,19 @@ main{max-width:980px;margin:0 auto;padding:1.25rem 1rem 0}
 .standing-note code{background:var(--bg3);padding:1px 5px;border-radius:4px;font-size:11px}
 
 /* BRACKET */
-.bracket-wrap{overflow-x:auto;padding-bottom:1rem}
-.bracket{display:flex;gap:0;min-width:700px}
-.bracket-round{display:flex;flex-direction:column;flex:1;min-width:130px}
-.bracket-round-title{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);padding:0 8px 10px;text-align:center}
-.bracket-matches{display:flex;flex-direction:column;justify-content:space-around;flex:1;gap:6px;padding:0 4px}
-.bracket-match{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:6px 8px;font-size:11px;position:relative}
-.bracket-match.final-match{border-color:rgba(200,168,75,.4);background:rgba(200,168,75,.05)}
-.bm-team{display:flex;justify-content:space-between;align-items:center;padding:2px 0;color:var(--text2)}
+.bracket-outer{overflow-x:auto;padding-bottom:1rem;-webkit-overflow-scrolling:touch}
+.bracket-svg-wrap{min-width:960px;width:100%}
+.bm-card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:5px 8px;font-size:11px;transition:border-color .15s}
+.bm-card:hover{border-color:var(--border2)}
+.bm-card.final-card{border-color:rgba(200,168,75,.4);background:rgba(200,168,75,.05)}
+.bm-card.bronze-card{border-color:rgba(180,115,0,.35);background:rgba(180,115,0,.04)}
+.bm-label{font-size:9px;color:var(--text3);font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin-bottom:3px}
+.bm-team{display:flex;justify-content:space-between;align-items:center;padding:2px 0;color:var(--text2);gap:4px}
 .bm-team.winner{color:var(--text);font-weight:700}
-.bm-score{font-variant-numeric:tabular-nums;font-weight:700;color:var(--accent2)}
-.bm-label{font-size:9px;color:var(--text3);margin-bottom:4px;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+.bm-team span.name{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bm-score{font-variant-numeric:tabular-nums;font-weight:700;color:var(--accent2);flex-shrink:0}
 .bracket-note{font-size:11px;color:var(--text3);font-style:italic;margin-bottom:1rem}
+.bracket-round-label{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);text-align:center}
 
 /* SCORER */
 .scorer-list{display:flex;flex-direction:column;border-radius:var(--rl);overflow:hidden;border:1px solid var(--border);margin-bottom:1.25rem}
@@ -144,20 +171,98 @@ main{max-width:980px;margin:0 auto;padding:1.25rem 1rem 0}
 .cd-num{font-size:22px;font-weight:800;color:var(--accent2);font-variant-numeric:tabular-nums;line-height:1;display:block}
 .cd-sub{font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em}
 .note-box{margin-top:1rem;padding:.75rem 1rem;background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);font-size:11px;color:var(--text2);line-height:1.7}
+.filter-indicator{display:none;margin-bottom:1rem;padding:.5rem 1rem;background:rgba(200,168,75,.08);border:1px solid rgba(200,168,75,.2);border-radius:var(--r);font-size:12px;color:var(--accent2);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px}
+.filter-indicator.hidden{display:none!important}
+.fi-left{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.fi-tag{background:rgba(200,168,75,.15);border-radius:4px;padding:2px 7px;font-size:11px;font-weight:600}
+.fi-count{color:var(--text2);font-size:11px}
 .note-box strong{color:var(--text)}
 .ko-note{font-size:11px;color:var(--text3);font-style:italic;margin-bottom:.9rem}
 @media(max-width:600px){
   .main-tab{font-size:10px;padding:7px 4px}
   .cd-num{font-size:18px}
-  .bracket{min-width:500px}
+  .bracket-outer{min-width:unset}
 }
+
+/* FLAG */
+.flag{display:inline-block;width:24px;height:16px;border-radius:2px;overflow:hidden;vertical-align:middle;flex-shrink:0;box-shadow:0 0 0 1px rgba(255,255,255,0.1)}
+.flag svg{width:100%;height:100%;display:block}
+.flag-sm{width:18px;height:12px}
+
+/* SQUAD MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:999;align-items:center;justify-content:center;padding:1rem}
+.modal-overlay.open{display:flex}
+.modal{background:var(--bg2);border:1px solid var(--border2);border-radius:var(--rl);max-width:500px;width:100%;max-height:85vh;overflow-y:auto;padding:1.25rem}
+.modal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;gap:1rem}
+.modal-title{font-size:16px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:10px}
+.modal-close{background:var(--bg3);border:1px solid var(--border2);border-radius:99px;padding:4px 12px;font-size:12px;color:var(--text2);cursor:pointer;font-family:inherit;flex-shrink:0}
+.modal-coach{font-size:12px;color:var(--text2);margin-bottom:1rem;padding:.5rem .75rem;background:var(--bg3);border-radius:8px;border-left:3px solid var(--accent)}
+.squad-table{width:100%;border-collapse:collapse;font-size:12px}
+.squad-table th{text-align:left;padding:6px 8px;font-size:10px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--text3);border-bottom:1px solid var(--border)}
+.squad-table td{padding:8px 8px;border-bottom:1px solid var(--border);color:var(--text2)}
+.squad-table tr:last-child td{border-bottom:none}
+.squad-table tr:hover td{background:var(--bg3)}
+.pos-badge{display:inline-block;font-size:9px;font-weight:700;padding:1px 5px;border-radius:3px;letter-spacing:.04em}
+.pos-GK{background:rgba(250,204,21,.15);color:#FACC15}
+.pos-DF{background:rgba(96,165,250,.15);color:#60A5FA}
+.pos-MF{background:rgba(74,222,128,.15);color:#4ADE80}
+.pos-FW{background:rgba(248,113,113,.15);color:#F87171}
+
+/* ALL NATIONS */
+.nations-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;margin-bottom:1.25rem}
+.nation-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:10px 12px;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:10px}
+.nation-card:hover{background:var(--bg3);border-color:var(--border2);transform:translateY(-1px)}
+.nation-card .flag{width:28px;height:19px}
+.nation-info{}
+.nation-name{font-size:12px;font-weight:600;color:var(--text);line-height:1.2}
+.nation-group{font-size:10px;color:var(--text3);margin-top:1px}
+.nation-search{width:100%;padding:8px 14px;background:var(--bg2);border:1px solid var(--border2);border-radius:99px;color:var(--text);font-size:13px;font-family:inherit;outline:none;margin-bottom:1.25rem;transition:border-color .15s}
+.nation-search:focus{border-color:var(--accent)}
+.nation-search::placeholder{color:var(--text3)}
 </style>
 </head>
 <body>
 <header>
   <div class="header-inner">
     <div class="logo-area">
-      <h1>FIFA World Cup 2026</h1>
+      <h1 style="display:flex;align-items:center;gap:10px">
+        <svg width="38" height="42" viewBox="0 0 120 134" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="gl" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#F0D060"/>
+              <stop offset="40%" stop-color="#C8A84B"/>
+              <stop offset="100%" stop-color="#8A6520"/>
+            </linearGradient>
+            <linearGradient id="gl2" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#E8C86A"/>
+              <stop offset="100%" stop-color="#A07830"/>
+            </linearGradient>
+          </defs>
+          <!-- Main trophy body - World Cup shape -->
+          <path d="M38,6 L82,6 L82,8 L86,8 L88,12 L88,46 Q88,72 60,82 Q32,72 32,46 L32,12 L34,8 L38,8 Z" fill="url(#gl)"/>
+          <!-- Inner shadow on cup -->
+          <path d="M42,10 L78,10 L80,12 L84,44 Q84,68 60,78 Q36,68 36,44 L40,12 Z" fill="url(#gl2)" opacity="0.5"/>
+          <!-- Handles left -->
+          <path d="M32,18 Q14,18 12,36 Q10,54 30,56 L32,52 Q18,50 20,36 Q22,24 32,24 Z" fill="url(#gl)"/>
+          <!-- Handles right -->
+          <path d="M88,18 Q106,18 108,36 Q110,54 90,56 L88,52 Q102,50 100,36 Q98,24 88,24 Z" fill="url(#gl)"/>
+          <!-- Neck/stem -->
+          <path d="M50,82 L50,96 Q50,100 44,100 L44,104 L76,104 L76,100 Q70,100 70,96 L70,82 Z" fill="url(#gl)"/>
+          <!-- Base -->
+          <rect x="30" y="104" width="60" height="10" rx="4" fill="url(#gl)"/>
+          <rect x="24" y="114" width="72" height="8" rx="4" fill="url(#gl)"/>
+          <!-- Shine highlights -->
+          <path d="M44,10 Q46,10 47,22" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="3" stroke-linecap="round"/>
+          <path d="M38,28 Q37,36 38,44" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="2" stroke-linecap="round"/>
+          <!-- Star symbol (FIFA WC trophy has figures on it) -->
+          <polygon points="60,20 62.5,27.5 70.5,27.5 64,32 66.5,39.5 60,35 53.5,39.5 56,32 49.5,27.5 57.5,27.5" fill="rgba(255,255,255,0.3)"/>
+          <!-- 3 stars on top (host countries USA, CAN, MEX) -->
+          <polygon points="46,2 47,5 50,5 47.5,7 48.5,10 46,8 43.5,10 44.5,7 42,5 45,5" fill="#F0D060"/>
+          <polygon points="60,0 61,3 64,3 61.5,5 62.5,8 60,6 57.5,8 58.5,5 56,3 59,3" fill="#F0D060"/>
+          <polygon points="74,2 75,5 78,5 75.5,7 76.5,10 74,8 71.5,10 72.5,7 70,5 73,5" fill="#F0D060"/>
+        </svg>
+        FIFA World Cup 2026
+      </h1>
       <div class="subtitle">Jadwal Lengkap &amp; Statistik — Waktu Indonesia Barat</div>
     </div>
     <div class="header-right">
@@ -177,6 +282,7 @@ main{max-width:980px;margin:0 auto;padding:1.25rem 1rem 0}
     <button class="main-tab" onclick="switchMain('bracket',this)">Bracket</button>
     <button class="main-tab" onclick="switchMain('topskor',this)">Top Skor</button>
     <button class="main-tab" onclick="switchMain('topassist',this)">Top Assist</button>
+    <button class="main-tab" onclick="switchMain('nations',this)">Semua Tim</button>
   </div>
 
   <!-- JADWAL -->
@@ -188,6 +294,16 @@ main{max-width:980px;margin:0 auto;padding:1.25rem 1rem 0}
       <button class="fav-btn" id="favFilterBtn" onclick="toggleFavFilter()">Favorit saja</button>
       <button class="fav-btn" id="watchedFilterBtn" onclick="toggleWatchedFilter()">Belum ditonton</button>
     </div>
+    <div class="today-banner" id="todayBanner"></div>
+    <div class="date-filter-bar">
+      <div class="date-filter-label">Pilih Tanggal</div>
+      <select class="date-select" id="dateSelect" onchange="onDateSelect()">
+        <option value="">-- Semua pertandingan --</option>
+      </select>
+      <button class="today-btn" id="todayBtn" onclick="goToToday()">Match Today</button>
+      <button class="clear-date-btn" id="clearDateBtn" onclick="clearDateFilter()">Hapus filter</button>
+    </div>
+    <div class="filter-indicator" id="filterIndicator"></div>
     <div class="phase-tabs" id="phaseTabs"></div>
     <div id="phaseContent"></div>
     <div class="note-box">
@@ -231,6 +347,19 @@ main{max-width:980px;margin:0 auto;padding:1.25rem 1rem 0}
     <p style="font-size:12px;color:var(--text2);margin-bottom:1rem">Edit variabel <code style="background:var(--bg3);padding:1px 5px;border-radius:4px;font-size:11px">topAssistData</code> di script.</p>
     <div id="topAssistContainer"></div>
   </div>
+
+  <!-- SEMUA TIM -->
+  <div class="main-panel" id="mp-nations">
+    <input class="nation-search" id="nationSearch" placeholder="Cari tim atau negara..." oninput="filterNations()">
+    <div class="nations-grid" id="nationsGrid"></div>
+    <p style="font-size:11px;color:var(--text3)">Klik tim untuk lihat skuad dan pelatih. Data skuad tersedia untuk tim yang sudah diisi.</p>
+  </div>
+
+<!-- SQUAD MODAL -->
+<div class="modal-overlay" id="squadModal" onclick="closeSquadModal(event)">
+  <div class="modal" id="squadModalContent"></div>
+</div>
+
 </main>
 
 <script>
@@ -318,17 +447,36 @@ const klasemenData = {
 };
 
 // HASIL PERTANDINGAN — isi nomor match dan skor, contoh: { 1: '2-1', 25: '0-0' }
+// HASIL PERTANDINGAN
+// Format: nomor_match: 'skor_home-skor_away'
+// Contoh: 1: '2-1'  → pertandingan #1, home menang 2-1
 const hasilMatch = {
-  // 1: '2-1',
+  // Group Stage
+  // 1: '2-1',   // MEX vs RSA
+  // 2: '1-1',   // KOR vs CZE
 };
 
-// BRACKET KNOCKOUT — isi setelah R32 dst, contoh: { home:'Brazil', away:'Morocco', score:'2-0', winner:'Brazil' }
+// BRACKET KNOCKOUT
+// Format tiap slot: { home:'Nama Tim', away:'Nama Tim', score:'2-1', winner:'Nama Tim', homeCode:'BRA', awayCode:'MAR' }
+// homeCode/awayCode = kode 3 huruf buat bendera (opsional)
+// Contoh R32 slot 0: { home:'Brazil', away:'Morocco', score:'2-0', winner:'Brazil', homeCode:'BRA', awayCode:'MAR' }
+// Isi urut dari atas ke bawah sesuai bracket FIFA
 const bracketData = {
-  r32: Array(16).fill(null),   // isi 16 slot
-  r16: Array(8).fill(null),
-  qf:  Array(4).fill(null),
-  sf:  Array(2).fill(null),
-  final: null,
+  // Round of 32 — 16 pertandingan (urut dari atas)
+  r32: [
+    null, null, null, null,   // M1-M4
+    null, null, null, null,   // M5-M8
+    null, null, null, null,   // M9-M12
+    null, null, null, null,   // M13-M16
+  ],
+  // Round of 16 — 8 pertandingan
+  r16: [null, null, null, null, null, null, null, null],
+  // Quarter-Finals — 4 pertandingan
+  qf:  [null, null, null, null],
+  // Semi-Finals — 2 pertandingan
+  sf:  [null, null],
+  // Final & Bronze
+  final:  null,
   bronze: null,
 };
 
@@ -340,9 +488,714 @@ const topSkorData = [
 const topAssistData = [
 ];
 
+const FLAGS = {
+  'MEX': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect width="1" height="2" fill="#006847"/><rect x="1" width="1" height="2" fill="#fff"/><rect x="2" width="1" height="2" fill="#ce1126"/></svg>`,
+  'RSA': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6 4"><rect width="6" height="4" fill="#007A4D"/><polygon points="0,0 2.5,2 0,4" fill="#000"/><polygon points="0,0.5 2.1,2 0,3.5" fill="#007A4D"/><rect y="1.5" width="6" height="1" fill="#fff"/><rect y="1.7" width="6" height=".6" fill="#DE3831"/></svg>`,
+  'KOR': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect width="3" height="2" fill="#fff"/><circle cx="1.5" cy="1" r=".45" fill="#CD2E3A"/><path d="M1.5,0.55 A0.45,0.45 0 0,1 1.5,1.45" fill="#003478"/></svg>`,
+  'CZE': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect width="3" height="2" fill="#d7141a"/><rect width="3" height="1" fill="#fff"/><polygon points="0,0 1.5,1 0,2" fill="#11457e"/></svg>`,
+  'CAN': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect width="3" height="2" fill="#fff"/><rect width=".75" height="2" fill="#FF0000"/><rect x="2.25" width=".75" height="2" fill="#FF0000"/><path d="M1.5,0.4 l0.12,0.35h0.38l-0.31,0.22 0.12,0.35-0.31-0.22-0.31,0.22 0.12-0.35-0.31-0.22h0.38z" fill="#FF0000"/></svg>`,
+  'BIH': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect width="3" height="2" fill="#002395"/><polygon points="0.5,0 2.5,2 0.5,2" fill="#FFCD00"/></svg>`,
+  'QAT': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect width="3" height="2" fill="#8D1B3D"/><rect width=".8" height="2" fill="#fff"/></svg>`,
+  'SUI': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect width="3" height="2" fill="#FF0000"/><rect x="1.3" y=".5" width=".4" height="1" fill="#fff"/><rect x="1" y=".8" width="1" height=".4" fill="#fff"/></svg>`,
+  'BRA': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect width="3" height="2" fill="#009c3b"/><polygon points="1.5,0.2 2.9,1 1.5,1.8 0.1,1" fill="#FEDD00"/><circle cx="1.5" cy="1" r="0.38" fill="#002776"/></svg>`,
+  'MAR': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect width="3" height="2" fill="#c1272d"/><polygon points="1.5,0.55 1.59,0.82 1.88,0.82 1.65,0.99 1.74,1.26 1.5,1.09 1.26,1.26 1.35,0.99 1.12,0.82 1.41,0.82" fill="none" stroke="#006233" stroke-width="0.05"/></svg>`,
+  'HAI': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect width="3" height="1" fill="#00209F"/><rect y="1" width="3" height="1" fill="#D21034"/></svg>`,
+  'SCO': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect width="3" height="2" fill="#003082"/><line x1="0" y1="0" x2="3" y2="2" stroke="#fff" stroke-width="0.38"/><line x1="3" y1="0" x2="0" y2="2" stroke="#fff" stroke-width="0.38"/></svg>`,
+  'USA': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect width="3" height="2" fill="#fff"/><rect y="0" width="3" height=".154" fill="#B22234"/><rect y=".308" width="3" height=".154" fill="#B22234"/><rect y=".615" width="3" height=".154" fill="#B22234"/><rect y=".923" width="3" height=".154" fill="#B22234"/><rect y="1.231" width="3" height=".154" fill="#B22234"/><rect y="1.538" width="3" height=".154" fill="#B22234"/><rect y="1.846" width="3" height=".154" fill="#B22234"/><rect width="1.2" height=".923" fill="#3C3B6E"/></svg>`,
+  'PAR': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect width="3" height=".667" fill="#0038A8"/><rect y=".667" width="3" height=".666" fill="#fff"/><rect y="1.333" width="3" height=".667" fill="#D52B1E"/></svg>`,
+  'AUS': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect width="3" height="2" fill="#00008B"/><line x1="0" y1="0" x2="1.5" y2="1" stroke="#fff" stroke-width="0.28"/><line x1="1.5" y1="0" x2="0" y2="1" stroke="#fff" stroke-width="0.28"/><rect width="1.5" height="1" fill="none"/></svg>`,
+  'TUR': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect width="3" height="2" fill="#E30A17"/><circle cx="1.2" cy="1" r="0.42" fill="#fff"/><circle cx="1.45" cy="1" r="0.32" fill="#E30A17"/></svg>`,
+  'GER': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect width="3" height=".667" fill="#000"/><rect y=".667" width="3" height=".666" fill="#DD0000"/><rect y="1.333" width="3" height=".667" fill="#FFCE00"/></svg>`,
+  'CUW': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect width="3" height="2" fill="#003DA5"/><rect y="1.25" width="3" height=".35" fill="#F9DF00"/><circle cx=".7" cy=".7" r=".18" fill="#fff"/><circle cx="1.05" cy=".5" r=".18" fill="#fff"/></svg>`,
+  'CIV': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect width="1" height="2" fill="#F77F00"/><rect x="1" width="1" height="2" fill="#fff"/><rect x="2" width="1" height="2" fill="#009A44"/></svg>`,
+  'ECU': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect width="3" height=".8" fill="#FFD100"/><rect y=".8" width="3" height=".6" fill="#034694"/><rect y="1.4" width="3" height=".6" fill="#ED1C24"/></svg>`,
+  'NED': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect width="3" height=".667" fill="#AE1C28"/><rect y=".667" width="3" height=".666" fill="#fff"/><rect y="1.333" width="3" height=".667" fill="#21468B"/></svg>`,
+  'JPN': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect width="3" height="2" fill="#fff"/><circle cx="1.5" cy="1" r="0.6" fill="#BC002D"/></svg>`,
+  'SWE': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect width="3" height="2" fill="#006AA7"/><rect x=".9" width=".4" height="2" fill="#FECC02"/><rect y=".8" width="3" height=".4" fill="#FECC02"/></svg>`,
+  'TUN': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect width="3" height="2" fill="#E70013"/><circle cx="1.5" cy="1" r="0.55" fill="#fff"/><circle cx="1.5" cy="1" r="0.42" fill="#E70013"/></svg>`,
+  'BEL': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect width="1" height="2" fill="#000"/><rect x="1" width="1" height="2" fill="#FFD90C"/><rect x="2" width="1" height="2" fill="#F31830"/></svg>`,
+  'EGY': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect width="3" height=".667" fill="#CE1126"/><rect y=".667" width="3" height=".666" fill="#fff"/><rect y="1.333" width="3" height=".667" fill="#000"/></svg>`,
+  'IRN': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect width="3" height=".667" fill="#239F40"/><rect y=".667" width="3" height=".666" fill="#fff"/><rect y="1.333" width="3" height=".667" fill="#DA0000"/></svg>`,
+  'NZL': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect width="3" height="2" fill="#00247D"/><line x1="0" y1="0" x2="1.5" y2="1" stroke="#fff" stroke-width="0.28"/><line x1="1.5" y1="0" x2="0" y2="1" stroke="#fff" stroke-width="0.28"/><circle cx="2.1" cy=".35" r=".12" fill="#CC142B"/><circle cx="2.65" cy=".65" r=".12" fill="#CC142B"/><circle cx="2.45" cy="1.2" r=".12" fill="#CC142B"/><circle cx="1.85" cy="1.1" r=".12" fill="#CC142B"/></svg>`,
+  'ESP': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect width="3" height="2" fill="#c60b1e"/><rect y=".5" width="3" height="1" fill="#ffc400"/></svg>`,
+  'CPV': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect width="3" height="2" fill="#003893"/><rect y="1.1" width="3" height=".22" fill="#CF2027"/><rect y="1.42" width="3" height=".22" fill="#CF2027"/></svg>`,
+  'KSA': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect width="3" height="2" fill="#006C35"/></svg>`,
+  'URU': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect width="3" height="2" fill="#fff"/><rect y=".222" width="3" height=".222" fill="#4a7fcb"/><rect y=".667" width="3" height=".222" fill="#4a7fcb"/><rect y="1.111" width="3" height=".222" fill="#4a7fcb"/><rect y="1.556" width="3" height=".222" fill="#4a7fcb"/><rect width=".9" height=".9" fill="#fff"/><circle cx=".45" cy=".45" r=".22" fill="#F5C700"/></svg>`,
+  'FRA': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect width="1" height="2" fill="#002395"/><rect x="1" width="1" height="2" fill="#fff"/><rect x="2" width="1" height="2" fill="#ED2939"/></svg>`,
+  'SEN': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect width="1" height="2" fill="#00853F"/><rect x="1" width="1" height="2" fill="#FDEF42"/><rect x="2" width="1" height="2" fill="#E31B23"/><polygon points="1.5,0.6 1.56,0.78 1.75,0.78 1.61,0.89 1.66,1.07 1.5,0.96 1.34,1.07 1.39,0.89 1.25,0.78 1.44,0.78" fill="#00853F"/></svg>`,
+  'IRQ': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect width="3" height=".667" fill="#CE1126"/><rect y=".667" width="3" height=".666" fill="#fff"/><rect y="1.333" width="3" height=".667" fill="#000"/></svg>`,
+  'NOR': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect width="3" height="2" fill="#EF2B2D"/><rect x=".7" width=".4" height="2" fill="#fff"/><rect y=".8" width="3" height=".4" fill="#fff"/><rect x=".75" width=".3" height="2" fill="#002868"/><rect y=".85" width="3" height=".3" fill="#002868"/></svg>`,
+  'ALG': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect width="1.5" height="2" fill="#fff"/><rect x="1.5" width="1.5" height="2" fill="#006233"/><circle cx="1.4" cy="1" r="0.38" fill="#fff"/><circle cx="1.55" cy="1" r="0.38" fill="#006233"/><polygon points="1.55,0.65 1.63,0.88 1.85,0.88 1.68,1.01 1.74,1.24 1.55,1.11 1.36,1.24 1.42,1.01 1.25,0.88 1.47,0.88" fill="#D21034"/></svg>`,
+  'AUT': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect width="3" height=".667" fill="#ED2939"/><rect y=".667" width="3" height=".666" fill="#fff"/><rect y="1.333" width="3" height=".667" fill="#ED2939"/></svg>`,
+  'JOR': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect width="3" height=".667" fill="#007A3D"/><rect y=".667" width="3" height=".666" fill="#fff"/><rect y="1.333" width="3" height=".667" fill="#000"/><polygon points="0,0 1,1 0,2" fill="#CE1126"/></svg>`,
+  'POR': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect width="3" height="2" fill="#FF0000"/><rect width="1.2" height="2" fill="#006600"/><circle cx="1.2" cy="1" r="0.32" fill="#FFFF00" stroke="#003300" stroke-width="0.04"/></svg>`,
+  'COD': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect width="3" height="2" fill="#007FFF"/><line x1="0" y1="2" x2="3" y2="0" stroke="#F7D618" stroke-width="0.3"/><circle cx="0.3" cy="0.3" r="0.22" fill="#CE1021"/></svg>`,
+  'UZB': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect width="3" height=".667" fill="#1EB53A"/><rect y=".667" width="3" height=".666" fill="#fff"/><rect y="1.333" width="3" height=".667" fill="#CE1126"/><rect y=".6" width="3" height=".1" fill="#fff"/><rect y="1.3" width="3" height=".1" fill="#fff"/><rect width=".8" height=".6" fill="#1EBFAF"/></svg>`,
+  'COL': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect width="3" height=".8" fill="#FCD116"/><rect y=".8" width="3" height=".6" fill="#003087"/><rect y="1.4" width="3" height=".6" fill="#CE1126"/></svg>`,
+  'ENG': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect width="3" height="2" fill="#fff"/><rect x="1.3" width=".4" height="2" fill="#CE1124"/><rect y=".8" width="3" height=".4" fill="#CE1124"/></svg>`,
+  'CRO': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect width="3" height=".667" fill="#FF0000"/><rect y=".667" width="3" height=".666" fill="#fff"/><rect y="1.333" width="3" height=".667" fill="#0093DD"/></svg>`,
+  'GHA': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect width="3" height=".667" fill="#006B3F"/><rect y=".667" width="3" height=".666" fill="#FCD116"/><rect y="1.333" width="3" height=".667" fill="#EF3340"/><polygon points="1.5,0.6 1.58,0.85 1.84,0.85 1.63,1.0 1.71,1.25 1.5,1.1 1.29,1.25 1.37,1.0 1.16,0.85 1.42,0.85" fill="#000"/></svg>`,
+  'PAN': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect width="1.5" height="1" fill="#fff"/><rect x="1.5" y="1" width="1.5" height="1" fill="#fff"/><rect x="1.5" width="1.5" height="1" fill="#D21034"/><rect y="1" width="1.5" height="1" fill="#0033A0"/></svg>`,
+  'ARG': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect width="3" height=".667" fill="#74ACDF"/><rect y=".667" width="3" height=".666" fill="#fff"/><rect y="1.333" width="3" height=".667" fill="#74ACDF"/><circle cx="1.5" cy="1" r=".23" fill="#F6B40E"/><polygon points="1.5,0.72 1.53,0.81 1.62,0.81 1.55,0.87 1.58,0.96 1.5,0.9 1.42,0.96 1.45,0.87 1.38,0.81 1.47,0.81" fill="#85340A" opacity="0.7"/></svg>`,
+};
+
+// ── SQUAD DATA ─────────────────────────────────────────────────────────
+// Edit di sini untuk update data pemain. Tambah tim sesuai format.
+const SQUADS = {
+  MEX:{name:'Mexico',coach:'Javier Aguirre',players:[
+    {no:1,name:'Guillermo Ochoa',pos:'GK',club:'Salernitana'},
+    {no:13,name:'Rodolfo Cota',pos:'GK',club:'Leon'},
+    {no:4,name:'Edson Alvarez',pos:'MF',club:'West Ham'},
+    {no:5,name:'Johan Vasquez',pos:'DF',club:'Genoa'},
+    {no:3,name:'Jesus Gallardo',pos:'DF',club:'Monterrey'},
+    {no:6,name:'Hector Moreno',pos:'DF',club:'Al-Gharafa'},
+    {no:7,name:'Hirving Lozano',pos:'FW',club:'PSV'},
+    {no:8,name:'Erick Gutierrez',pos:'MF',club:'PSV'},
+    {no:9,name:'Raul Jimenez',pos:'FW',club:'Fulham'},
+    {no:10,name:'Alexis Vega',pos:'FW',club:'Chivas'},
+    {no:14,name:'Henry Martin',pos:'FW',club:'Club America'},
+  ]},
+  BRA:{name:'Brazil',coach:'Dorival Junior',players:[
+    {no:1,name:'Alisson',pos:'GK',club:'Liverpool'},
+    {no:2,name:'Danilo',pos:'DF',club:'Juventus'},
+    {no:3,name:'Guilherme Arana',pos:'DF',club:'Atletico Mineiro'},
+    {no:4,name:'Marquinhos',pos:'DF',club:'PSG'},
+    {no:5,name:'Casemiro',pos:'MF',club:'Manchester United'},
+    {no:7,name:'Vinicius Jr',pos:'FW',club:'Real Madrid'},
+    {no:8,name:'Bruno Guimaraes',pos:'MF',club:'Newcastle'},
+    {no:9,name:'Gabriel Jesus',pos:'FW',club:'Arsenal'},
+    {no:10,name:'Rodrygo',pos:'FW',club:'Real Madrid'},
+    {no:11,name:'Raphinha',pos:'FW',club:'Barcelona'},
+    {no:20,name:'Endrick',pos:'FW',club:'Real Madrid'},
+  ]},
+  ARG:{name:'Argentina',coach:'Lionel Scaloni',players:[
+    {no:1,name:'Emiliano Martinez',pos:'GK',club:'Aston Villa'},
+    {no:2,name:'Gonzalo Montiel',pos:'DF',club:'Nottingham Forest'},
+    {no:3,name:'Nicolas Tagliafico',pos:'DF',club:'Lyon'},
+    {no:5,name:'Leandro Paredes',pos:'MF',club:'Roma'},
+    {no:7,name:'Rodrigo De Paul',pos:'MF',club:'Atletico Madrid'},
+    {no:8,name:'Enzo Fernandez',pos:'MF',club:'Chelsea'},
+    {no:9,name:'Julian Alvarez',pos:'FW',club:'Atletico Madrid'},
+    {no:10,name:'Lionel Messi',pos:'FW',club:'Inter Miami'},
+    {no:11,name:'Angel Di Maria',pos:'FW',club:'Benfica'},
+    {no:13,name:'Cristian Romero',pos:'DF',club:'Tottenham'},
+    {no:4,name:'German Pezzella',pos:'DF',club:'Betis'},
+  ]},
+  FRA:{name:'France',coach:'Didier Deschamps',players:[
+    {no:1,name:'Mike Maignan',pos:'GK',club:'AC Milan'},
+    {no:2,name:'Benjamin Pavard',pos:'DF',club:'Inter Milan'},
+    {no:3,name:'Lucas Hernandez',pos:'DF',club:'PSG'},
+    {no:4,name:'Raphael Varane',pos:'DF',club:'Como'},
+    {no:5,name:'Jules Kounde',pos:'DF',club:'Barcelona'},
+    {no:6,name:'Eduardo Camavinga',pos:'MF',club:'Real Madrid'},
+    {no:7,name:'Antoine Griezmann',pos:'FW',club:'Atletico Madrid'},
+    {no:8,name:'Aurelien Tchouameni',pos:'MF',club:'Real Madrid'},
+    {no:10,name:'Kylian Mbappe',pos:'FW',club:'Real Madrid'},
+    {no:11,name:'Ousmane Dembele',pos:'FW',club:'PSG'},
+    {no:14,name:'Adrien Rabiot',pos:'MF',club:'Juventus'},
+  ]},
+  ENG:{name:'England',coach:'Gareth Southgate',players:[
+    {no:1,name:'Jordan Pickford',pos:'GK',club:'Everton'},
+    {no:2,name:'Kyle Walker',pos:'DF',club:'Manchester City'},
+    {no:3,name:'Luke Shaw',pos:'DF',club:'Manchester United'},
+    {no:4,name:'Declan Rice',pos:'MF',club:'Arsenal'},
+    {no:5,name:'John Stones',pos:'DF',club:'Manchester City'},
+    {no:6,name:'Marc Guehi',pos:'DF',club:'Crystal Palace'},
+    {no:7,name:'Bukayo Saka',pos:'FW',club:'Arsenal'},
+    {no:8,name:'Jude Bellingham',pos:'MF',club:'Real Madrid'},
+    {no:9,name:'Harry Kane',pos:'FW',club:'Bayern Munich'},
+    {no:10,name:'Phil Foden',pos:'MF',club:'Manchester City'},
+    {no:11,name:'Raheem Sterling',pos:'FW',club:'Arsenal'},
+  ]},
+  ESP:{name:'Spain',coach:'Luis de la Fuente',players:[
+    {no:1,name:'Unai Simon',pos:'GK',club:'Athletic Bilbao'},
+    {no:2,name:'Dani Carvajal',pos:'DF',club:'Real Madrid'},
+    {no:3,name:'Alejandro Balde',pos:'DF',club:'Barcelona'},
+    {no:5,name:'Aymeric Laporte',pos:'DF',club:'Al-Nassr'},
+    {no:6,name:'Mikel Merino',pos:'MF',club:'Arsenal'},
+    {no:7,name:'Alvaro Morata',pos:'FW',club:'AC Milan'},
+    {no:8,name:'Fabian Ruiz',pos:'MF',club:'PSG'},
+    {no:9,name:'Ferran Torres',pos:'FW',club:'Barcelona'},
+    {no:10,name:'Dani Olmo',pos:'MF',club:'Barcelona'},
+    {no:11,name:'Nico Williams',pos:'FW',club:'Athletic Bilbao'},
+    {no:14,name:'Pedri',pos:'MF',club:'Barcelona'},
+  ]},
+  GER:{name:'Germany',coach:'Julian Nagelsmann',players:[
+    {no:1,name:'Manuel Neuer',pos:'GK',club:'Bayern Munich'},
+    {no:2,name:'Joshua Kimmich',pos:'MF',club:'Bayern Munich'},
+    {no:3,name:'David Raum',pos:'DF',club:'RB Leipzig'},
+    {no:4,name:'Jonathan Tah',pos:'DF',club:'Bayern Munich'},
+    {no:5,name:'Nico Schlotterbeck',pos:'DF',club:'Borussia Dortmund'},
+    {no:7,name:'Kai Havertz',pos:'FW',club:'Arsenal'},
+    {no:8,name:'Leon Goretzka',pos:'MF',club:'Bayern Munich'},
+    {no:9,name:'Niclas Fullkrug',pos:'FW',club:'West Ham'},
+    {no:10,name:'Florian Wirtz',pos:'MF',club:'Bayer Leverkusen'},
+    {no:11,name:'Leroy Sane',pos:'FW',club:'Bayern Munich'},
+    {no:13,name:'Thomas Muller',pos:'FW',club:'Bayern Munich'},
+  ]},
+  POR:{name:'Portugal',coach:'Roberto Martinez',players:[
+    {no:1,name:'Rui Patricio',pos:'GK',club:'Roma'},
+    {no:2,name:'Joao Cancelo',pos:'DF',club:'Barcelona'},
+    {no:3,name:'Nuno Mendes',pos:'DF',club:'PSG'},
+    {no:4,name:'Ruben Dias',pos:'DF',club:'Manchester City'},
+    {no:6,name:'Joao Palhinha',pos:'MF',club:'Bayern Munich'},
+    {no:7,name:'Cristiano Ronaldo',pos:'FW',club:'Al-Nassr'},
+    {no:8,name:'Bruno Fernandes',pos:'MF',club:'Manchester United'},
+    {no:10,name:'Bernardo Silva',pos:'MF',club:'Manchester City'},
+    {no:11,name:'Rafael Leao',pos:'FW',club:'AC Milan'},
+    {no:17,name:'Goncalo Ramos',pos:'FW',club:'PSG'},
+    {no:22,name:'Diogo Jota',pos:'FW',club:'Liverpool'},
+  ]},
+  NED:{name:'Netherlands',coach:'Ronald Koeman',players:[
+    {no:1,name:'Bart Verbruggen',pos:'GK',club:'Brighton'},
+    {no:2,name:'Denzel Dumfries',pos:'DF',club:'Inter Milan'},
+    {no:3,name:'Nathan Ake',pos:'DF',club:'Manchester City'},
+    {no:4,name:'Virgil van Dijk',pos:'DF',club:'Liverpool'},
+    {no:5,name:'Stefan de Vrij',pos:'DF',club:'Inter Milan'},
+    {no:6,name:'Tijjani Reijnders',pos:'MF',club:'AC Milan'},
+    {no:8,name:'Teun Koopmeiners',pos:'MF',club:'Juventus'},
+    {no:9,name:'Wout Weghorst',pos:'FW',club:'Hoffenheim'},
+    {no:10,name:'Memphis Depay',pos:'FW',club:'Atletico Madrid'},
+    {no:11,name:'Cody Gakpo',pos:'FW',club:'Liverpool'},
+    {no:7,name:'Steven Bergwijn',pos:'FW',club:'Ajax'},
+  ]},
+  JPN:{name:'Japan',coach:'Hajime Moriyasu',players:[
+    {no:1,name:'Shuichi Gonda',pos:'GK',club:'Shimizu S-Pulse'},
+    {no:4,name:'Ko Itakura',pos:'DF',club:'Borussia Monchengladbach'},
+    {no:5,name:'Takehiro Tomiyasu',pos:'DF',club:'Arsenal'},
+    {no:6,name:'Wataru Endo',pos:'MF',club:'Liverpool'},
+    {no:7,name:'Takefusa Kubo',pos:'FW',club:'Real Sociedad'},
+    {no:8,name:'Ritsu Doan',pos:'FW',club:'Freiburg'},
+    {no:9,name:'Ayase Ueda',pos:'FW',club:'Feyenoord'},
+    {no:10,name:'Daichi Kamada',pos:'MF',club:'Lazio'},
+    {no:11,name:'Kaoru Mitoma',pos:'FW',club:'Brighton'},
+    {no:14,name:'Junya Ito',pos:'FW',club:'Reims'},
+    {no:16,name:'Ao Tanaka',pos:'MF',club:'Dusseldorf'},
+  ]},
+  BEL:{name:'Belgium',coach:'Domenico Tedesco',players:[
+    {no:1,name:'Koen Casteels',pos:'GK',club:'Al-Qadsiah'},
+    {no:2,name:'Timothy Castagne',pos:'DF',club:'Fulham'},
+    {no:3,name:'Arthur Theate',pos:'DF',club:'Stade Rennais'},
+    {no:4,name:'Wout Faes',pos:'DF',club:'Leicester City'},
+    {no:5,name:'Jan Vertonghen',pos:'DF',club:'Anderlecht'},
+    {no:6,name:'Axel Witsel',pos:'MF',club:'Atletico Madrid'},
+    {no:7,name:'Kevin De Bruyne',pos:'MF',club:'Manchester City'},
+    {no:8,name:'Youri Tielemans',pos:'MF',club:'Aston Villa'},
+    {no:9,name:'Romelu Lukaku',pos:'FW',club:'Roma'},
+    {no:10,name:'Dodi Lukebakio',pos:'FW',club:'Sevilla'},
+    {no:11,name:'Leandro Trossard',pos:'FW',club:'Arsenal'},
+  ]},
+  KOR:{name:'Korea Republic',coach:'Hong Myung-bo',players:[
+    {no:1,name:'Kim Seung-gyu',pos:'GK',club:'Vissel Kobe'},
+    {no:4,name:'Kim Min-jae',pos:'DF',club:'Bayern Munich'},
+    {no:5,name:'Jung Woo-young',pos:'MF',club:'Al-Qadsiah'},
+    {no:7,name:'Son Heung-min',pos:'FW',club:'Tottenham'},
+    {no:8,name:'Lee Jae-sung',pos:'MF',club:'Mainz'},
+    {no:9,name:'Cho Gue-sung',pos:'FW',club:'Midtjylland'},
+    {no:10,name:'Lee Kang-in',pos:'MF',club:'PSG'},
+    {no:11,name:'Hwang Hee-chan',pos:'FW',club:'Wolves'},
+    {no:14,name:'Lee Seung-woo',pos:'MF',club:'Jeonbuk'},
+    {no:17,name:'Hwang In-beom',pos:'MF',club:'Feyenoord'},
+    {no:20,name:'Oh Hyeon-gyu',pos:'FW',club:'Celtic'},
+  ]},
+  CZE:{name:'Czechia',coach:'Ivan Hasek',players:[
+    {no:1,name:'Jiri Pavlenka',pos:'GK',club:'Werder Bremen'},
+    {no:2,name:'Vladimir Coufal',pos:'DF',club:'West Ham'},
+    {no:3,name:'Jan Boril',pos:'DF',club:'Slavia Prague'},
+    {no:4,name:'Tomas Holes',pos:'MF',club:'Slavia Prague'},
+    {no:5,name:'Ladislav Krejci',pos:'DF',club:'Sparta Prague'},
+    {no:7,name:'Antonin Barak',pos:'MF',club:'AS Monaco'},
+    {no:8,name:'Tomas Soucek',pos:'MF',club:'West Ham'},
+    {no:9,name:'Patrik Schick',pos:'FW',club:'Bayer Leverkusen'},
+    {no:10,name:'Alex Kral',pos:'MF',club:'Spartak Moscow'},
+    {no:11,name:'Jakub Jankto',pos:'MF',club:'Getafe'},
+    {no:14,name:'Matej Jurasek',pos:'MF',club:'Slavia Prague'},
+  ]},
+  RSA:{name:'South Africa',coach:'Hugo Broos',players:[
+    {no:1,name:'Ronwen Williams',pos:'GK',club:'Mamelodi Sundowns'},
+    {no:2,name:'Reeve Frosler',pos:'DF',club:'Kaizer Chiefs'},
+    {no:3,name:'Sifiso Hlanti',pos:'DF',club:'Kaizer Chiefs'},
+    {no:5,name:'Mothobi Mvala',pos:'MF',club:'Mamelodi Sundowns'},
+    {no:7,name:'Lyle Foster',pos:'FW',club:'Burnley'},
+    {no:8,name:'Ethan Ngorane',pos:'MF',club:'Mamelodi Sundowns'},
+    {no:10,name:'Percy Tau',pos:'FW',club:'Al-Ahly'},
+    {no:11,name:'Themba Zwane',pos:'FW',club:'Mamelodi Sundowns'},
+    {no:14,name:'Teboho Mokoena',pos:'MF',club:'Mamelodi Sundowns'},
+    {no:17,name:'Evidence Makgopa',pos:'FW',club:'Mamelodi Sundowns'},
+    {no:23,name:'Grant Kekana',pos:'DF',club:'Mamelodi Sundowns'},
+  ]},
+  CAN:{name:'Canada',coach:'Jesse Marsch',players:[
+    {no:1,name:'Maxime Crepeau',pos:'GK',club:'LA Galaxy'},
+    {no:2,name:'Alistair Johnston',pos:'DF',club:'Celtic'},
+    {no:3,name:'Richie Laryea',pos:'DF',club:'Nottingham Forest'},
+    {no:4,name:'Scott Kennedy',pos:'DF',club:'Valerenga'},
+    {no:5,name:'Steven Vitoria',pos:'DF',club:'Maritimo'},
+    {no:6,name:'Samuel Piette',pos:'MF',club:'CF Montreal'},
+    {no:7,name:'Stephen Eustaquio',pos:'MF',club:'Porto'},
+    {no:9,name:'Lucas Cavallini',pos:'FW',club:'Queretaro'},
+    {no:10,name:'Jonathan David',pos:'FW',club:'Lille'},
+    {no:11,name:'Alphonso Davies',pos:'DF',club:'Bayern Munich'},
+    {no:14,name:'Cyle Larin',pos:'FW',club:'Mallorca'},
+  ]},
+  BIH:{name:'Bosnia & Herzegovina',coach:'Sergej Barbarez',players:[
+    {no:1,name:'Ibrahim Sehic',pos:'GK',club:'Konyaspor'},
+    {no:2,name:'Sead Kolasinac',pos:'DF',club:'Atalanta'},
+    {no:4,name:'Ermin Bicakcic',pos:'DF',club:'Hoffenheim'},
+    {no:5,name:'Anel Ahmedhodzic',pos:'DF',club:'Sheffield United'},
+    {no:7,name:'Edin Visca',pos:'FW',club:'Trabzonspor'},
+    {no:8,name:'Miralem Pjanic',pos:'MF',club:'Sharjah'},
+    {no:9,name:'Edin Dzeko',pos:'FW',club:'Fenerbahce'},
+    {no:10,name:'Haris Ljajic',pos:'MF',club:'Partizan'},
+    {no:11,name:'Kenan Kodro',pos:'FW',club:'Kasimpasa'},
+    {no:14,name:'Sanjin Prcic',pos:'MF',club:'Panathinaikos'},
+    {no:17,name:'Muhamed Besic',pos:'MF',club:'Middlesbrough'},
+  ]},
+  QAT:{name:'Qatar',coach:'Marquez Lopez',players:[
+    {no:1,name:'Meshaal Barsham',pos:'GK',club:'Al-Sadd'},
+    {no:2,name:'Pedro Miguel',pos:'DF',club:'Al-Sadd'},
+    {no:3,name:'Bassam Al-Rawi',pos:'DF',club:'Al-Gharafa'},
+    {no:5,name:'Tarek Salman',pos:'DF',club:'Al-Arabi'},
+    {no:7,name:'Akram Afif',pos:'FW',club:'Al-Sadd'},
+    {no:8,name:'Karim Boudiaf',pos:'MF',club:'Al-Duhail'},
+    {no:9,name:'Almoez Ali',pos:'FW',club:'Al-Duhail'},
+    {no:10,name:'Hassan Al-Haydos',pos:'FW',club:'Al-Sadd'},
+    {no:11,name:'Ismaeel Mohammad',pos:'FW',club:'Al-Gharafa'},
+    {no:14,name:'Abdulaziz Hatem',pos:'MF',club:'Al-Rayyan'},
+    {no:19,name:'Mohammed Muntari',pos:'FW',club:'Al-Duhail'},
+  ]},
+  SUI:{name:'Switzerland',coach:'Murat Yakin',players:[
+    {no:1,name:'Yann Sommer',pos:'GK',club:'Inter Milan'},
+    {no:2,name:'Silvan Widmer',pos:'DF',club:'Mainz'},
+    {no:3,name:'Ricardo Rodriguez',pos:'DF',club:'Torino'},
+    {no:4,name:'Nico Elvedi',pos:'DF',club:'Borussia Monchengladbach'},
+    {no:5,name:'Manuel Akanji',pos:'DF',club:'Manchester City'},
+    {no:6,name:'Denis Zakaria',pos:'MF',club:'AS Monaco'},
+    {no:7,name:'Breel Embolo',pos:'FW',club:'AS Monaco'},
+    {no:8,name:'Remo Freuler',pos:'MF',club:'Nottingham Forest'},
+    {no:9,name:'Haris Seferovic',pos:'FW',club:'Galatasaray'},
+    {no:10,name:'Granit Xhaka',pos:'MF',club:'Bayer Leverkusen'},
+    {no:11,name:'Ruben Vargas',pos:'FW',club:'Augsburg'},
+  ]},
+  MAR:{name:'Morocco',coach:'Walid Regragui',players:[
+    {no:1,name:'Yassine Bounou',pos:'GK',club:'Al-Hilal'},
+    {no:2,name:'Achraf Hakimi',pos:'DF',club:'PSG'},
+    {no:3,name:'Noussair Mazraoui',pos:'DF',club:'Manchester United'},
+    {no:4,name:'Romain Saiss',pos:'DF',club:'Besiktas'},
+    {no:5,name:'Nayef Aguerd',pos:'DF',club:'West Ham'},
+    {no:6,name:'Sofyan Amrabat',pos:'MF',club:'Manchester United'},
+    {no:7,name:'Hakim Ziyech',pos:'MF',club:'Galatasaray'},
+    {no:8,name:'Azzedine Ounahi',pos:'MF',club:'Marseille'},
+    {no:9,name:'Youssef En-Nesyri',pos:'FW',club:'Fenerbahce'},
+    {no:10,name:'Brahim Diaz',pos:'MF',club:'AC Milan'},
+    {no:11,name:'Sofiane Boufal',pos:'FW',club:'Angers'},
+  ]},
+  HAI:{name:'Haiti',coach:'Marc Collat',players:[
+    {no:1,name:'Josue Duverger',pos:'GK',club:'Colorado Rapids'},
+    {no:3,name:'Mechack Jerome',pos:'DF',club:'Vancouver Whitecaps'},
+    {no:4,name:'Andrew Jean-Baptiste',pos:'DF',club:'Houston Dynamo'},
+    {no:5,name:'Steeven Saba',pos:'DF',club:'Gueugnon'},
+    {no:7,name:'Frantzdy Pierrot',pos:'FW',club:'DC United'},
+    {no:8,name:'Duckens Nazon',pos:'FW',club:'Saint-Etienne'},
+    {no:9,name:'Derrick Etienne',pos:'FW',club:'Columbus Crew'},
+    {no:10,name:'Wilde-Donald Guerrier',pos:'MF',club:'Olympiakos'},
+    {no:11,name:'Carnejy Antoine',pos:'FW',club:'CF Montreal'},
+    {no:14,name:'Nicolas Janvier',pos:'MF',club:'Colorado Rapids'},
+    {no:17,name:'Jeff Louis',pos:'MF',club:'New England'},
+  ]},
+  SCO:{name:'Scotland',coach:'Steve Clarke',players:[
+    {no:1,name:'Angus Gunn',pos:'GK',club:'Norwich City'},
+    {no:2,name:'Aaron Hickey',pos:'DF',club:'Brentford'},
+    {no:3,name:'Andrew Robertson',pos:'DF',club:'Liverpool'},
+    {no:4,name:'Scott McTominay',pos:'MF',club:'Napoli'},
+    {no:5,name:'Grant Hanley',pos:'DF',club:'Norwich City'},
+    {no:6,name:'Kieran Tierney',pos:'DF',club:'Real Sociedad'},
+    {no:7,name:'Ryan Christie',pos:'MF',club:'Bournemouth'},
+    {no:8,name:'John McGinn',pos:'MF',club:'Aston Villa'},
+    {no:9,name:'Che Adams',pos:'FW',club:'Torino'},
+    {no:10,name:'Stuart Armstrong',pos:'MF',club:'Southampton'},
+    {no:11,name:'Lyndon Dykes',pos:'FW',club:'QPR'},
+  ]},
+  USA:{name:'USA',coach:'Mauricio Pochettino',players:[
+    {no:1,name:'Matt Turner',pos:'GK',club:'Nottingham Forest'},
+    {no:2,name:'Sergiño Dest',pos:'DF',club:'PSV'},
+    {no:3,name:'Antonee Robinson',pos:'DF',club:'Fulham'},
+    {no:4,name:'Tyler Adams',pos:'MF',club:'Bournemouth'},
+    {no:5,name:'Zack Steffen',pos:'GK',club:'Colorado Rapids'},
+    {no:6,name:'Yunus Musah',pos:'MF',club:'AC Milan'},
+    {no:7,name:'Gio Reyna',pos:'MF',club:'Nottingham Forest'},
+    {no:8,name:'Weston McKennie',pos:'MF',club:'Juventus'},
+    {no:9,name:'Josh Sargent',pos:'FW',club:'Norwich City'},
+    {no:10,name:'Christian Pulisic',pos:'FW',club:'AC Milan'},
+    {no:11,name:'Brenden Aaronson',pos:'MF',club:'Union Berlin'},
+  ]},
+  PAR:{name:'Paraguay',coach:'Daniel Garnero',players:[
+    {no:1,name:'Antony Silva',pos:'GK',club:'Olimpia'},
+    {no:2,name:'Omar Alderete',pos:'DF',club:'Getafe'},
+    {no:3,name:'Fabian Balbuena',pos:'DF',club:'Dynamo Moscow'},
+    {no:4,name:'Gustavo Gomez',pos:'DF',club:'Palmeiras'},
+    {no:5,name:'Mathias Villasanti',pos:'MF',club:'Gremio'},
+    {no:7,name:'Celso Ortiz',pos:'MF',club:'Monterrey'},
+    {no:8,name:'Andres Cubas',pos:'MF',club:'Nottingham Forest'},
+    {no:9,name:'Antonio Sanabria',pos:'FW',club:'Torino'},
+    {no:10,name:'Miguel Almiron',pos:'MF',club:'Newcastle'},
+    {no:11,name:'Angel Romero',pos:'FW',club:'Corinthians'},
+    {no:14,name:'Richard Sanchez',pos:'MF',club:'America'},
+  ]},
+  AUS:{name:'Australia',coach:'Tony Popovic',players:[
+    {no:1,name:'Mat Ryan',pos:'GK',club:'Real Sociedad'},
+    {no:2,name:'Milos Degenek',pos:'DF',club:'Columbus Crew'},
+    {no:3,name:'Aziz Behich',pos:'DF',club:'Dundee United'},
+    {no:4,name:'Kye Rowles',pos:'DF',club:'Hearts'},
+    {no:5,name:'Bailey Wright',pos:'DF',club:'Sunderland'},
+    {no:7,name:'Mathew Leckie',pos:'FW',club:'Melbourne City'},
+    {no:8,name:'Jackson Irvine',pos:'MF',club:'FC St Pauli'},
+    {no:9,name:'Adam Taggart',pos:'FW',club:'Cerezo Osaka'},
+    {no:10,name:'Ajdin Hrustic',pos:'MF',club:'Hellas Verona'},
+    {no:11,name:'Mitchell Duke',pos:'FW',club:'Fagiano Okayama'},
+    {no:14,name:'Riley McGree',pos:'MF',club:'Middlesbrough'},
+  ]},
+  TUR:{name:'Turkiye',coach:'Vincenzo Montella',players:[
+    {no:1,name:'Ugurcan Cakir',pos:'GK',club:'Trabzonspor'},
+    {no:2,name:'Zeki Celik',pos:'DF',club:'Roma'},
+    {no:3,name:'Ferdi Kadioglu',pos:'DF',club:'Brighton'},
+    {no:4,name:'Caglar Soyuncu',pos:'DF',club:'Atletico Madrid'},
+    {no:5,name:'Merih Demiral',pos:'DF',club:'Al-Qadsiah'},
+    {no:6,name:'Okay Yokuslu',pos:'MF',club:'West Brom'},
+    {no:7,name:'Kerem Akturkoglu',pos:'FW',club:'Galatasaray'},
+    {no:8,name:'Hakan Calhanoglu',pos:'MF',club:'Inter Milan'},
+    {no:9,name:'Baris Yilmaz',pos:'FW',club:'Galatasaray'},
+    {no:10,name:'Arda Guler',pos:'MF',club:'Real Madrid'},
+    {no:11,name:'Irfan Can Kahveci',pos:'FW',club:'Fenerbahce'},
+  ]},
+  CUW:{name:'Curacao',coach:'Remko Bicentini',players:[
+    {no:1,name:'Eloy Room',pos:'GK',club:'Columbus Crew'},
+    {no:2,name:'Cuco Martina',pos:'DF',club:'Retired'},
+    {no:3,name:'Vurnon Anita',pos:'MF',club:'Retired'},
+    {no:5,name:'Roshon van der Helm',pos:'DF',club:'SC Cambuur'},
+    {no:7,name:'Leandro Bacuna',pos:'MF',club:'Cardiff City'},
+    {no:8,name:'Jarchinio Antonia',pos:'FW',club:'NEC Nijmegen'},
+    {no:9,name:'Quiñcy Promes',pos:'FW',club:'Spartak Moscow'},
+    {no:10,name:'Giliano Wijnaldum',pos:'MF',club:'NEC Nijmegen'},
+    {no:11,name:'Jurickson Profar',pos:'MF',club:'Molenbeek'},
+    {no:14,name:'Chedren Drenthe',pos:'DF',club:'Go Ahead Eagles'},
+    {no:17,name:'Gevaro Nepomuceno',pos:'FW',club:'MVV Maastricht'},
+  ]},
+  CIV:{name:"Cote d'Ivoire",coach:'Emerse Fae',players:[
+    {no:1,name:'Yahia Fofana',pos:'GK',club:'Leicester City'},
+    {no:2,name:'Serge Aurier',pos:'DF',club:'Retired'},
+    {no:3,name:'Ghislain Konan',pos:'DF',club:'Reims'},
+    {no:4,name:'Jean-Louis Gbamin',pos:'MF',club:'Twente'},
+    {no:5,name:'Odilon Kossounou',pos:'DF',club:'Bayer Leverkusen'},
+    {no:7,name:'Nicolas Pepe',pos:'FW',club:'Trabzonspor'},
+    {no:8,name:'Franck Kessie',pos:'MF',club:'Barcelona'},
+    {no:9,name:'Wilfried Bony',pos:'FW',club:'Retired'},
+    {no:10,name:'Sebastien Haller',pos:'FW',club:'Borussia Dortmund'},
+    {no:11,name:'Simon Adingra',pos:'FW',club:'Brighton'},
+    {no:14,name:'Ibrahim Sangare',pos:'MF',club:'Nottingham Forest'},
+  ]},
+  ECU:{name:'Ecuador',coach:'Sebastian Beccacece',players:[
+    {no:1,name:'Hernan Galindez',pos:'GK',club:'Aucas'},
+    {no:2,name:'Angelo Preciado',pos:'DF',club:'Genk'},
+    {no:3,name:'Pervis Estupinan',pos:'DF',club:'Brighton'},
+    {no:4,name:'Felix Torres',pos:'DF',club:'Santos Laguna'},
+    {no:5,name:'Jose Cifuentes',pos:'MF',club:'LAFC'},
+    {no:7,name:'Kevin Rodriguez',pos:'FW',club:'Ipswich Town'},
+    {no:8,name:'Jhegson Mendez',pos:'MF',club:'LAFC'},
+    {no:9,name:'Jordy Caicedo',pos:'FW',club:'Olimpia'},
+    {no:10,name:'Moises Caicedo',pos:'MF',club:'Chelsea'},
+    {no:11,name:'Michael Estrada',pos:'FW',club:'Cruz Azul'},
+    {no:14,name:'Gonzalo Plata',pos:'FW',club:'Valladolid'},
+  ]},
+  SWE:{name:'Sweden',coach:'Jon Dahl Tomasson',players:[
+    {no:1,name:'Robin Olsen',pos:'GK',club:'Aston Villa'},
+    {no:2,name:'Emil Krafth',pos:'DF',club:'Newcastle'},
+    {no:3,name:'Ludwig Augustinsson',pos:'DF',club:'Sevilla'},
+    {no:4,name:'Victor Lindelof',pos:'DF',club:'Manchester United'},
+    {no:5,name:'Isak Hien',pos:'DF',club:'Atalanta'},
+    {no:6,name:'Albin Ekdal',pos:'MF',club:'Sampdoria'},
+    {no:7,name:'Sebastian Larsson',pos:'MF',club:'AIK'},
+    {no:8,name:'Kristoffer Olsson',pos:'MF',club:'Anderlecht'},
+    {no:9,name:'Alexander Isak',pos:'FW',club:'Newcastle'},
+    {no:10,name:'Dejan Kulusevski',pos:'MF',club:'Tottenham'},
+    {no:11,name:'Anthony Elanga',pos:'FW',club:'Nottingham Forest'},
+  ]},
+  TUN:{name:'Tunisia',coach:'Faouzi Benzarti',players:[
+    {no:1,name:'Aymen Dahmen',pos:'GK',club:'Montpellier'},
+    {no:2,name:'Montassar Talbi',pos:'DF',club:'Lorient'},
+    {no:3,name:'Dylan Bronn',pos:'DF',club:'Salernitana'},
+    {no:4,name:'Yassine Meriah',pos:'DF',club:'Cruz Azul'},
+    {no:5,name:'Nader Ghandri',pos:'DF',club:'Marseille'},
+    {no:7,name:'Wahbi Khazri',pos:'FW',club:'Montpellier'},
+    {no:8,name:'Ellyes Skhiri',pos:'MF',club:'Eintracht Frankfurt'},
+    {no:9,name:'Seifeddine Jaziri',pos:'FW',club:'Zamalek'},
+    {no:10,name:'Hannibal Mejbri',pos:'MF',club:'Birmingham City'},
+    {no:11,name:'Naim Sliti',pos:'FW',club:'Dunkerque'},
+    {no:14,name:'Ferjani Sassi',pos:'MF',club:'Zamalek'},
+  ]},
+  EGY:{name:'Egypt',coach:'Rui Vitoria',players:[
+    {no:1,name:'Mohamed Abou Gabal',pos:'GK',club:'Zamalek'},
+    {no:2,name:'Ahmed Hegazy',pos:'DF',club:'Al-Ittihad'},
+    {no:3,name:'Omar Kamal',pos:'DF',club:'Al-Ahly'},
+    {no:4,name:'Ahmed Fatouh',pos:'DF',club:'Al-Ahly'},
+    {no:5,name:'Ayman Ashraf',pos:'DF',club:'Al-Ahly'},
+    {no:7,name:'Ramadan Sobhi',pos:'MF',club:'Al-Ahly'},
+    {no:8,name:'Tarek Hamed',pos:'MF',club:'Pyramids'},
+    {no:9,name:'Omar Marmoush',pos:'FW',club:'Manchester City'},
+    {no:10,name:'Mohamed Salah',pos:'FW',club:'Liverpool'},
+    {no:11,name:'Mostafa Mohamed',pos:'FW',club:'Nantes'},
+    {no:14,name:'Emam Ashour',pos:'MF',club:'Zamalek'},
+  ]},
+  IRN:{name:'IR Iran',coach:'Amir Ghalenoei',players:[
+    {no:1,name:'Alireza Beiranvand',pos:'GK',club:'Antwerp'},
+    {no:2,name:'Sadegh Moharrami',pos:'DF',club:'Dinamo Zagreb'},
+    {no:3,name:'Ehsan Hajsafi',pos:'DF',club:'Panathinaikos'},
+    {no:4,name:'Shoja Khalilzadeh',pos:'DF',club:'Al-Quwa Al-Jawiya'},
+    {no:5,name:'Milad Mohammadi',pos:'DF',club:'AEK Athens'},
+    {no:7,name:'Sardar Azmoun',pos:'FW',club:'Roma'},
+    {no:8,name:'Saeid Ezatolahi',pos:'MF',club:'Celta Vigo'},
+    {no:9,name:'Mehdi Taremi',pos:'FW',club:'Inter Milan'},
+    {no:10,name:'Ali Gholizadeh',pos:'MF',club:'Charleroi'},
+    {no:11,name:'Alireza Jahanbakhsh',pos:'FW',club:'Feyenoord'},
+    {no:14,name:'Ahmad Noorollahi',pos:'MF',club:'Al-Shabab'},
+  ]},
+  NZL:{name:'New Zealand',coach:'Darren Bazeley',players:[
+    {no:1,name:'Stefan Marinovic',pos:'GK',club:'FC Wil'},
+    {no:2,name:'Liberato Cacace',pos:'DF',club:'Empoli'},
+    {no:3,name:'Tommy Smith',pos:'DF',club:'Retired'},
+    {no:4,name:'Michael Boxall',pos:'DF',club:'Minnesota United'},
+    {no:5,name:'Winston Reid',pos:'DF',club:'Brentford'},
+    {no:7,name:'Callum McCowatt',pos:'FW',club:'HJK Helsinki'},
+    {no:8,name:'Elijah Just',pos:'MF',club:'RFC Seraing'},
+    {no:9,name:'Chris Wood',pos:'FW',club:'Nottingham Forest'},
+    {no:10,name:'Sarpreet Singh',pos:'MF',club:'Jahn Regensburg'},
+    {no:11,name:'Marko Stamenic',pos:'MF',club:'FC Copenhagen'},
+    {no:14,name:'Matthew Garbett',pos:'MF',club:'OH Leuven'},
+  ]},
+  CPV:{name:'Cabo Verde',coach:'Bubista',players:[
+    {no:1,name:'Vozinha',pos:'GK',club:'Cercle Brugge'},
+    {no:2,name:'Sandro',pos:'DF',club:'Boavista'},
+    {no:3,name:'Stopira',pos:'DF',club:'Maccabi Haifa'},
+    {no:4,name:'Roberto Lopes',pos:'DF',club:'Shamrock Rovers'},
+    {no:5,name:'Jeffry Fortes',pos:'DF',club:'Setubal'},
+    {no:7,name:'Ryan Mendes',pos:'FW',club:'Anorthosis'},
+    {no:8,name:'Garry Rodrigues',pos:'FW',club:'Al-Gharafa'},
+    {no:9,name:'Julio Tavares',pos:'FW',club:'Dijon'},
+    {no:10,name:'Jamiro Monteiro',pos:'MF',club:'Al-Fayha'},
+    {no:11,name:'Gilson Benchimol',pos:'FW',club:'Rubin Kazan'},
+    {no:14,name:'Steven Fortes',pos:'DF',club:'Belenenses'},
+  ]},
+  KSA:{name:'Saudi Arabia',coach:'Roberto Mancini',players:[
+    {no:1,name:'Mohammed Al-Owais',pos:'GK',club:'Al-Hilal'},
+    {no:2,name:'Sultan Al-Ghannam',pos:'DF',club:'Al-Hilal'},
+    {no:3,name:'Yasser Al-Shahrani',pos:'DF',club:'Al-Hilal'},
+    {no:4,name:'Ali Al-Bulaihi',pos:'DF',club:'Al-Hilal'},
+    {no:5,name:'Abdulelah Al-Amri',pos:'DF',club:'Al-Shabab'},
+    {no:7,name:'Saleh Al-Shehri',pos:'FW',club:'Al-Hilal'},
+    {no:8,name:'Ali Al-Hassan',pos:'MF',club:'Al-Qadsiah'},
+    {no:9,name:'Firas Al-Buraikan',pos:'FW',club:'Al-Fateh'},
+    {no:10,name:'Salem Al-Dawsari',pos:'FW',club:'Al-Hilal'},
+    {no:11,name:'Mohammed Al-Qasim',pos:'MF',club:'Al-Nassr'},
+    {no:14,name:'Sami Al-Najei',pos:'MF',club:'Al-Ittihad'},
+  ]},
+  URU:{name:'Uruguay',coach:'Marcelo Bielsa',players:[
+    {no:1,name:'Sergio Rochet',pos:'GK',club:'Nacional'},
+    {no:2,name:'Nahitan Nandez',pos:'MF',club:'Cagliari'},
+    {no:3,name:'Mathias Olivera',pos:'DF',club:'Napoli'},
+    {no:4,name:'Ronald Araujo',pos:'DF',club:'Barcelona'},
+    {no:5,name:'Jose Gimenez',pos:'DF',club:'Atletico Madrid'},
+    {no:7,name:'Facundo Pellistri',pos:'FW',club:'Manchester United'},
+    {no:8,name:'Federico Valverde',pos:'MF',club:'Real Madrid'},
+    {no:9,name:'Edinson Cavani',pos:'FW',club:'Boca Juniors'},
+    {no:10,name:'Giorgian de Arrascaeta',pos:'MF',club:'Flamengo'},
+    {no:11,name:'Darwin Nunez',pos:'FW',club:'Liverpool'},
+    {no:14,name:'Rodrigo Bentancur',pos:'MF',club:'Tottenham'},
+  ]},
+  SEN:{name:'Senegal',coach:'Aliou Cisse',players:[
+    {no:1,name:'Edouard Mendy',pos:'GK',club:'Chelsea'},
+    {no:2,name:'Bouna Sarr',pos:'DF',club:'Bayern Munich'},
+    {no:3,name:'Abdou Diallo',pos:'DF',club:'RB Leipzig'},
+    {no:4,name:'Kalidou Koulibaly',pos:'DF',club:'Al-Hilal'},
+    {no:5,name:'Idrissa Gueye',pos:'MF',club:'Everton'},
+    {no:7,name:'Ismaila Sarr',pos:'FW',club:'Crystal Palace'},
+    {no:8,name:'Cheikhou Kouyate',pos:'MF',club:'Nottingham Forest'},
+    {no:9,name:'Boulaye Dia',pos:'FW',club:'Lazio'},
+    {no:10,name:'Sadio Mane',pos:'FW',club:'Al-Nassr'},
+    {no:11,name:'Famara Diedhiou',pos:'FW',club:'Al-Qadsiah'},
+    {no:14,name:'Pape Matar Sarr',pos:'MF',club:'Tottenham'},
+  ]},
+  IRQ:{name:'Iraq',coach:'Jesus Casas',players:[
+    {no:1,name:'Jalal Hassan',pos:'GK',club:'Al-Zawraa'},
+    {no:2,name:'Ali Adnan',pos:'DF',club:'Vancouver Whitecaps'},
+    {no:3,name:'Hussein Ali',pos:'DF',club:'Al-Shorta'},
+    {no:4,name:'Saman Shaker',pos:'DF',club:'Al-Zawraa'},
+    {no:5,name:'Rebin Sulaka',pos:'DF',club:'Al-Quwa Al-Jawiya'},
+    {no:7,name:'Amjed Attwan',pos:'MF',club:'Al-Zawraa'},
+    {no:8,name:'Saad Abdul Amir',pos:'MF',club:'Al-Shorta'},
+    {no:9,name:'Aymen Hussein',pos:'FW',club:'Al-Zawraa'},
+    {no:10,name:'Mohanad Ali',pos:'FW',club:'Al-Shorta'},
+    {no:11,name:'Ahmed Yasin',pos:'MF',club:'Al-Quwa Al-Jawiya'},
+    {no:14,name:'Bashar Resan',pos:'FW',club:'Ludogorets'},
+  ]},
+  NOR:{name:'Norway',coach:'Stale Solbakken',players:[
+    {no:1,name:'Orjan Nyland',pos:'GK',club:'Atalanta'},
+    {no:2,name:'Omar Elabdellaoui',pos:'DF',club:'Olympiakos'},
+    {no:3,name:'Patrick Berg',pos:'MF',club:'Bodo/Glimt'},
+    {no:4,name:'Andreas Hanche-Olsen',pos:'DF',club:'Gent'},
+    {no:5,name:'Leo Ostigard',pos:'DF',club:'Napoli'},
+    {no:6,name:'Martin Odegaard',pos:'MF',club:'Arsenal'},
+    {no:7,name:'Mohamed Elyounoussi',pos:'FW',club:'Southampton'},
+    {no:8,name:'Sander Berge',pos:'MF',club:'Burnley'},
+    {no:9,name:'Erling Haaland',pos:'FW',club:'Manchester City'},
+    {no:10,name:'Alexander Sorloth',pos:'FW',club:'Atletico Madrid'},
+    {no:11,name:'Joergen Strand Larsen',pos:'FW',club:'Celta Vigo'},
+  ]},
+  ALG:{name:'Algeria',coach:'Vladimir Petkovic',players:[
+    {no:1,name:'Rais MBolhi',pos:'GK',club:'Al-Ettifaq'},
+    {no:2,name:'Aissa Mandi',pos:'DF',club:'Villarreal'},
+    {no:3,name:'Ramy Bensebaini',pos:'DF',club:'Borussia Dortmund'},
+    {no:4,name:'Djamel Benlamri',pos:'DF',club:'Al-Shabab'},
+    {no:5,name:'Hossem Aouar',pos:'MF',club:'Betis'},
+    {no:7,name:'Youcef Atal',pos:'DF',club:'Nice'},
+    {no:8,name:'Adlene Guedioura',pos:'MF',club:'Nottingham Forest'},
+    {no:9,name:'Islam Slimani',pos:'FW',club:'Retired'},
+    {no:10,name:'Riyad Mahrez',pos:'FW',club:'Al-Ahli'},
+    {no:11,name:'Baghdad Bounedjah',pos:'FW',club:'Al-Sadd'},
+    {no:14,name:'Yacine Brahimi',pos:'MF',club:'Al-Rayyan'},
+  ]},
+  AUT:{name:'Austria',coach:'Ralf Rangnick',players:[
+    {no:1,name:'Patrick Pentz',pos:'GK',club:'Stade Reims'},
+    {no:2,name:'Stefan Posch',pos:'DF',club:'Bologna'},
+    {no:3,name:'David Alaba',pos:'DF',club:'Real Madrid'},
+    {no:4,name:'Kevin Danso',pos:'DF',club:'Lens'},
+    {no:5,name:'Maximilian Wober',pos:'DF',club:'Leeds United'},
+    {no:6,name:'Nicolas Seiwald',pos:'MF',club:'RB Leipzig'},
+    {no:7,name:'Christoph Baumgartner',pos:'MF',club:'RB Leipzig'},
+    {no:8,name:'Konrad Laimer',pos:'MF',club:'Bayern Munich'},
+    {no:9,name:'Marko Arnautovic',pos:'FW',club:'Inter Milan'},
+    {no:10,name:'Marcel Sabitzer',pos:'MF',club:'Borussia Dortmund'},
+    {no:11,name:'Michael Gregoritsch',pos:'FW',club:'Freiburg'},
+  ]},
+  JOR:{name:'Jordan',coach:'Hussain Ammouta',players:[
+    {no:1,name:'Yazeed Abulaila',pos:'GK',club:'Al-Faisaly'},
+    {no:2,name:'Musa Al-Taamari',pos:'FW',club:'Montpellier'},
+    {no:3,name:'Ehsan Haddad',pos:'DF',club:'Al-Wehdat'},
+    {no:4,name:'Baher Al-Saqqa',pos:'DF',club:'Al-Ramtha'},
+    {no:5,name:'Yazan Al-Naimat',pos:'DF',club:'Al-Faisaly'},
+    {no:7,name:'Hamza Al-Dardour',pos:'FW',club:'Anorthosis'},
+    {no:8,name:'Mousa Suleiman',pos:'MF',club:'Al-Jazira'},
+    {no:9,name:'Baha Faisal',pos:'FW',club:'Al-Wehdat'},
+    {no:10,name:'Ahmad Hayel',pos:'MF',club:'Al-Wehdat'},
+    {no:11,name:'Oday Al-Dabbagh',pos:'FW',club:'Al-Shabab SA'},
+    {no:14,name:'Nour Mansour',pos:'MF',club:'Al-Faisaly'},
+  ]},
+  COD:{name:'Congo DR',coach:'Sébastien Desabre',players:[
+    {no:1,name:'Joël Kiassumbua',pos:'GK',club:'Amiens'},
+    {no:2,name:'Chancel Mbemba',pos:'DF',club:'Marseille'},
+    {no:3,name:'Junior Malanda',pos:'MF',club:'Retired'},
+    {no:4,name:'Marcel Tisserand',pos:'DF',club:'Fenerbahce'},
+    {no:5,name:'Merveille Bope',pos:'MF',club:'Cercle Brugge'},
+    {no:7,name:'Yannick Bolasie',pos:'FW',club:'Millwall'},
+    {no:8,name:'Firmin Mubele',pos:'FW',club:'Al-Ittihad'},
+    {no:9,name:'Paul-Jose Mpoku',pos:'MF',club:'Al-Ahly'},
+    {no:10,name:'Cedric Bakambu',pos:'FW',club:'Marseille'},
+    {no:11,name:'Jonathan Bolingi',pos:'FW',club:'Al-Ittihad'},
+    {no:14,name:'Meschak Elia',pos:'FW',club:'Young Boys'},
+  ]},
+  UZB:{name:'Uzbekistan',coach:'Srecko Katanec',players:[
+    {no:1,name:'Utkir Yusupov',pos:'GK',club:'Pakhtakor'},
+    {no:2,name:'Dostonbek Khamdamov',pos:'DF',club:'Pakhtakor'},
+    {no:3,name:'Sherzod Nasimov',pos:'DF',club:'Pakhtakor'},
+    {no:4,name:'Jamshid Iskanderov',pos:'DF',club:'Pakhtakor'},
+    {no:5,name:'Otabek Shukurov',pos:'MF',club:'FK Navbahor'},
+    {no:7,name:'Eldor Shomurodov',pos:'FW',club:'Roma'},
+    {no:8,name:'Jaloliddin Masharipov',pos:'MF',club:'Pakhtakor'},
+    {no:9,name:'Jasur Yakhshiboev',pos:'FW',club:'Pakhtakor'},
+    {no:10,name:'Otabek Fayzullaev',pos:'MF',club:'CSKA Moscow'},
+    {no:11,name:'Abbosbek Fayzullaev',pos:'FW',club:'Lokomotiv Moscow'},
+    {no:14,name:'Mukhammad Shamsiyev',pos:'MF',club:'Pakhtakor'},
+  ]},
+  COL:{name:'Colombia',coach:'Nestor Lorenzo',players:[
+    {no:1,name:'Camilo Vargas',pos:'GK',club:'Atlas'},
+    {no:2,name:'Daniel Munoz',pos:'DF',club:'Crystal Palace'},
+    {no:3,name:'Johan Mojica',pos:'DF',club:'Girona'},
+    {no:4,name:'Santiago Arias',pos:'DF',club:'Atletico Mineiro'},
+    {no:5,name:'Davinson Sanchez',pos:'DF',club:'Galatasaray'},
+    {no:6,name:'Wilmar Barrios',pos:'MF',club:'Zenit'},
+    {no:7,name:'Luis Diaz',pos:'FW',club:'Liverpool'},
+    {no:8,name:'Mateus Uribe',pos:'MF',club:'Porto'},
+    {no:9,name:'Radamel Falcao',pos:'FW',club:'Rayo Vallecano'},
+    {no:10,name:'James Rodriguez',pos:'MF',club:'Rayo Vallecano'},
+    {no:11,name:'Rafael Santos Borre',pos:'FW',club:'Eintracht Frankfurt'},
+  ]},
+  CRO:{name:'Croatia',coach:'Zlatko Dalic',players:[
+    {no:1,name:'Dominik Livakovic',pos:'GK',club:'Fenerbahce'},
+    {no:2,name:'Josip Juranovic',pos:'DF',club:'Celtic'},
+    {no:3,name:'Borna Sosa',pos:'DF',club:'Stuttgart'},
+    {no:4,name:'Josko Gvardiol',pos:'DF',club:'Manchester City'},
+    {no:5,name:'Martin Erlic',pos:'DF',club:'Sassuolo'},
+    {no:7,name:'Ivan Perisic',pos:'MF',club:'Hajduk Split'},
+    {no:8,name:'Mateo Kovacic',pos:'MF',club:'Manchester City'},
+    {no:9,name:'Andrej Kramaric',pos:'FW',club:'Hoffenheim'},
+    {no:10,name:'Luka Modric',pos:'MF',club:'Real Madrid'},
+    {no:11,name:'Ante Budimir',pos:'FW',club:'Osasuna'},
+    {no:14,name:'Marcelo Brozovic',pos:'MF',club:'Al-Nassr'},
+  ]},
+  GHA:{name:'Ghana',coach:'Otto Addo',players:[
+    {no:1,name:'Lawrence Ati-Zigi',pos:'GK',club:'FC St Gallen'},
+    {no:2,name:'Tariq Lamptey',pos:'DF',club:'Brighton'},
+    {no:3,name:'Baba Rahman',pos:'DF',club:'Reading'},
+    {no:4,name:'Daniel Amartey',pos:'DF',club:'Leicester City'},
+    {no:5,name:'Alexander Djiku',pos:'DF',club:'Fenerbahce'},
+    {no:7,name:'Jordan Ayew',pos:'FW',club:'Al-Qadsiah'},
+    {no:8,name:'Thomas Partey',pos:'MF',club:'Arsenal'},
+    {no:9,name:'Antoine Semenyo',pos:'FW',club:'Bournemouth'},
+    {no:10,name:'Andre Ayew',pos:'FW',club:'Le Havre'},
+    {no:11,name:'Kamaldeen Sulemana',pos:'FW',club:'Southampton'},
+    {no:14,name:'Mohammed Kudus',pos:'MF',club:'West Ham'},
+  ]},
+  PAN:{name:'Panama',coach:'Thomas Christiansen',players:[
+    {no:1,name:'Luis Mejia',pos:'GK',club:'Independiente'},
+    {no:2,name:'Michael Murillo',pos:'DF',club:'Anderlecht'},
+    {no:3,name:'Harold Cummings',pos:'DF',club:'Santos Laguna'},
+    {no:4,name:'Fidel Escobar',pos:'DF',club:'New England'},
+    {no:5,name:'Andres Andrade',pos:'DF',club:'FC Dallas'},
+    {no:7,name:'Ismael Diaz',pos:'FW',club:'Lokomotiv Moscow'},
+    {no:8,name:'Edgar Barcenas',pos:'MF',club:'Notts County'},
+    {no:9,name:'Roberto Nurse',pos:'FW',club:'Chaves'},
+    {no:10,name:'Adalberto Carrasquilla',pos:'MF',club:'Houston Dynamo'},
+    {no:11,name:'Cesar Blackman',pos:'FW',club:'Colorado Rapids'},
+    {no:14,name:'Rolando Blackburn',pos:'FW',club:'Al-Qadsiah'},
+  ]},
+};
+
 // ══════════════════════════════════════════════════════
 //  JANGAN EDIT DI BAWAH KECUALI MAU UBAH TAMPILAN
 // ══════════════════════════════════════════════════════
+
+const TEAM_NAMES = {
+  MEX:'Mexico',RSA:'South Africa',KOR:'Korea Republic',CZE:'Czechia',
+  CAN:'Canada',BIH:'Bosnia Herzegovina',QAT:'Qatar',SUI:'Switzerland',
+  BRA:'Brazil',MAR:'Morocco',HAI:'Haiti',SCO:'Scotland',
+  USA:'United States America',PAR:'Paraguay',AUS:'Australia',TUR:'Turkiye Turkey',
+  GER:'Germany',CUW:'Curacao',CIV:"Cote d'Ivoire Ivory Coast",ECU:'Ecuador',
+  NED:'Netherlands Holland',JPN:'Japan',SWE:'Sweden',TUN:'Tunisia',
+  BEL:'Belgium',EGY:'Egypt',IRN:'Iran',NZL:'New Zealand',
+  ESP:'Spain',CPV:'Cabo Verde Cape Verde',KSA:'Saudi Arabia',URU:'Uruguay',
+  FRA:'France',SEN:'Senegal',IRQ:'Iraq',NOR:'Norway',
+  ARG:'Argentina',ALG:'Algeria',AUT:'Austria',JOR:'Jordan',
+  POR:'Portugal',COD:'Congo DR',UZB:'Uzbekistan',COL:'Colombia',
+  ENG:'England',CRO:'Croatia',GHA:'Ghana',PAN:'Panama',
+};
+function flagHTML(code, sm){
+  const svg = FLAGS[code] || '';
+  return `<span class="flag${sm?' flag-sm':''}">${svg}</span>`;
+}
+function getCode(teamStr){
+  // extract 3-letter code from e.g. "MEX" or "Mexico (MEX)"
+  const m = teamStr.match(/\b([A-Z]{3})\b/);
+  return m ? m[1] : teamStr.substring(0,3).toUpperCase();
+}
+
 
 const DAYS_ID=['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
 const MONTHS_ID=['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
@@ -394,6 +1247,39 @@ function toggleTheme(){
 
 // ── WATCHED ───────────────────────────────────────────
 function getWatched(){try{return JSON.parse(localStorage.getItem('fwc_watched')||'[]');}catch(e){return[];}}
+function getFavs(){try{return JSON.parse(localStorage.getItem('fwc_favs')||'[]');}catch(e){return[];}}
+function toggleFavMatch(no){
+  let f=getFavs();
+  if(f.includes(no)) f=f.filter(x=>x!==no); else f.push(no);
+  localStorage.setItem('fwc_favs',JSON.stringify(f));
+  // update all instances of this match
+  document.querySelectorAll(`.mi-${no}`).forEach(el=>{
+    el.classList.toggle('user-fav',f.includes(no));
+  });
+  // re-render menu if open
+  closeAllMenus();
+  applyFilter();
+}
+function openMatchMenu(no,btn){
+  closeAllMenus();
+  const menu=btn.parentElement.querySelector('.match-ctx-menu');
+  if(!menu) return;
+  const isWatched=getWatched().includes(no);
+  const isFav=getFavs().includes(no);
+  menu.innerHTML=`
+    <button class="ctx-item ${isFav?'active-item':''}" onclick="toggleFavMatch(${no})">
+      <span>${isFav?'★':'☆'}</span> ${isFav?'Hapus favorit':'Tambah ke favorit'}
+    </button>
+    <button class="ctx-item ${isWatched?'active-item':''}" onclick="toggleWatched(${no})">
+      <span>${isWatched?'✓':'○'}</span> ${isWatched?'Tandai belum ditonton':'Tandai sudah ditonton'}
+    </button>`;
+  menu.classList.add('open');
+  // close when clicking outside
+  setTimeout(()=>document.addEventListener('click',closeAllMenus,{once:true}),10);
+}
+function closeAllMenus(){
+  document.querySelectorAll('.match-ctx-menu.open').forEach(m=>m.classList.remove('open'));
+}
 function toggleWatched(no){
   let w=getWatched();
   if(w.includes(no)) w=w.filter(x=>x!==no); else w.push(no);
@@ -418,31 +1304,141 @@ function toggleWatchedFilter(){
   document.getElementById('watchedFilterBtn').classList.toggle('active',showOnlyUnwatched);
   applyFilter();
 }
+let activeDateFilter = null;
+
+function onDateSelect(){
+  const sel = document.getElementById('dateSelect');
+  activeDateFilter = sel.value || null;
+  document.getElementById('clearDateBtn').classList.toggle('visible', !!activeDateFilter);
+  applyDateFilter();
+}
+
+function clearDateFilter(){
+  activeDateFilter = null;
+  document.getElementById('dateSelect').value = '';
+  document.getElementById('clearDateBtn').classList.remove('visible');
+  applyDateFilter();
+}
+
+function getTodayLabelWIB(){
+  // Use WIB = UTC+7
+  const now = new Date(Date.now() + 7*3600*1000);
+  const DAYS_ID2=['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+  const MONTHS_ID2=['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
+  return `${DAYS_ID2[now.getUTCDay()]}, ${now.getUTCDate()} ${MONTHS_ID2[now.getUTCMonth()]}`;
+}
+
+function goToToday(){
+  const todayLabel = getTodayLabelWIB();
+  const sel = document.getElementById('dateSelect');
+  const opt = [...sel.options].find(o => o.value === todayLabel);
+  if(opt){
+    sel.value = todayLabel;
+    activeDateFilter = todayLabel;
+    document.getElementById('clearDateBtn').classList.add('visible');
+    applyDateFilter();
+  } else {
+    alert('Tidak ada pertandingan hari ini.');
+  }
+}
+
+function applyDateFilter(){
+  // if date filter active: force show ALL phase+group panels, hide non-matching matches and empty groups
+  if(activeDateFilter){
+    // show all panels
+    document.querySelectorAll('.phase-panel, .group-panel').forEach(p => p.style.display = 'block');
+    // hide phase tabs, show flat view
+    document.getElementById('phaseTabs').style.display = 'none';
+    document.getElementById('phaseContent').style.display = 'block';
+  } else {
+    document.getElementById('phaseTabs').style.display = '';
+    // restore only active panels
+    document.querySelectorAll('.phase-panel').forEach(p => p.style.display = p.classList.contains('active') ? '' : 'none');
+    document.querySelectorAll('.group-panel').forEach(p => p.style.display = p.classList.contains('active') ? '' : 'none');
+  }
+  applyFilter();
+  if(activeDateFilter){
+    // hide group panels that have no visible matches
+    document.querySelectorAll('.group-panel').forEach(gp => {
+      const vis = [...gp.querySelectorAll('.match-item')].some(el => el.style.display !== 'none');
+      gp.style.display = vis ? 'block' : 'none';
+    });
+    // hide phase panels (r32,r16,qf,sf,fin) that have no visible matches
+    document.querySelectorAll('.phase-panel').forEach(pp => {
+      if(pp.id === 'pp-gs') return; // gs handled by group panels
+      const hasVis = [...pp.querySelectorAll('.match-item')].some(el => el.style.display !== 'none');
+      pp.style.display = hasVis ? 'block' : 'none';
+    });
+    // if gs has no visible groups, hide it too
+    const gsPanel = document.getElementById('pp-gs');
+    if(gsPanel){
+      const visGps = [...gsPanel.querySelectorAll('.group-panel')].some(g => g.style.display !== 'none');
+      gsPanel.style.display = visGps ? 'block' : 'none';
+    }
+    // hide group-tabs when filtering
+    document.querySelectorAll('.group-tabs').forEach(t => t.style.display = 'none');
+  } else {
+    document.querySelectorAll('.group-tabs').forEach(t => t.style.display = '');
+  }
+}
+
 function applyFilter(){
   const q=document.getElementById('teamSearch').value.toLowerCase().trim();
   const watched=getWatched();
   document.querySelectorAll('.match-item[data-teams]').forEach(el=>{
     const teams=el.getAttribute('data-teams').toLowerCase();
     const no=parseInt(el.getAttribute('data-no'));
-    const isFav=el.classList.contains('fav-match');
+    const dateLabel=el.getAttribute('data-date')||'';
+    // fav check below
     const isWatched=watched.includes(no);
     let show=true;
     if(q && !teams.includes(q)) show=false;
-    if(showOnlyFav && !isFav) show=false;
+    const isUserFav=getFavs().includes(no);
+    const isTeamFav=el.classList.contains('fav-match');
+    if(showOnlyFav && !isUserFav && !isTeamFav) show=false;
     if(showOnlyUnwatched && isWatched) show=false;
+    if(activeDateFilter && dateLabel !== activeDateFilter) show=false;
     el.style.display=show?'':'none';
   });
-  // show no-results if all hidden in each list
   document.querySelectorAll('.match-list').forEach(list=>{
     const visible=[...list.querySelectorAll('.match-item')].filter(i=>i.style.display!=='none');
     let nr=list.querySelector('.no-results');
     if(!visible.length){
-      if(!nr){nr=document.createElement('div');nr.className='no-results';nr.textContent='Tidak ada pertandingan yang cocok.';list.appendChild(nr);}
+      if(!nr){nr=document.createElement('div');nr.className='no-results';nr.textContent='Tidak ada pertandingan.';list.appendChild(nr);}
       nr.style.display='';
     } else {
       if(nr) nr.style.display='none';
     }
   });
+  // Update filter indicator
+  const ind = document.getElementById('filterIndicator');
+  if(!ind) return;
+  const totalVis = [...document.querySelectorAll('.match-item[data-teams]')].filter(el=>el.style.display!=='none').length;
+  const tags = [];
+  if(activeDateFilter) tags.push(activeDateFilter);
+  if(q) tags.push('Tim: '+q);
+  if(showOnlyFav) tags.push('Favorit');
+  if(showOnlyUnwatched) tags.push('Belum ditonton');
+  if(tags.length){
+    ind.classList.remove('hidden');
+    ind.style.display='flex';
+    ind.innerHTML=`<div class="fi-left">${tags.map(t=>`<span class="fi-tag">${t}</span>`).join('')}<span class="fi-count">${totalVis} pertandingan</span></div><button onclick="clearAllFilters()" style="padding:3px 10px;font-size:11px;border:1px solid var(--border2);border-radius:99px;background:transparent;color:var(--text2);cursor:pointer;font-family:inherit">Hapus semua</button>`;
+  } else {
+    ind.classList.add('hidden');
+    ind.style.display='none';
+  }
+}
+
+function clearAllFilters(){
+  activeDateFilter=null;
+  showOnlyFav=false;
+  showOnlyUnwatched=false;
+  document.getElementById('teamSearch').value='';
+  document.getElementById('dateSelect').value='';
+  document.getElementById('clearDateBtn').classList.remove('visible');
+  document.getElementById('favFilterBtn').classList.remove('active');
+  document.getElementById('watchedFilterBtn').classList.remove('active');
+  applyDateFilter();
 }
 
 // ── MATCH LIST ────────────────────────────────────────
@@ -453,25 +1449,29 @@ function buildMatchList(matches){
     const dateLabel=formatDate(m.date,m.et);
     const lbl=m.label?`<span class="final-badge">${m.label}</span>`:'';
     const score=hasilMatch[m.no]?`<span class="m-score">${hasilMatch[m.no]}</span>`:'';
-    const isFav=FAVORITE_TEAMS.some(f=>m.home.includes(f)||m.away.includes(f));
+    const favTeams=FAVORITE_TEAMS.some(f=>m.home.includes(f)||m.away.includes(f));
+    const isFavMatch=getFavs().includes(m.no);
+    const isFav=favTeams||isFavMatch;
     const isWatched=watched.includes(m.no);
-    const teamsStr=`${m.home} ${m.away}`;
-    return`<div class="match-item mi-${m.no}${isFav?' fav-match':''}${isWatched?' watched':''}" data-no="${m.no}" data-teams="${teamsStr}">
+    const hCode=getCode(m.home),aCode=getCode(m.away);const teamsStr=`${m.home} ${m.away} ${TEAM_NAMES[hCode]||''} ${TEAM_NAMES[aCode]||''}`;
+    const wibDate=formatDate(m.date,m.et);
+    return`<div class="match-item mi-${m.no}${favTeams?' fav-match':''} ${isFavMatch?' user-fav':''}${isWatched?' watched':''}" data-no="${m.no}" data-teams="${teamsStr}" data-date="${wibDate}">
       <span class="m-no">${m.no}</span>
       <div>
-        <div class="m-teams">${m.home} <span style="color:var(--text3);font-weight:400">vs</span> ${m.away}${score}${lbl}</div>
+        <div class="m-teams">${flagHTML(getCode(m.home),true)} ${m.home} <span style="color:var(--text3);font-weight:400">vs</span> ${flagHTML(getCode(m.away),true)} ${m.away}${score}${lbl}</div>
         <div class="m-sub">
           <span class="m-date">${dateLabel}${plus?`<span class="plus1">(+1)</span>`:''}</span>
           <span class="m-dot"></span>
           <span>${m.venue}</span>
         </div>
       </div>
-      <div style="display:flex;align-items:center;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px;position:relative">
         <div style="text-align:right">
           <span class="m-wib">${time} WIB</span>
           <span class="m-et">ET ${m.et}</span>
         </div>
-        <button class="watch-btn" onclick="toggleWatched(${m.no})" title="${isWatched?'Tandai belum ditonton':'Tandai sudah ditonton'}">&#10003;</button>
+        <button class="match-menu-btn" onclick="event.stopPropagation();openMatchMenu(${m.no},this)" title="Opsi">&#8942;</button>
+        <div class="match-ctx-menu"></div>
       </div>
     </div>`;
   }).join('')}</div>`;
@@ -656,9 +1656,21 @@ phases.forEach((ph,i)=>{
   btn.textContent=ph.label;
   btn.onclick=()=>{
     phaseTabs.querySelectorAll('.phase-tab').forEach(t=>t.classList.remove('active'));
-    phaseContent.querySelectorAll('.phase-panel').forEach(p=>p.classList.remove('active'));
+    phaseContent.querySelectorAll('.phase-panel').forEach(p=>{p.classList.remove('active');p.style.display='none';});
     btn.classList.add('active');
-    document.getElementById('pp-'+ph.id).classList.add('active');
+    const activePp=document.getElementById('pp-'+ph.id);
+    activePp.classList.add('active');
+    activePp.style.display='block';
+    // also reset group panels inside gs
+    if(ph.id==='gs'){
+      const firstGp=activePp.querySelector('.group-panel');
+      if(firstGp){
+        activePp.querySelectorAll('.group-panel').forEach(p=>{p.style.display='none';});
+        firstGp.style.display='block';
+        firstGp.classList.add('active');
+      }
+      activePp.querySelectorAll('.group-tabs').forEach(t=>t.style.display='');
+    }
     applyFilter();
   };
   phaseTabs.appendChild(btn);
@@ -674,9 +1686,11 @@ phases.forEach((ph,i)=>{
       gt.textContent='Grup '+g.id;
       gt.onclick=()=>{
         gtabs.querySelectorAll('.group-tab').forEach(t=>t.classList.remove('active'));
-        gps.querySelectorAll('.group-panel').forEach(p=>p.classList.remove('active'));
+        gps.querySelectorAll('.group-panel').forEach(p=>{p.classList.remove('active');p.style.display='none';});
         gt.classList.add('active');
-        document.getElementById('gp-'+g.id).classList.add('active');
+        const activeGp=document.getElementById('gp-'+g.id);
+        activeGp.classList.add('active');
+        activeGp.style.display='block';
         applyFilter();
       };
       gtabs.appendChild(gt);
@@ -703,7 +1717,7 @@ function renderStanding(gid,container){
     .sort((a,b)=>b.pts-a.pts||b.gd-a.gd||b.gf-a.gf);
   const rows=sorted.map((r,i)=>`<tr class="${i<2?'q-r32':i===2?'q-po':'q-out'}">
     <td class="st-pos">${i+1}</td>
-    <td><div class="st-team-name">${r.team}</div></td>
+    <td><div class="st-team-name" style="display:flex;align-items:center;gap:7px">${flagHTML(getCode(r.team))} ${r.team}</div></td>
     <td>${r.mp}</td><td>${r.w}</td><td>${r.d}</td><td>${r.l}</td>
     <td>${r.gf}</td><td>${r.ga}</td>
     <td class="${gdClass(r.gd)}">${gdStr(r.gd)}</td>
@@ -746,7 +1760,7 @@ function renderThirdPlace(){
   }).sort((a,b)=>b.pts-a.pts||(b.gd-a.gd)||(b.gf||0)-(a.gf||0));
   const rows=thirds.map((r,i)=>`<tr class="${i<8?'q-r32':'q-out'}">
     <td class="st-pos">${i+1}</td>
-    <td><div class="st-team-name">${r.team} <span style="font-size:10px;color:var(--text3)">(Grp ${r.group})</span></div></td>
+    <td><div class="st-team-name" style="display:flex;align-items:center;gap:7px">${flagHTML(getCode(r.team))} ${r.team} <span style="font-size:10px;color:var(--text3)">(Grp ${r.group})</span></div></td>
     <td>${r.mp||0}</td><td>${r.w||0}</td><td>${r.d||0}</td><td>${r.l||0}</td>
     <td>${r.gf||0}</td><td>${r.ga||0}</td>
     <td class="${gdClass(r.gd)}">${gdStr(r.gd)}</td>
@@ -765,38 +1779,200 @@ renderThirdPlace();
 
 // ── BRACKET ───────────────────────────────────────────
 function renderBracket(){
-  const c=document.getElementById('bracketContainer');
-  function bMatch(data,label){
-    if(!data) return`<div class="bracket-match"><div class="bm-label">${label}</div><div class="bm-team">TBD</div><div class="bm-team">TBD</div></div>`;
-    const hw=data.winner===data.home;
-    const aw=data.winner===data.away;
-    return`<div class="bracket-match${label==='FINAL'?' final-match':''}">
-      <div class="bm-label">${label}</div>
-      <div class="bm-team ${hw?'winner':''}"><span>${data.home||'TBD'}</span><span class="bm-score">${data.score?data.score.split('-')[0]:'-'}</span></div>
-      <div class="bm-team ${aw?'winner':''}"><span>${data.away||'TBD'}</span><span class="bm-score">${data.score?data.score.split('-')[1]:'-'}</span></div>
-    </div>`;
-  }
-  const rounds=[
-    {label:'Round of 32',data:bracketData.r32,count:16},
-    {label:'Round of 16',data:bracketData.r16,count:8},
-    {label:'QF',data:bracketData.qf,count:4},
-    {label:'SF',data:bracketData.sf,count:2},
+  const c = document.getElementById('bracketContainer');
+
+  // Layout constants
+  const CARD_W = 148;   // card width px
+  const CARD_H = 52;    // card height px
+  const COL_GAP = 48;   // gap between columns
+  const ROW_GAP = 6;    // gap between cards within a column
+  const PAD_TOP = 30;   // top padding for round label
+
+  // Rounds: [label, count]
+  const rounds = [
+    ['Round of 32', 16],
+    ['Round of 16', 8],
+    ['QF', 4],
+    ['SF', 2],
+    ['Final', 1],
   ];
-  let html=`<div class="bracket-wrap"><div class="bracket">`;
-  rounds.forEach(r=>{
-    html+=`<div class="bracket-round"><div class="bracket-round-title">${r.label}</div><div class="bracket-matches">`;
-    for(let i=0;i<r.count;i++) html+=bMatch(r.data[i],`M${i+1}`);
-    html+=`</div></div>`;
+  const dataByRound = [
+    bracketData.r32,
+    bracketData.r16,
+    bracketData.qf,
+    bracketData.sf,
+    [bracketData.final],
+  ];
+
+  // Total columns = 5 rounds + bronze
+  const numCols = 5;
+  const totalW = numCols * CARD_W + (numCols - 1) * COL_GAP + 40;
+
+  // Compute Y positions for each card in each round
+  // Each round's cards are evenly distributed in the total height
+  const maxCount = 16;
+  const totalH_content = maxCount * (CARD_H + ROW_GAP) - ROW_GAP;
+  const totalH = totalH_content + PAD_TOP + 20;
+
+  function getCardY(roundIdx, cardIdx, count) {
+    const slotH = totalH_content / count;
+    return PAD_TOP + cardIdx * slotH + (slotH - CARD_H) / 2;
+  }
+
+  function getCardX(colIdx) {
+    return 20 + colIdx * (CARD_W + COL_GAP);
+  }
+
+  // Build foreignObject cards
+  let cards = '';
+  let lines = '';
+  const lineColor = 'rgba(255,255,255,0.12)';
+  const lineColorWin = 'rgba(200,168,75,0.5)';
+
+  rounds.forEach((r, ri) => {
+    const [label, count] = r;
+    const data = dataByRound[ri] || [];
+    const x = getCardX(ri);
+
+    // Round label
+    cards += `<text x="${x + CARD_W/2}" y="${PAD_TOP - 10}" text-anchor="middle" class="bracket-round-label" style="fill:var(--text3);font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-family:inherit">${label}</text>`;
+
+    for (let i = 0; i < count; i++) {
+      const y = getCardY(ri, i, count);
+      const d = data[i] || null;
+      const hw = d && d.winner && d.winner === d.home;
+      const aw = d && d.winner && d.winner === d.away;
+      const s = d && d.score ? d.score.split('-') : ['—', '—'];
+      const isFinal = ri === 4;
+      const cardCls = isFinal ? 'bm-card final-card' : 'bm-card';
+      const hFlag = d && d.homeCode ? flagHTML(d.homeCode, true) : '';
+      const aFlag = d && d.awayCode ? flagHTML(d.awayCode, true) : '';
+
+      const cardHtml = `<div class="${cardCls}" style="height:${CARD_H}px;display:flex;flex-direction:column;justify-content:center">
+        <div class="bm-label">M${i+1}</div>
+        <div class="bm-team ${hw?'winner':''}"><span class="name">${hFlag}${(d&&d.home)||'TBD'}</span><span class="bm-score">${s[0]}</span></div>
+        <div class="bm-team ${aw?'winner':''}"><span class="name">${aFlag}${(d&&d.away)||'TBD'}</span><span class="bm-score">${s[1]||'—'}</span></div>
+      </div>`;
+
+      cards += `<foreignObject x="${x}" y="${y}" width="${CARD_W}" height="${CARD_H}">
+        <div xmlns="http://www.w3.org/1999/xhtml">${cardHtml}</div>
+      </foreignObject>`;
+
+      // Draw connector lines to next round
+      if (ri < rounds.length - 1) {
+        const nextCount = rounds[ri+1][1];
+        const nextCardIdx = Math.floor(i / 2);
+        const nextY = getCardY(ri+1, nextCardIdx, nextCount);
+        const nextX = getCardX(ri+1);
+
+        // Right midpoint of current card
+        const myMidY = y + CARD_H / 2;
+        const nextMidY = nextY + CARD_H / 2;
+
+        // Horizontal line from right edge of card to midpoint
+        const midX = x + CARD_W + COL_GAP / 2;
+
+        const lc = (hw || aw) ? lineColorWin : lineColor;
+
+        // Horizontal stub right
+        lines += `<line x1="${x+CARD_W}" y1="${myMidY}" x2="${midX}" y2="${myMidY}" stroke="${lc}" stroke-width="1.5"/>`;
+
+        // Vertical connector (only draw for top card of each pair)
+        if (i % 2 === 0) {
+          const pairTopY  = myMidY;
+          const pairBotY  = getCardY(ri, i+1, count) + CARD_H / 2;
+          // Vertical line
+          lines += `<line x1="${midX}" y1="${pairTopY}" x2="${midX}" y2="${pairBotY}" stroke="${lc}" stroke-width="1.5"/>`;
+          // Horizontal stub left to next card
+          lines += `<line x1="${midX}" y1="${nextMidY}" x2="${nextX}" y2="${nextMidY}" stroke="${lc}" stroke-width="1.5"/>`;
+        }
+      }
+    }
   });
-  // Final column
-  html+=`<div class="bracket-round"><div class="bracket-round-title">Final</div><div class="bracket-matches">`;
-  html+=bMatch(bracketData.bronze,'Bronze');
-  html+=bMatch(bracketData.final,'FINAL');
-  html+=`</div></div>`;
-  html+=`</div></div>`;
-  c.innerHTML=html;
+
+  // Bronze match (separate row below)
+  const bronzeY = totalH - 10;
+  const bronzeX = getCardX(3); // same x as SF
+  const bd = bracketData.bronze;
+  const bs = bd && bd.score ? bd.score.split('-') : ['—','—'];
+  const bhw = bd && bd.winner === bd.home;
+  const baw = bd && bd.winner === bd.away;
+  const bronzeHtml = `<div class="bm-card bronze-card" style="height:${CARD_H}px;display:flex;flex-direction:column;justify-content:center">
+    <div class="bm-label">Bronze Final</div>
+    <div class="bm-team ${bhw?'winner':''}"><span class="name">${(bd&&bd.home)||'TBD'}</span><span class="bm-score">${bs[0]}</span></div>
+    <div class="bm-team ${baw?'winner':''}"><span class="name">${(bd&&bd.away)||'TBD'}</span><span class="bm-score">${bs[1]||'—'}</span></div>
+  </div>`;
+
+  const svgH = totalH + CARD_H + 20;
+
+  c.innerHTML = `
+    <div class="bracket-outer">
+      <svg class="bracket-svg-wrap" viewBox="0 0 ${totalW} ${svgH}" height="${svgH}" xmlns="http://www.w3.org/2000/svg">
+        <!-- connector lines first (behind cards) -->
+        ${lines}
+        <!-- cards -->
+        ${cards}
+        <!-- bronze -->
+        <text x="${bronzeX + CARD_W/2}" y="${totalH}" text-anchor="middle" style="fill:var(--text3);font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-family:inherit">Bronze</text>
+        <foreignObject x="${bronzeX}" y="${totalH + 6}" width="${CARD_W}" height="${CARD_H}">
+          <div xmlns="http://www.w3.org/1999/xhtml">${bronzeHtml}</div>
+        </foreignObject>
+      </svg>
+    </div>`;
 }
 renderBracket();
+
+// ── DATE SELECT + TODAY ───────────────────────────────────────────────
+(function buildDateSelect(){
+  const allMatches = [];
+  groupData.forEach(g => g.matches.forEach(m => allMatches.push(m)));
+  [r32m,r16m,qfm,sfm,finalsm].forEach(arr => arr.forEach(m => allMatches.push(m)));
+
+  const seen = new Set();
+  const dates = [];
+  allMatches.forEach(m => {
+    const d = formatDate(m.date, m.et);
+    if(!seen.has(d)){
+      seen.add(d);
+      dates.push({label:d, raw:new Date(2026, getMonthIdx(m.date), getDayNum(m.date, m.et))});
+    }
+  });
+  dates.sort((a,b)=>a.raw-b.raw);
+
+  const sel = document.getElementById('dateSelect');
+  dates.forEach(d => {
+    const opt = document.createElement('option');
+    opt.value = d.label;
+    opt.textContent = d.label;
+    sel.appendChild(opt);
+  });
+
+  // check today using WIB (UTC+7)
+  const todayLabel = getTodayLabelWIB();
+  const todayExists = dates.some(d => d.label === todayLabel);
+  const todayBtn = document.getElementById('todayBtn');
+  const banner = document.getElementById('todayBanner');
+  if(todayExists){
+    todayBtn.classList.remove('no-match');
+    banner.textContent = 'Hari ini ada pertandingan — ' + todayLabel;
+    banner.classList.add('visible');
+  } else {
+    // still allow click, just no visual emphasis
+    todayBtn.title = 'Tidak ada pertandingan hari ini';
+  }
+})();
+
+function getMonthIdx(dateStr){
+  const months={Jan:0,Feb:1,Mar:2,Apr:3,Mei:4,Jun:5,Jul:6,Agu:7,Sep:8,Okt:9,Nov:10,Des:11,June:5,July:6};
+  const parts=dateStr.replace(/,/g,'').trim().split(/\s+/);
+  return parts.length===3?months[parts[2]]:months[parts[1]];
+}
+function getDayNum(dateStr, et){
+  const parts=dateStr.replace(/,/g,'').trim().split(/\s+/);
+  let d=parts.length===3?parseInt(parts[1]):parseInt(parts[0]);
+  if(parseInt(et.split(':')[0])+11>=24) d++;
+  return d;
+}
 
 // ── TOP SKOR / ASSIST ─────────────────────────────────
 function renderTopStats(type){
@@ -818,6 +1994,101 @@ function renderTopStats(type){
 }
 renderTopStats('skor');
 renderTopStats('assist');
+
+// ── ALL NATIONS ───────────────────────────────────────────────────────
+const allNations = [
+  {code:'MEX',name:'Mexico',group:'A'},{code:'RSA',name:'South Africa',group:'A'},
+  {code:'KOR',name:'Korea Republic',group:'A'},{code:'CZE',name:'Czechia',group:'A'},
+  {code:'CAN',name:'Canada',group:'B'},{code:'BIH',name:'Bosnia & Herzegovina',group:'B'},
+  {code:'QAT',name:'Qatar',group:'B'},{code:'SUI',name:'Switzerland',group:'B'},
+  {code:'BRA',name:'Brazil',group:'C'},{code:'MAR',name:'Morocco',group:'C'},
+  {code:'HAI',name:'Haiti',group:'C'},{code:'SCO',name:'Scotland',group:'C'},
+  {code:'USA',name:'USA',group:'D'},{code:'PAR',name:'Paraguay',group:'D'},
+  {code:'AUS',name:'Australia',group:'D'},{code:'TUR',name:'Turkiye',group:'D'},
+  {code:'GER',name:'Germany',group:'E'},{code:'CUW',name:'Curacao',group:'E'},
+  {code:'CIV',name:"Cote d'Ivoire",group:'E'},{code:'ECU',name:'Ecuador',group:'E'},
+  {code:'NED',name:'Netherlands',group:'F'},{code:'JPN',name:'Japan',group:'F'},
+  {code:'SWE',name:'Sweden',group:'F'},{code:'TUN',name:'Tunisia',group:'F'},
+  {code:'BEL',name:'Belgium',group:'G'},{code:'EGY',name:'Egypt',group:'G'},
+  {code:'IRN',name:'IR Iran',group:'G'},{code:'NZL',name:'New Zealand',group:'G'},
+  {code:'ESP',name:'Spain',group:'H'},{code:'CPV',name:'Cabo Verde',group:'H'},
+  {code:'KSA',name:'Saudi Arabia',group:'H'},{code:'URU',name:'Uruguay',group:'H'},
+  {code:'FRA',name:'France',group:'I'},{code:'SEN',name:'Senegal',group:'I'},
+  {code:'IRQ',name:'Iraq',group:'I'},{code:'NOR',name:'Norway',group:'I'},
+  {code:'ARG',name:'Argentina',group:'J'},{code:'ALG',name:'Algeria',group:'J'},
+  {code:'AUT',name:'Austria',group:'J'},{code:'JOR',name:'Jordan',group:'J'},
+  {code:'POR',name:'Portugal',group:'K'},{code:'COD',name:'Congo DR',group:'K'},
+  {code:'UZB',name:'Uzbekistan',group:'K'},{code:'COL',name:'Colombia',group:'K'},
+  {code:'ENG',name:'England',group:'L'},{code:'CRO',name:'Croatia',group:'L'},
+  {code:'GHA',name:'Ghana',group:'L'},{code:'PAN',name:'Panama',group:'L'},
+];
+
+function renderNations(list){
+  const grid = document.getElementById('nationsGrid');
+  grid.innerHTML = list.map(n => `
+    <div class="nation-card" onclick="openSquad('${n.code}')">
+      <span class="flag" style="width:28px;height:19px">${FLAGS[n.code]||''}</span>
+      <div class="nation-info">
+        <div class="nation-name">${n.name}</div>
+        <div class="nation-group">Grup ${n.group}</div>
+      </div>
+    </div>`).join('');
+}
+renderNations(allNations);
+
+function filterNations(){
+  const q = document.getElementById('nationSearch').value.toLowerCase().trim();
+  const filtered = q ? allNations.filter(n =>
+    n.name.toLowerCase().includes(q) ||
+    n.code.toLowerCase().includes(q) ||
+    (TEAM_NAMES[n.code]||'').toLowerCase().includes(q) ||
+    ('grup '+n.group).includes(q)
+  ) : allNations;
+  renderNations(filtered);
+}
+
+function openSquad(code){
+  const squad = SQUADS[code];
+  const flag = FLAGS[code]||'';
+  const modal = document.getElementById('squadModalContent');
+  if(!squad){
+    modal.innerHTML = `
+      <div class="modal-header">
+        <div class="modal-title"><span class="flag" style="width:28px;height:19px">${flag}</span>${code}</div>
+        <button class="modal-close" onclick="document.getElementById('squadModal').classList.remove('open')">Tutup</button>
+      </div>
+      <p style="color:var(--text3);font-size:13px;text-align:center;padding:2rem 0">Data skuad belum tersedia.<br>Tambahkan di variabel SQUADS pada script.</p>`;
+  } else {
+    const posBadge = p => `<span class="pos-badge pos-${p}">${p}</span>`;
+    const rows = [...squad.players]
+      .sort((a,b) => a.no - b.no)
+      .map(p => `<tr>
+        <td style="color:var(--text3);width:28px">${p.no}</td>
+        <td style="color:var(--text);font-weight:500">${p.name}</td>
+        <td>${posBadge(p.pos)}</td>
+        <td>${p.club}</td>
+      </tr>`).join('');
+    modal.innerHTML = `
+      <div class="modal-header">
+        <div class="modal-title"><span class="flag" style="width:28px;height:19px">${flag}</span>${squad.name}</div>
+        <button class="modal-close" onclick="document.getElementById('squadModal').classList.remove('open')">Tutup</button>
+      </div>
+      <div class="modal-coach">Pelatih: <strong style="color:var(--text)">${squad.coach}</strong></div>
+      <table class="squad-table">
+        <thead><tr><th>#</th><th>Nama</th><th>Pos</th><th>Klub</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>`;
+  }
+  document.getElementById('squadModal').classList.add('open');
+}
+
+function closeSquadModal(e){
+  if(e.target.id==='squadModal') document.getElementById('squadModal').classList.remove('open');
+}
+document.addEventListener('keydown', e => {
+  if(e.key==='Escape') document.getElementById('squadModal').classList.remove('open');
+});
+
 </script>
 </body>
 </html>
